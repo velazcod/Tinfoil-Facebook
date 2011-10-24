@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<item
+		android:id="@+id/menu_notifications"
+		android:title="@string/menu_notifications"
+		android:icon="@android:drawable/ic_menu_info_details"
+		android:alphabeticShortcut="@string/menu_notifications"
+		android:showAsAction="ifRoom|withText" />
+	
+	<item
+		android:id="@+id/menu_preferences"
+		android:title="@string/menu_preferences"
+		android:icon="@android:drawable/ic_menu_preferences"
+		android:alphabeticShortcut="@string/menu_preferences"
+		android:showAsAction="never|withText" />
+		
+	<item
+		android:id="@+id/menu_about"
+		android:title="@string/menu_about"
+		android:icon="@android:drawable/ic_menu_help"
+		android:alphabeticShortcut="@string/menu_about"
+		android:showAsAction="never|withText" />
+	
+	<item
+		android:id="@+id/menu_exit"
+		android:title="@string/menu_exit"
+		android:icon="@android:drawable/ic_menu_close_clear_cancel"
+		android:alphabeticShortcut="@string/menu_exit"
+		android:showAsAction="never|withText" />
+		
+</menu>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">Facebook Private</string>
+
+	<string name="menu_desktop">Desktop</string>
+	<string name="menu_mobile">Mobile</string>
+	<string name="menu_notifications">Notifications</string>
+	<string name="menu_preferences">Preferences</string>
+	<string name="menu_about">About</string>
+	<string name="menu_exit">Exit</string>
+        
+</resources>
