@@ -8,12 +8,12 @@
 		android:alphabeticShortcut="@string/menu_notifications"
 		android:showAsAction="ifRoom|withText" />
 	
-	<item
+	<!-- <item
 		android:id="@+id/menu_preferences"
 		android:title="@string/menu_preferences"
 		android:icon="@android:drawable/ic_menu_preferences"
 		android:alphabeticShortcut="@string/menu_preferences"
-		android:showAsAction="never|withText" />
+		android:showAsAction="never|withText" /> -->
 		
 	<item
 		android:id="@+id/menu_about"

@@ -50,7 +50,7 @@ public class FbWrapper extends Activity {
         WebSettings webSettings = fbWrapper.getSettings(); 
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSavePassword(false);
-        webSettings.setSaveFormData(false);
+        webSettings.setSaveFormData(true);
         webSettings.setSupportZoom(true);
         USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
         
@@ -201,8 +201,8 @@ public class FbWrapper extends Activity {
     		case R.id.menu_notifications:
     			loadNotificationsView();
     			return true;
-    		case R.id.menu_preferences:
-    			return true;
+    		//case R.id.menu_preferences:
+    			//return true;
     		case R.id.menu_about:
     			return true;
     		case R.id.menu_exit:
