@@ -2,8 +2,10 @@ package com.danvelazco.fbwrapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -22,6 +24,7 @@ public class FbWrapper extends Activity {
 	
 	private WebView fbWrapper;
 	
+	private boolean desktopView = false;
 	private String USERAGENT_ANDROID_DEFAULT;
 	
 	private ProgressBar mProgressBar;
@@ -48,17 +51,16 @@ public class FbWrapper extends Activity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSavePassword(false);
         webSettings.setSaveFormData(false);
-        webSettings.setSupportZoom(false);
+        webSettings.setSupportZoom(true);
         USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
+        
+        initSession();
         
     }
     
     @Override
     public void onResume() {
     	super.onResume();
-    	
-    	setMobileUserAgent();
-        //setDesktopUserAgent();
     	
     	CookieSyncManager.getInstance().startSync();
     }
@@ -82,17 +84,25 @@ public class FbWrapper extends Activity {
     	@Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
         	
+    		if (url.equals("about:blank")) return false;
+    		
         	String domain = Uri.parse(url).getHost();
         	
-        	//Output URL
-        	if (V) Log.d(Constants.TAG, "URL: " + url);
+        	if (domain != null) {
         	
-        	// Let this WebView load the page. Do not override it.
-            if (domain.equals("m.facebook.com")) {
-                return false;
-            } else if (domain.equals("facebook.com")) {
-            	return false;
-            }
+	        	//Output URL
+	        	if (V) Log.d(Constants.TAG, "URL: " + url);
+	        	
+	        	// Let this WebView load the page. Do not override it.
+	            if (domain.equals("m.facebook.com")) {
+	                return false;
+	            } else if (domain.equals("facebook.com")) {
+	            	return false;
+	            } else if (domain.equals("www.facebook.com")) {
+	            	return false;
+	            }
+	            
+        	}
             
             // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -119,17 +129,49 @@ public class FbWrapper extends Activity {
     }
     
     private void setMobileUserAgent() {
+    	desktopView = false;
     	fbWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
     	fbWrapper.loadUrl("https://m.facebook.com");
     }
     
-//    private void setDesktopUserAgent() {
-//    	fbWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
-//    	fbWrapper.loadUrl("https://www.facebook.com");
-//    }
+    private void setDesktopUserAgent() {
+    	desktopView = true;
+    	fbWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
+    	fbWrapper.loadUrl("https://www.facebook.com");
+    }
+    
+    private void initSession() {
+    	
+    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+        	
+	    	Configuration config = getResources().getConfiguration();
+	    	if (config.smallestScreenWidthDp >= 600) {
+	    		//Tablet
+	    		setDesktopUserAgent();
+	    	} else {
+	    		//Phone
+	    		setMobileUserAgent();
+	    	}
+	   
+    	} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
+    			&& Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
+    		
+    		//Tablet
+    		setDesktopUserAgent();
+    		
+    	} else {
+    		//Phone
+    		setMobileUserAgent();
+    	}
+    	
+    }
     
     private void loadNotificationsView() {
-    	fbWrapper.loadUrl("https://m.facebook.com/notifications.php");
+    	
+    	if (desktopView)
+    		fbWrapper.loadUrl("https://www.facebook.com/notifications.php");
+    	else
+    		fbWrapper.loadUrl("https://m.facebook.com/notifications.php");
     }
     
     @Override
