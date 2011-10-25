@@ -29,7 +29,7 @@ public class FbWrapper extends Activity {
 	
 	private ProgressBar mProgressBar;
 	
-	private boolean V = !Constants.PRODUCTION;
+	private boolean V = Constants.OUTPUT_LOGS;
 	
 	/** Called when the activity is first created. */
     @Override
