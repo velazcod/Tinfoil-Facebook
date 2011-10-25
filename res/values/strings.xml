@@ -10,4 +10,18 @@
 	<string name="menu_about">About</string>
 	<string name="menu_exit">Exit</string>
         
+	<string name="lbl_dialog_close">Close</string>
+    <string name="lbl_dialog_ok">Ok</string>
+
+	<!-- Text used on the "about" dialog -->
+    <string name="txt_about">\nDeveloped by Daniel Velazco.
+\nvelazcod@gmail.com
+\nhttp://www.danvelazco.com\n
+\n
+\nSource code:
+\nhttps://github.com/velazcod/Tinfoil-Facebook\n
+\n
+\nThis app is for those users that require a Tinfoil Hat when logging in to Facebook. It creates a sandbox for facebook\'s mobile site to avoid them tracking your browsing history or location. Only requires INTERNET permissions, and if you are skeptic about it, feel free to check the source code listed above.\n
+\n
+	</string>
 </resources>

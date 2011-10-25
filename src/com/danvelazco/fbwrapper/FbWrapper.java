@@ -1,6 +1,8 @@
 package com.danvelazco.fbwrapper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -226,6 +228,19 @@ public class FbWrapper extends Activity {
         return super.onKeyDown(keyCode, event);
     }
     
+    private void showAboutAlert() {
+    	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(getString(R.string.menu_about));
+        alertDialog.setMessage(getString(R.string.txt_about));
+        alertDialog.setIcon(R.drawable.ic_launcher); 
+        alertDialog.setButton(getString(R.string.lbl_dialog_close), new DialogInterface.OnClickListener() {
+        	public void onClick(DialogInterface dialog, int which) {
+        		return;
+        	} 
+        });
+        alertDialog.show();
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
@@ -244,6 +259,7 @@ public class FbWrapper extends Activity {
     		//case R.id.menu_preferences:
     			//return true;
     		case R.id.menu_about:
+    			showAboutAlert();
     			return true;
     		case R.id.menu_exit:
     			finish();
