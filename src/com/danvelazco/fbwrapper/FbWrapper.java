@@ -63,6 +63,7 @@ public class FbWrapper extends Activity {
         webSettings.setSavePassword(false);
         webSettings.setSaveFormData(true);
         webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
         
         /** Load default User Agent */
         USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
