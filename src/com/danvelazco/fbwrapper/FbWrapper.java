@@ -32,7 +32,7 @@ import android.widget.ProgressBar;
  */
 public class FbWrapper extends Activity {
 	
-	private WebView fbWrapper;
+	private WebView mFBWrapper;
 	
 	private boolean desktopView = false;
 	private String USERAGENT_ANDROID_DEFAULT;
@@ -69,13 +69,13 @@ public class FbWrapper extends Activity {
         mProgressBar = (ProgressBar)findViewById(R.id.progress_bar);
         
         /** Configure WebView */
-        fbWrapper = (WebView) findViewById(R.id.webview);
-        fbWrapper.setWebViewClient(new FbWebViewClient());
-        fbWrapper.setWebChromeClient(new FbWebChromeClient());
-        fbWrapper.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        mFBWrapper = (WebView) findViewById(R.id.webview);
+        mFBWrapper.setWebViewClient(new FbWebViewClient());
+        mFBWrapper.setWebChromeClient(new FbWebChromeClient());
+        mFBWrapper.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         
         /** Apply settings for WebView */
-        WebSettings webSettings = fbWrapper.getSettings(); 
+        WebSettings webSettings = mFBWrapper.getSettings(); 
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSavePassword(false);
         webSettings.setSaveFormData(true);
@@ -96,7 +96,7 @@ public class FbWrapper extends Activity {
         
         if (savedInstanceState != null) {
         	/** Restore the state of the WebView using the saved instance state */
-            fbWrapper.restoreState(savedInstanceState);
+        	mFBWrapper.restoreState(savedInstanceState);
         } else {
         	/** Loads proper URL depending on device type */
         	initSession(urlToLoad);
@@ -107,7 +107,7 @@ public class FbWrapper extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
     	/** Save the state of the WebView as a Bundle to the Instance State */
-    	fbWrapper.saveState(outState);
+    	mFBWrapper.saveState(outState);
     }
     
     @Override
@@ -235,12 +235,12 @@ public class FbWrapper extends Activity {
      */
     private void setMobileUserAgent(Uri urlToLoad) {
     	desktopView = false;
-    	fbWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
+    	mFBWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
     	
     	if (urlToLoad != null)
-    		fbWrapper.loadUrl(urlToLoad.toString());
+    		mFBWrapper.loadUrl(urlToLoad.toString());
     	else
-    		fbWrapper.loadUrl(Constants.URL_MOBILE_SITE);
+    		mFBWrapper.loadUrl(Constants.URL_MOBILE_SITE);
     }
     
     /**
@@ -249,13 +249,13 @@ public class FbWrapper extends Activity {
      */
     private void setDesktopUserAgent(Uri urlToLoad) {
     	desktopView = true;
-    	fbWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
-    	fbWrapper.loadUrl(Constants.URL_DESKTOP_SITE);
+    	mFBWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
+    	mFBWrapper.loadUrl(Constants.URL_DESKTOP_SITE);
     	
     	if (urlToLoad != null)
-    		fbWrapper.loadUrl(urlToLoad.toString());
+    		mFBWrapper.loadUrl(urlToLoad.toString());
     	else
-    		fbWrapper.loadUrl(Constants.URL_MOBILE_SITE);
+    		mFBWrapper.loadUrl(Constants.URL_MOBILE_SITE);
     }
     
     /**
@@ -306,17 +306,17 @@ public class FbWrapper extends Activity {
     private void loadNotificationsView() {
     	
     	if (!desktopView)
-    		fbWrapper.loadUrl(Constants.URL_MOBILE_NOTIFICATIONS);
+    		mFBWrapper.loadUrl(Constants.URL_MOBILE_NOTIFICATIONS);
     	else
-    		fbWrapper.loadUrl(Constants.URL_DESKTOP_NOTIFICATIONS);
+    		mFBWrapper.loadUrl(Constants.URL_DESKTOP_NOTIFICATIONS);
     }
     
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         
     	/** Check if the key event was the BACK key and if there's history */
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && fbWrapper.canGoBack()) {
-        	fbWrapper.goBack();
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mFBWrapper.canGoBack()) {
+        	mFBWrapper.goBack();
             return true;
         }
         
@@ -339,7 +339,7 @@ public class FbWrapper extends Activity {
 				initSession(null);
 				return true;
     		case R.id.menu_refresh:
-    			fbWrapper.reload();
+    			mFBWrapper.reload();
     			return true;
     		case R.id.menu_notifications:
     			loadNotificationsView();
