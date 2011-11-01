@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieSyncManager;
+import android.webkit.GeolocationPermissions.Callback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -114,6 +115,13 @@ public class FbWrapper extends Activity {
     		
     		/** Posts current progress to the ProgressBar */
     		mProgressBar.setProgress(progress);
+    	}
+    	
+    	@Override
+    	public void onGeolocationPermissionsShowPrompt(String origin, Callback callback) {
+    		super.onGeolocationPermissionsShowPrompt(origin, callback);
+    		
+    		callback.invoke(origin, true, false);
     	}
     }
     
