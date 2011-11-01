@@ -70,13 +70,16 @@ public class FbWrapper extends Activity {
         /** Load default User Agent */
         USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
         
-        
-        /** Loads proper URL depending on device type */
         if (savedInstanceState != null)
             fbWrapper.restoreState(savedInstanceState);
         else
+        	/** Loads proper URL depending on device type */
         	initSession();
         
+    }
+    
+    protected void onSaveInstanceState(Bundle outState) {
+    	fbWrapper.saveState(outState);
     }
     
     @Override
@@ -94,10 +97,6 @@ public class FbWrapper extends Activity {
     	/** Stop synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().stopSync();
     }
-    
-    protected void onSaveInstanceState(Bundle outState) {
-        fbWrapper.saveState(outState);
-     }
  
     private class FbWebChromeClient extends WebChromeClient {
     	@Override
