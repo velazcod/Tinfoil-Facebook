@@ -1,14 +1,14 @@
 package com.danvelazco.fbwrapper;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieSyncManager;
+import android.webkit.GeolocationPermissions.Callback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -38,7 +39,12 @@ public class FbWrapper extends Activity {
 	
 	private ProgressBar mProgressBar;
 	
-	private boolean V = Constants.OUTPUT_LOGS;
+	private boolean V = false;
+	private boolean mAllowCheckins = false;
+	private boolean mOpenLinksInside = false;
+	private String mSiteMode;
+	
+	private SharedPreferences mSharedPrefs;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -46,6 +52,15 @@ public class FbWrapper extends Activity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.webview);
+        
+        /** Load shared preferences */
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        
+        /** Logcat verbose */
+        V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
+        
+        /** Whether the site should be loaded as the mobile or desktop version */
+        mSiteMode = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
         
         /** Creates new CookieSyncManager instance that will manage cookies */
         CookieSyncManager.createInstance(this);
@@ -70,9 +85,26 @@ public class FbWrapper extends Activity {
         /** Load default User Agent */
         USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
         
-        /** Loads proper URL depending on device type */
-        initSession();
+        if (savedInstanceState != null) {
+        	/** Restore the state of the WebView using the saved instance state */
+            fbWrapper.restoreState(savedInstanceState);
+        } else {
+        	/** Loads proper URL depending on device type */
+        	initSession();
+        }
         
+    }
+    
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+    	/** Save the state of the WebView as a Bundle to the Instance State */
+    	fbWrapper.saveState(outState);
+    }
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+    	/** Handle orientation configuration changes */
+    	super.onConfigurationChanged(newConfig);
     }
     
     @Override
@@ -81,6 +113,23 @@ public class FbWrapper extends Activity {
     	
     	/** Start synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().startSync();
+    	
+    	/** Re-load these preferences in case some of them were changed */
+    	V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
+    	mAllowCheckins = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
+    	
+    	mOpenLinksInside = mSharedPrefs.getBoolean(Constants.PREFS_OPEN_LINKS_INSIDE, false);
+    	
+    	/** Check to see if the Site mode preference was just changed */
+    	if (!mSiteMode.equals(mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO))) {
+    	
+    		/** Store the new changes on the global field */
+    		mSiteMode = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
+    		
+    		/** Loads proper URL depending on device type */
+        	initSession();
+    	}
+    	
     }
     
     @Override
@@ -98,6 +147,13 @@ public class FbWrapper extends Activity {
     		/** Posts current progress to the ProgressBar */
     		mProgressBar.setProgress(progress);
     	}
+    	
+    	@Override
+    	public void onGeolocationPermissionsShowPrompt(String origin, Callback callback) {
+    		super.onGeolocationPermissionsShowPrompt(origin, callback);
+    		
+    		callback.invoke(origin, mAllowCheckins, false);
+    	}
     }
     
     private class FbWebViewClient extends WebViewClient {
@@ -107,6 +163,15 @@ public class FbWrapper extends Activity {
         	
     		/** Avoid NPEs when clicking on some weird links on facebook.com */
     		if (url.equals("about:blank")) return false;
+    		
+    		if (!mOpenLinksInside) {
+	    		if (url.startsWith("https://m.facebook.com/l.php") ||  
+	    				url.startsWith("http://m.facebook.com/l.php")) {
+	    			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+	                startActivity(intent);
+	                return true;
+	    		}
+    		}
     		
     		/** Get the URL's domain name */
         	String domain = Uri.parse(url).getHost();
@@ -181,24 +246,36 @@ public class FbWrapper extends Activity {
      */
     private void initSession() {
     	
-    	/** ICS allows phones AND tablets */
-    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-        	
-	    	Configuration config = getResources().getConfiguration();
-	    	if (config.smallestScreenWidthDp >= 600) {
-	    		/** For tablets */
+    	/** Automatically check the proper site to load depending on screen size */
+    	if (mSiteMode.equals(Constants.PREFS_SITE_MODE_AUTO)) {
+    	
+	    	/** ICS allows phones AND tablets */
+	    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+	        	
+		    	Configuration config = getResources().getConfiguration();
+		    	if (config.smallestScreenWidthDp >= 600) {
+		    		/** For tablets */
+		    		setDesktopUserAgent();
+		    	} else {
+		    		/** For phones */
+		    		setMobileUserAgent();
+		    	}
+		   
+		    /** Honeycomb only allowed tablets, always assume it's a tablet */
+	    	} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
+	    			&& Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
 	    		setDesktopUserAgent();
+	    	
+	    	/** There were no tablets before Honeycomb, assume it's a phone */
 	    	} else {
-	    		/** For phones */
 	    		setMobileUserAgent();
 	    	}
-	   
-	    /** Honeycomb only allowed tablets, always assume it's a tablet */
-    	} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
-    			&& Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
+	    
+	    /** Force the desktop version to load */
+    	} else if (mSiteMode.equals(Constants.PREFS_SITE_MODE_DESKTOP)) {
     		setDesktopUserAgent();
-    	
-    	/** There were no tablets before Honeycomb, assume it's a phone */
+    		
+    	/** Otherwise force the mobile version to load */
     	} else {
     		setMobileUserAgent();
     	}
@@ -228,19 +305,6 @@ public class FbWrapper extends Activity {
         return super.onKeyDown(keyCode, event);
     }
     
-    private void showAboutAlert() {
-    	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(getString(R.string.menu_about));
-        alertDialog.setMessage(getString(R.string.txt_about));
-        alertDialog.setIcon(R.drawable.ic_launcher); 
-        alertDialog.setButton(getString(R.string.lbl_dialog_close), new DialogInterface.OnClickListener() {
-        	public void onClick(DialogInterface dialog, int which) {
-        		return;
-        	} 
-        });
-        alertDialog.show();
-    }
-    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
@@ -253,13 +317,14 @@ public class FbWrapper extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	
     	switch (item.getItemId()) {
+    		case R.id.menu_refresh:
+    			fbWrapper.reload();
+    			return true;
     		case R.id.menu_notifications:
     			loadNotificationsView();
     			return true;
-    		//case R.id.menu_preferences:
-    			//return true;
-    		case R.id.menu_about:
-    			showAboutAlert();
+    		case R.id.menu_preferences:
+    			startActivity(new Intent(this, Preferences.class));
     			return true;
     		case R.id.menu_exit:
     			finish();
