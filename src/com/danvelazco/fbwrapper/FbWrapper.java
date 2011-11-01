@@ -41,6 +41,7 @@ public class FbWrapper extends Activity {
 	
 	private boolean V = false;
 	private boolean ALLOW_CHECKINS = false;
+	private boolean OPEN_LINKS_INSIDE = false;
 	private String SITE_MODE;
 	
 	private SharedPreferences mSharedPrefs;
@@ -117,6 +118,8 @@ public class FbWrapper extends Activity {
     	V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
     	ALLOW_CHECKINS = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
     	
+    	OPEN_LINKS_INSIDE = mSharedPrefs.getBoolean(Constants.PREFS_OPEN_LINKS_INSIDE, false);
+    	
     	/** Check to see if the Site mode preference was just changed */
     	if (!SITE_MODE.equals(mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO))) {
     	
@@ -160,6 +163,15 @@ public class FbWrapper extends Activity {
         	
     		/** Avoid NPEs when clicking on some weird links on facebook.com */
     		if (url.equals("about:blank")) return false;
+    		
+    		if (!OPEN_LINKS_INSIDE) {
+	    		if (url.startsWith("https://m.facebook.com/l.php") ||  
+	    				url.startsWith("http://m.facebook.com/l.php")) {
+	    			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+	                startActivity(intent);
+	                return true;
+	    		}
+    		}
     		
     		/** Get the URL's domain name */
         	String domain = Uri.parse(url).getHost();

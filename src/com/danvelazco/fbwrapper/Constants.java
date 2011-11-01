@@ -25,6 +25,7 @@ public class Constants {
 	
 	/** Preferences */
 	public final static String PREFS_ALLOW_CHECKINS = "prefs_allow_checkins";
+	public final static String PREFS_OPEN_LINKS_INSIDE = "prefs_open_links_inside";
 	public final static String PREFS_SITE_MODE = "prefs_mobile_site";
 	public final static String PREFS_SITE_MODE_AUTO = "auto";
 	public final static String PREFS_SITE_MODE_MOBILE = "mobile";
