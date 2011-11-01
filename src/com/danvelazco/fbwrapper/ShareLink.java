@@ -2,9 +2,11 @@ package com.danvelazco.fbwrapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieSyncManager;
@@ -20,11 +22,21 @@ public class ShareLink extends Activity {
 	
 	private ProgressBar mProgressBar;
 	
+	private boolean V = false;
+	
+	private SharedPreferences mSharedPrefs;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.webview);
+		
+		/** Load shared preferences */
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        
+        /** Logcat verbose */
+        V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
 		
 		/** Creates new CookieSyncManager instance that will manage cookies */
         CookieSyncManager.createInstance(this);
@@ -53,7 +65,7 @@ public class ShareLink extends Activity {
 		
 		String shareLink = String.format(Constants.URL_SHARE_LINKS, url, subject);
 		
-		Log.d(Constants.TAG, "Share - Go to: " + shareLink);
+		if (V) Log.d(Constants.TAG, "Share to: " + shareLink);
 		
 		fbWrapper.loadUrl(shareLink);
 	}
@@ -91,6 +103,7 @@ public class ShareLink extends Activity {
     	
     	@Override
     	public void onCloseWindow(WebView window) {
+    		if (V) Log.d(Constants.TAG, "Attempting to close window");
 			window.destroy();
 			finish();
 		}
