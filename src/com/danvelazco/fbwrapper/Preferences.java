@@ -20,7 +20,7 @@ public class Preferences extends PreferenceActivity {
 		
 		String key = preference.getKey();
 		
-		if ("pref_about".equals(key)) {
+		if (Constants.PREFS_ABOUT.equals(key)) {
 			showAboutAlert();
 		}
 		
