@@ -83,6 +83,11 @@ public class FbWrapper extends Activity {
     }
     
     @Override
+    public void onConfigurationChanged(Configuration newConfig){
+    	super.onConfigurationChanged(newConfig);
+    }
+    
+    @Override
     public void onResume() {
     	super.onResume();
     	
