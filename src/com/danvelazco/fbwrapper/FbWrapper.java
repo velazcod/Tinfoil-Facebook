@@ -85,12 +85,21 @@ public class FbWrapper extends Activity {
         /** Load default User Agent */
         USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
         
+        /** Allow us to load a custom URL */
+        Intent intent = getIntent();
+        Uri urlToLoad = null;
+		
+        /** Check to see if we receive Intent Data */
+        if (intent.getData() != null) {
+        	urlToLoad = intent.getData();
+        }        
+        
         if (savedInstanceState != null) {
         	/** Restore the state of the WebView using the saved instance state */
             fbWrapper.restoreState(savedInstanceState);
         } else {
         	/** Loads proper URL depending on device type */
-        	initSession();
+        	initSession(urlToLoad);
         }
         
     }
@@ -127,7 +136,7 @@ public class FbWrapper extends Activity {
     		mSiteMode = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
     		
     		/** Loads proper URL depending on device type */
-        	initSession();
+        	initSession(null);
     	}
     	
     }
@@ -224,27 +233,36 @@ public class FbWrapper extends Activity {
      * Sets the user agent to the default user agent
      * and load the mobile site.
      */
-    private void setMobileUserAgent() {
+    private void setMobileUserAgent(Uri urlToLoad) {
     	desktopView = false;
     	fbWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
-    	fbWrapper.loadUrl(Constants.URL_MOBILE_SITE);
+    	
+    	if (urlToLoad != null)
+    		fbWrapper.loadUrl(urlToLoad.toString());
+    	else
+    		fbWrapper.loadUrl(Constants.URL_MOBILE_SITE);
     }
     
     /**
      * Sets the user agent to the desktop one
      * and load the desktop site
      */
-    private void setDesktopUserAgent() {
+    private void setDesktopUserAgent(Uri urlToLoad) {
     	desktopView = true;
     	fbWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
     	fbWrapper.loadUrl(Constants.URL_DESKTOP_SITE);
+    	
+    	if (urlToLoad != null)
+    		fbWrapper.loadUrl(urlToLoad.toString());
+    	else
+    		fbWrapper.loadUrl(Constants.URL_MOBILE_SITE);
     }
     
     /**
      * Determines whether to load the mobile or desktop version
      * depending on screen configuration. 
      */
-    private void initSession() {
+    private void initSession(Uri urlToLoad) {
     	
     	/** Automatically check the proper site to load depending on screen size */
     	if (mSiteMode.equals(Constants.PREFS_SITE_MODE_AUTO)) {
@@ -255,29 +273,29 @@ public class FbWrapper extends Activity {
 		    	Configuration config = getResources().getConfiguration();
 		    	if (config.smallestScreenWidthDp >= 600) {
 		    		/** For tablets */
-		    		setDesktopUserAgent();
+		    		setDesktopUserAgent(urlToLoad);
 		    	} else {
 		    		/** For phones */
-		    		setMobileUserAgent();
+		    		setMobileUserAgent(urlToLoad);
 		    	}
 		   
 		    /** Honeycomb only allowed tablets, always assume it's a tablet */
 	    	} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
 	    			&& Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
-	    		setDesktopUserAgent();
+	    		setDesktopUserAgent(urlToLoad);
 	    	
 	    	/** There were no tablets before Honeycomb, assume it's a phone */
 	    	} else {
-	    		setMobileUserAgent();
+	    		setMobileUserAgent(urlToLoad);
 	    	}
 	    
 	    /** Force the desktop version to load */
     	} else if (mSiteMode.equals(Constants.PREFS_SITE_MODE_DESKTOP)) {
-    		setDesktopUserAgent();
+    		setDesktopUserAgent(urlToLoad);
     		
     	/** Otherwise force the mobile version to load */
     	} else {
-    		setMobileUserAgent();
+    		setMobileUserAgent(urlToLoad);
     	}
     	
     }

@@ -21,10 +21,27 @@
             android:name=".FbWrapper"
             android:theme="@style/Theme.FullScreenCustom"
             android:configChanges="orientation" >
+            
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                
+                <data android:scheme="http" android:host="m.facebook.com" />
+                <data android:scheme="https" android:host="m.facebook.com" />
+                
+                <data android:scheme="http" android:host="facebook.com" />
+                <data android:scheme="https" android:host="facebook.com" />
+                
+                <data android:scheme="http" android:host="www.facebook.com" />
+                <data android:scheme="https" android:host="www.facebook.com" />
+            </intent-filter>
+            
         </activity>
         
             
