@@ -52,10 +52,13 @@ public class FbWrapper extends Activity {
         
         setContentView(R.layout.webview);
         
+        /** Load shared preferences */
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         
+        /** Logcat verbose */
         V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
-        ALLOW_CHECKINS = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
+        
+        /** Whether the site should be loaded as the mobile or desktop version */
         SITE_MODE = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
         
         /** Creates new CookieSyncManager instance that will manage cookies */
@@ -109,6 +112,21 @@ public class FbWrapper extends Activity {
     	
     	/** Start synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().startSync();
+    	
+    	/** Re-load these preferences in case some of them were changed */
+    	V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
+    	ALLOW_CHECKINS = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
+    	
+    	/** Check to see if the Site mode preference was just changed */
+    	if (!SITE_MODE.equals(mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO))) {
+    	
+    		/** Store the new changes on the global field */
+    		SITE_MODE = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
+    		
+    		/** Loads proper URL depending on device type */
+        	initSession();
+    	}
+    	
     }
     
     @Override
