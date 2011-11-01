@@ -335,6 +335,9 @@ public class FbWrapper extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	
     	switch (item.getItemId()) {
+	    	case R.id.menu_news_feed:
+				initSession(null);
+				return true;
     		case R.id.menu_refresh:
     			fbWrapper.reload();
     			return true;
