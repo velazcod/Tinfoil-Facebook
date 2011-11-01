@@ -21,13 +21,6 @@
 		android:icon="@android:drawable/ic_menu_preferences"
 		android:alphabeticShortcut="@string/menu_preferences"
 		android:showAsAction="never|withText" />
-		
-	<!-- <item
-		android:id="@+id/menu_about"
-		android:title="@string/menu_about"
-		android:icon="@android:drawable/ic_menu_help"
-		android:alphabeticShortcut="@string/menu_about"
-		android:showAsAction="never|withText" /> -->
 	
 	<item
 		android:id="@+id/menu_exit"
