@@ -78,6 +78,7 @@ public class FbWrapper extends Activity {
         
     }
     
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
     	fbWrapper.saveState(outState);
     }
