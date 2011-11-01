@@ -9,9 +9,41 @@
 	<string name="menu_preferences">Preferences</string>
 	<string name="menu_about">About</string>
 	<string name="menu_exit">Exit</string>
-        
+	
 	<string name="lbl_dialog_close">Close</string>
     <string name="lbl_dialog_ok">Ok</string>
+     
+	<!-- Preferences -->
+		<string name="pref_cat_access">Access</string>
+		<string name="pref_cat_general">General</string>
+		    
+		<string name="prefs_allow_checkins">Allow Check-ins</string>
+		<string name="prefs_allow_checkins_sry">Allows the mobile app to use coarse location in order to check-in to places</string>
+		
+		<string name="prefs_open_links_inside">Open links inside app</string>
+		<string name="prefs_open_links_inside_sry">Any links being opened from the mobile app will open from within the app instead of the browser</string>
+		
+		<string name="prefs_mobile_site">Mobile/Desktop site</string>
+		<string name="prefs_mobile_site_sry">Force the use of the mobile or desktop site</string>
+		<array name="prefs_mobile_site_list">
+	    	<item>Auto</item>
+	    	<item>Force mobile site</item>
+	    	<item>Force desktop site</item>
+	    </array>
+	    <array name="prefs_mobile_site_list_values">
+	    	<item>auto</item>
+	    	<item>mobile</item>
+	    	<item>desktop</item>
+	    </array>
+		    
+		<string name="pref_logcat">System logging</string>
+		<string name="pref_logcat_sry">Enable system logging. Useful when helping developer debug problems with the app</string>
+		
+		<string name="pref_about">About</string>
+		<string name="pref_about_sry">Writen by Daniel Velazco. Click here for more information.</string>
+		    
+	<!-- End preferences -->
+
 
 	<!-- Text used on the "about" dialog -->
     <string name="txt_about">\nDeveloped by Daniel Velazco.

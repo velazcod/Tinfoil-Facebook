@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<PreferenceScreen 
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<PreferenceCategory android:title="@string/pref_cat_access">
+		
+		<CheckBoxPreference 
+			android:key="prefs_allow_checkins" 
+			android:title="@string/prefs_allow_checkins" 
+			android:summary="@string/prefs_allow_checkins_sry"
+			android:defaultValue="false"/>
+			
+		<CheckBoxPreference 
+			android:key="prefs_open_links_inside" 
+			android:title="@string/prefs_open_links_inside" 
+			android:summary="@string/prefs_open_links_inside_sry"
+			android:defaultValue="false"/>
+			
+		<ListPreference 
+			android:key="prefs_mobile_site" 
+			android:title="@string/prefs_mobile_site" 
+			android:summary="@string/prefs_mobile_site_sry"
+			android:entries="@array/prefs_mobile_site_list"
+			android:entryValues="@array/prefs_mobile_site_list_values"
+			android:defaultValue="auto" />
+			
+	</PreferenceCategory>
+	
+	<PreferenceCategory android:title="@string/pref_cat_general">
+		
+		<CheckBoxPreference 
+			android:key="pref_logcat" 
+			android:title="@string/pref_logcat" 
+			android:summary="@string/pref_logcat_sry"
+			android:defaultValue="false"/>
+			
+		<PreferenceScreen
+			android:key="pref_about"
+			android:title="@string/pref_about"
+			android:summary="@string/pref_about_sry" />
+			
+	</PreferenceCategory>
+	
+</PreferenceScreen>
