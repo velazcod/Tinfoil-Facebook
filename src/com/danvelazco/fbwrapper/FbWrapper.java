@@ -2,11 +2,13 @@ package com.danvelazco.fbwrapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -37,7 +39,11 @@ public class FbWrapper extends Activity {
 	
 	private ProgressBar mProgressBar;
 	
-	private boolean V = Constants.OUTPUT_LOGS;
+	private boolean V = false;
+	private boolean ALLOW_CHECKINS = false;
+	private String SITE_MODE;
+	
+	private SharedPreferences mSharedPrefs;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -45,6 +51,12 @@ public class FbWrapper extends Activity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.webview);
+        
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        
+        V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
+        ALLOW_CHECKINS = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
+        SITE_MODE = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
         
         /** Creates new CookieSyncManager instance that will manage cookies */
         CookieSyncManager.createInstance(this);
@@ -119,7 +131,7 @@ public class FbWrapper extends Activity {
     	public void onGeolocationPermissionsShowPrompt(String origin, Callback callback) {
     		super.onGeolocationPermissionsShowPrompt(origin, callback);
     		
-    		callback.invoke(origin, true, false);
+    		callback.invoke(origin, ALLOW_CHECKINS, false);
     	}
     }
     
@@ -204,24 +216,36 @@ public class FbWrapper extends Activity {
      */
     private void initSession() {
     	
-    	/** ICS allows phones AND tablets */
-    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-        	
-	    	Configuration config = getResources().getConfiguration();
-	    	if (config.smallestScreenWidthDp >= 600) {
-	    		/** For tablets */
+    	/** Automatically check the proper site to load depending on screen size */
+    	if (SITE_MODE.equals(Constants.PREFS_SITE_MODE_AUTO)) {
+    	
+	    	/** ICS allows phones AND tablets */
+	    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+	        	
+		    	Configuration config = getResources().getConfiguration();
+		    	if (config.smallestScreenWidthDp >= 600) {
+		    		/** For tablets */
+		    		setDesktopUserAgent();
+		    	} else {
+		    		/** For phones */
+		    		setMobileUserAgent();
+		    	}
+		   
+		    /** Honeycomb only allowed tablets, always assume it's a tablet */
+	    	} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
+	    			&& Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
 	    		setDesktopUserAgent();
+	    	
+	    	/** There were no tablets before Honeycomb, assume it's a phone */
 	    	} else {
-	    		/** For phones */
 	    		setMobileUserAgent();
 	    	}
-	   
-	    /** Honeycomb only allowed tablets, always assume it's a tablet */
-    	} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
-    			&& Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
+	    
+	    /** Force the desktop version to load */
+    	} else if (SITE_MODE.equals(Constants.PREFS_SITE_MODE_DESKTOP)) {
     		setDesktopUserAgent();
-    	
-    	/** There were no tablets before Honeycomb, assume it's a phone */
+    		
+    	/** Otherwise force the mobile version to load */
     	} else {
     		setMobileUserAgent();
     	}

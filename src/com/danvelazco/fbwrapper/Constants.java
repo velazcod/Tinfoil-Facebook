@@ -24,6 +24,11 @@ public class Constants {
 	public static final String URL_DESKTOP_NOTIFICATIONS = "https://www.facebook.com/notifications.php";
 	
 	/** Preferences */
+	public final static String PREFS_ALLOW_CHECKINS = "prefs_allow_checkins";
+	public final static String PREFS_SITE_MODE = "prefs_mobile_site";
+	public final static String PREFS_SITE_MODE_AUTO = "auto";
+	public final static String PREFS_SITE_MODE_MOBILE = "mobile";
+	public final static String PREFS_SITE_MODE_DESKTOP = "desktop";
 	public final static String PREFS_LOGCAT_ENABLED = "pref_logcat";
 	public final static String PREFS_ABOUT = "pref_about";
 	
