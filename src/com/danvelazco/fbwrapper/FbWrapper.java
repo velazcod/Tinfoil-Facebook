@@ -40,9 +40,9 @@ public class FbWrapper extends Activity {
 	private ProgressBar mProgressBar;
 	
 	private boolean V = false;
-	private boolean ALLOW_CHECKINS = false;
-	private boolean OPEN_LINKS_INSIDE = false;
-	private String SITE_MODE;
+	private boolean mAllowCheckins = false;
+	private boolean mOpenLinksInside = false;
+	private String mSiteMode;
 	
 	private SharedPreferences mSharedPrefs;
 	
@@ -60,7 +60,7 @@ public class FbWrapper extends Activity {
         V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
         
         /** Whether the site should be loaded as the mobile or desktop version */
-        SITE_MODE = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
+        mSiteMode = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
         
         /** Creates new CookieSyncManager instance that will manage cookies */
         CookieSyncManager.createInstance(this);
@@ -116,15 +116,15 @@ public class FbWrapper extends Activity {
     	
     	/** Re-load these preferences in case some of them were changed */
     	V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
-    	ALLOW_CHECKINS = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
+    	mAllowCheckins = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
     	
-    	OPEN_LINKS_INSIDE = mSharedPrefs.getBoolean(Constants.PREFS_OPEN_LINKS_INSIDE, false);
+    	mOpenLinksInside = mSharedPrefs.getBoolean(Constants.PREFS_OPEN_LINKS_INSIDE, false);
     	
     	/** Check to see if the Site mode preference was just changed */
-    	if (!SITE_MODE.equals(mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO))) {
+    	if (!mSiteMode.equals(mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO))) {
     	
     		/** Store the new changes on the global field */
-    		SITE_MODE = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
+    		mSiteMode = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
     		
     		/** Loads proper URL depending on device type */
         	initSession();
@@ -152,7 +152,7 @@ public class FbWrapper extends Activity {
     	public void onGeolocationPermissionsShowPrompt(String origin, Callback callback) {
     		super.onGeolocationPermissionsShowPrompt(origin, callback);
     		
-    		callback.invoke(origin, ALLOW_CHECKINS, false);
+    		callback.invoke(origin, mAllowCheckins, false);
     	}
     }
     
@@ -164,7 +164,7 @@ public class FbWrapper extends Activity {
     		/** Avoid NPEs when clicking on some weird links on facebook.com */
     		if (url.equals("about:blank")) return false;
     		
-    		if (!OPEN_LINKS_INSIDE) {
+    		if (!mOpenLinksInside) {
 	    		if (url.startsWith("https://m.facebook.com/l.php") ||  
 	    				url.startsWith("http://m.facebook.com/l.php")) {
 	    			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -247,7 +247,7 @@ public class FbWrapper extends Activity {
     private void initSession() {
     	
     	/** Automatically check the proper site to load depending on screen size */
-    	if (SITE_MODE.equals(Constants.PREFS_SITE_MODE_AUTO)) {
+    	if (mSiteMode.equals(Constants.PREFS_SITE_MODE_AUTO)) {
     	
 	    	/** ICS allows phones AND tablets */
 	    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -272,7 +272,7 @@ public class FbWrapper extends Activity {
 	    	}
 	    
 	    /** Force the desktop version to load */
-    	} else if (SITE_MODE.equals(Constants.PREFS_SITE_MODE_DESKTOP)) {
+    	} else if (mSiteMode.equals(Constants.PREFS_SITE_MODE_DESKTOP)) {
     		setDesktopUserAgent();
     		
     	/** Otherwise force the mobile version to load */
