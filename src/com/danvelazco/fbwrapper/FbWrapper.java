@@ -70,21 +70,25 @@ public class FbWrapper extends Activity {
         /** Load default User Agent */
         USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
         
-        if (savedInstanceState != null)
+        if (savedInstanceState != null) {
+        	/** Restore the state of the WebView using the saved instance state */
             fbWrapper.restoreState(savedInstanceState);
-        else
+        } else {
         	/** Loads proper URL depending on device type */
         	initSession();
+        }
         
     }
     
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+    	/** Save the state of the WebView as a Bundle to the Instance State */
     	fbWrapper.saveState(outState);
     }
     
     @Override
     public void onConfigurationChanged(Configuration newConfig){
+    	/** Handle orientation configuration changes */
     	super.onConfigurationChanged(newConfig);
     }
     
