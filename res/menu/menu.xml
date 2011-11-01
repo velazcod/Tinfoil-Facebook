@@ -9,6 +9,13 @@
 		android:showAsAction="ifRoom|withText" />
 	
 	<item
+		android:id="@+id/menu_refresh"
+		android:title="@string/menu_refresh"
+		android:icon="@android:drawable/ic_menu_rotate"
+		android:alphabeticShortcut="@string/menu_refresh"
+		android:showAsAction="ifRoom|withText" />
+	
+	<item
 		android:id="@+id/menu_preferences"
 		android:title="@string/menu_preferences"
 		android:icon="@android:drawable/ic_menu_preferences"
