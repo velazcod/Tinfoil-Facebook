@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	
 	<item
-		android:id="@+id/menu_notifications"
-		android:title="@string/menu_notifications"
-		android:icon="@android:drawable/ic_menu_info_details"
-		android:alphabeticShortcut="@string/menu_notifications"
-		android:showAsAction="ifRoom|withText" />
-	
-	<item
 		android:id="@+id/menu_refresh"
 		android:title="@string/menu_refresh"
 		android:icon="@android:drawable/ic_menu_rotate"
 		android:alphabeticShortcut="@string/menu_refresh"
+		android:showAsAction="ifRoom|withText" />
+
+	<item
+		android:id="@+id/menu_notifications"
+		android:title="@string/menu_notifications"
+		android:icon="@android:drawable/ic_menu_info_details"
+		android:alphabeticShortcut="@string/menu_notifications"
 		android:showAsAction="ifRoom|withText" />
 	
 	<item

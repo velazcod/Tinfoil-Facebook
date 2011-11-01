@@ -317,11 +317,11 @@ public class FbWrapper extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	
     	switch (item.getItemId()) {
-    		case R.id.menu_notifications:
-    			loadNotificationsView();
-    			return true;
     		case R.id.menu_refresh:
     			fbWrapper.reload();
+    			return true;
+    		case R.id.menu_notifications:
+    			loadNotificationsView();
     			return true;
     		case R.id.menu_preferences:
     			startActivity(new Intent(this, Preferences.class));
