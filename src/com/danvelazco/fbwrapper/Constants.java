@@ -23,6 +23,9 @@ public class Constants {
 	public static final String URL_DESKTOP_SITE = "https://www.facebook.com";
 	public static final String URL_DESKTOP_NOTIFICATIONS = "https://www.facebook.com/notifications.php";
 	
+	/** URL for Sharing Links */
+	public static final String URL_SHARE_LINKS = "http://www.facebook.com/sharer.php?u=%s&t=%s"; //u = url & t = title
+		
 	/** Preferences */
 	public final static String PREFS_ALLOW_CHECKINS = "prefs_allow_checkins";
 	public final static String PREFS_OPEN_LINKS_INSIDE = "prefs_open_links_inside";

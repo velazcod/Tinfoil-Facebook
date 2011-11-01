@@ -27,6 +27,20 @@
             </intent-filter>
         </activity>
         
+            
+		<activity
+            android:label="@string/app_name"
+            android:name=".ShareLink"
+            android:theme="@style/Theme.FullScreenCustom"
+            android:configChanges="orientation" >
+            <intent-filter >
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+                            
+            
 		<activity 
 	        android:name=".Preferences" 
 			android:label="@string/app_name"
