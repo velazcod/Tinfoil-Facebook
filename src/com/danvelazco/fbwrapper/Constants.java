@@ -24,7 +24,7 @@ public class Constants {
 	public static final String URL_MOBILE_NOTIFICATIONS = "https://m.facebook.com/notifications.php";
 	
 	/** URLs for Desktop site */
-	public static final String URL_DESKTOP_SITE = "https://www.facebook.com/home.phps";
+	public static final String URL_DESKTOP_SITE = "https://www.facebook.com";
 	public static final String URL_DESKTOP_NOTIFICATIONS = "https://www.facebook.com/notifications.php";
 	
 	/** URL for Sharing Links */
