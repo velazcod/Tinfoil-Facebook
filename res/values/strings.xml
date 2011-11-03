@@ -2,6 +2,7 @@
 <resources>
 
 	<string name="app_name">Tinfoil for Facebook</string>
+	<string name="app_name_short">Facebook</string>
 
 	<string name="menu_desktop">Desktop</string>
 	<string name="menu_mobile">Mobile</string>
