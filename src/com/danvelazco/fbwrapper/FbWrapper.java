@@ -236,7 +236,11 @@ public class FbWrapper extends Activity {
     		
     		if (!mOpenLinksInside) {
 	    		if (url.startsWith("https://m.facebook.com/l.php") ||  
-	    				url.startsWith("http://m.facebook.com/l.php")) {
+	    				url.startsWith("http://m.facebook.com/l.php") ||
+	    				url.startsWith("https://www.facebook.com/l.php") ||
+	    				url.startsWith("http://www.facebook.com/l.php") ||
+	    				url.startsWith("https://facebook.com/l.php") ||
+	    				url.startsWith("http://facebook.com/l.php")) {
 	    			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 	                startActivity(intent);
 	                return true;
