@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -120,6 +122,9 @@ public class FbWrapper extends Activity {
     public void onResume() {
     	super.onResume();
     	
+    	if (V) Log.w(Constants.TAG, "Reset activity destroyer timeout");
+    	mDestroyHandy.removeMessages(Constants.REQUEST_WEB_VIEW_CLEANUP);
+    	
     	/** Start synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().startSync();
     	
@@ -148,6 +153,62 @@ public class FbWrapper extends Activity {
     	/** Stop synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().stopSync();
     }
+    
+    @Override
+    public void onStop() {
+    	super.onStop();
+    	
+    	if (V) Log.w(Constants.TAG, "Schedule activity cleanup in " + Constants.REQUEST_WEB_VIEW_CLEANUP_TIMEOUT + " millis");
+    	
+    	mDestroyHandy.sendMessageDelayed(Message.obtain(mDestroyHandy, 
+    			Constants.REQUEST_WEB_VIEW_CLEANUP), Constants.REQUEST_WEB_VIEW_CLEANUP_TIMEOUT);
+    }
+    
+    @Override
+    public void onDestroy() {
+    	super.onDestroy();
+    	
+    	if (V) Log.w(Constants.TAG, "Cleaning up and destroying activity");
+    	
+    	mDestroyHandy.removeMessages(Constants.REQUEST_WEB_VIEW_CLEANUP);
+    	
+    	/** Avoid an NPE */
+    	if (mFBWrapper != null) {
+    		
+    		/** Free memory and destroy WebView*/
+    		mFBWrapper.freeMemory();
+    		mFBWrapper.destroy();
+    		mFBWrapper = null;
+    	}
+    	
+    	/** Avoid an NPE */
+    	if (mSharedPrefs != null) {
+    		
+    		/** Clean up shared preferences */
+    		mSharedPrefs = null;
+    	}
+    	
+    	/** Force Garbage Collector */
+    	System.gc();
+    	
+    }
+    
+    private final Handler mDestroyHandy = new Handler() {
+    	@Override
+    	public void handleMessage(Message m) 
+    	{
+    		if (m.what == Constants.REQUEST_WEB_VIEW_CLEANUP) {
+    			new Thread() {
+	    			public void run() 
+					{
+	    				if (V) Log.w(Constants.TAG, "Request the activity to be cleaned up and destroyed");
+	    				finish();
+		    			return;
+					} 
+				}.start();
+    		}
+    	}
+    };
  
     private class FbWebChromeClient extends WebChromeClient {
     	@Override
