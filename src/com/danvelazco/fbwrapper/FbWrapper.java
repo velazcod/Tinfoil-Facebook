@@ -321,12 +321,11 @@ public class FbWrapper extends Activity {
     	
     	mDesktopView = true;
     	mFBWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
-    	mFBWrapper.loadUrl(Constants.URL_DESKTOP_SITE);
     	
     	if (urlToLoad != null)
     		mFBWrapper.loadUrl(urlToLoad.toString());
     	else
-    		mFBWrapper.loadUrl(Constants.URL_MOBILE_SITE);
+    		mFBWrapper.loadUrl(Constants.URL_DESKTOP_SITE);
     }
     
     /**
