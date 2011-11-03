@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.danvelazco.fbwrapper"
-    android:versionCode="20111101"
-    android:versionName="0.7" >
+    android:versionCode="20111103"
+    android:versionName="1.0" >
 
     <uses-sdk 
     	android:minSdkVersion="7"
@@ -22,12 +22,12 @@
             android:theme="@style/Theme.FullScreenCustom"
             android:configChanges="orientation" >
             
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
