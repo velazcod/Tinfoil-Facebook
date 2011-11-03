@@ -36,7 +36,7 @@ public class FbWrapper extends Activity {
 	
 	private WebView mFBWrapper;
 	
-	private boolean desktopView = false;
+	private boolean mDesktopView = false;
 	private String USERAGENT_ANDROID_DEFAULT;
 	
 	private ProgressBar mProgressBar;
@@ -299,7 +299,10 @@ public class FbWrapper extends Activity {
      * and load the mobile site.
      */
     private void setMobileUserAgent(Uri urlToLoad) {
-    	desktopView = false;
+    	
+    	if (V) Log.w(Constants.TAG, "Initialize for mobile");
+    	
+    	mDesktopView = false;
     	mFBWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
     	
     	if (urlToLoad != null)
@@ -313,7 +316,10 @@ public class FbWrapper extends Activity {
      * and load the desktop site
      */
     private void setDesktopUserAgent(Uri urlToLoad) {
-    	desktopView = true;
+    	
+    	if (V) Log.w(Constants.TAG, "Initialize for desktop");
+    	
+    	mDesktopView = true;
     	mFBWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
     	mFBWrapper.loadUrl(Constants.URL_DESKTOP_SITE);
     	
@@ -370,7 +376,7 @@ public class FbWrapper extends Activity {
      */
     private void loadNotificationsView() {
     	
-    	if (!desktopView)
+    	if (!mDesktopView)
     		mFBWrapper.loadUrl(Constants.URL_MOBILE_NOTIFICATIONS);
     	else
     		mFBWrapper.loadUrl(Constants.URL_DESKTOP_NOTIFICATIONS);
