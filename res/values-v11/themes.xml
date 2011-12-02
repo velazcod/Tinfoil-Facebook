@@ -2,5 +2,5 @@
  
 <resources>
 	<!-- <style name="Theme.FullScreenCustom" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen" /> -->
-	<style name="Theme.FullScreenCustom" parent="@android:style/Theme.Holo" />
+	<style name="Theme.FullScreenCustom" parent="@android:style/Theme.Holo.NoActionBar" />
 </resources>
