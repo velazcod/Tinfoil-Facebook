@@ -298,12 +298,29 @@ public class FbWrapper extends Activity {
      * Sets the user agent to the default user agent
      * and load the mobile site.
      */
-    private void setMobileUserAgent(Uri urlToLoad) {
+    private void setDefaultUserAgent(Uri urlToLoad) {
     	
     	if (V) Log.w(Constants.TAG, "Initialize for mobile");
     	
     	mDesktopView = false;
     	mFBWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
+    	
+    	if (urlToLoad != null)
+    		mFBWrapper.loadUrl(urlToLoad.toString());
+    	else
+    		mFBWrapper.loadUrl(Constants.URL_MOBILE_SITE);
+    }
+    
+    /**
+     * Sets the user agent to the default user agent
+     * and load the mobile site.
+     */
+    private void setMobileUserAgent(Uri urlToLoad) {
+    	
+    	if (V) Log.w(Constants.TAG, "Initialize for mobile");
+    	
+    	mDesktopView = false;
+    	mFBWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_MOBILE);
     	
     	if (urlToLoad != null)
     		mFBWrapper.loadUrl(urlToLoad.toString());
@@ -346,7 +363,7 @@ public class FbWrapper extends Activity {
 		    		setDesktopUserAgent(urlToLoad);
 		    	} else {
 		    		/** For phones */
-		    		setMobileUserAgent(urlToLoad);
+		    		setDefaultUserAgent(urlToLoad);
 		    	}
 		   
 		    /** Honeycomb only allowed tablets, always assume it's a tablet */
@@ -356,16 +373,20 @@ public class FbWrapper extends Activity {
 	    	
 	    	/** There were no tablets before Honeycomb, assume it's a phone */
 	    	} else {
-	    		setMobileUserAgent(urlToLoad);
+	    		setDefaultUserAgent(urlToLoad);
 	    	}
 	    
 	    /** Force the desktop version to load */
     	} else if (mSiteMode.equals(Constants.PREFS_SITE_MODE_DESKTOP)) {
     		setDesktopUserAgent(urlToLoad);
+    	
+    	/** Force the mobile version to load */
+    	} else if (mSiteMode.equals(Constants.PREFS_SITE_MODE_MOBILE)) {
+    		setMobileUserAgent(urlToLoad);
     		
     	/** Otherwise force the mobile version to load */
     	} else {
-    		setMobileUserAgent(urlToLoad);
+    		setDefaultUserAgent(urlToLoad);
     	}
     	
     }
