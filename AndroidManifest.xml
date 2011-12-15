@@ -20,7 +20,7 @@
             android:label="@string/app_name"
             android:name=".FbWrapper"
             android:theme="@style/Theme.FullScreenCustom"
-            android:configChanges="orientation" >
+            android:configChanges="keyboardHidden|orientation" >
             
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
