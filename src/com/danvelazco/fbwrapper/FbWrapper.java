@@ -300,7 +300,7 @@ public class FbWrapper extends Activity {
      */
     private void setDefaultUserAgent(Uri urlToLoad) {
     	
-    	if (V) Log.w(Constants.TAG, "Initialize for mobile");
+    	if (V) Log.w(Constants.TAG, "Initialize default user-agent");
     	
     	mDesktopView = false;
     	mFBWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
