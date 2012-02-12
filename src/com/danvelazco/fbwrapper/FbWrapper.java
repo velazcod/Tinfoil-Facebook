@@ -409,9 +409,19 @@ public class FbWrapper extends Activity {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mFBWrapper.canGoBack()) {
         	mFBWrapper.goBack();
             return true;
+        } else if (keyCode == KeyEvent.KEYCODE_SEARCH)
+        {
+        	openSearchBox();
         }
         
         return super.onKeyDown(keyCode, event);
+    }
+    
+    /*
+     * Use some hacky js to open the search box in the webview
+     */
+    private void openSearchBox() {
+    	mFBWrapper.loadUrl(getResources().getString(R.string.search_js));
     }
     
     @Override

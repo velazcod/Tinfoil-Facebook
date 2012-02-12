@@ -59,4 +59,17 @@
 \nThis app is for those users that require a Tinfoil Hat when logging in to Facebook. It creates a sandbox for facebook\'s mobile site to avoid them tracking your browsing history. Requires INTERNET permissions, and if you are skeptic about it, feel free to check the source code listed above. Coarse location permissions are required but location is not used unless you turn \"Allow Check-ins\" in the preferences.\n
 \n
 	</string>
+	
+<!-- Formatted javascript to open search box
+		var SPACING=250; (function() {
+		    document.querySelector("td.left > a.pageHeaderChromelessButton").click(); 
+		    setTimeout(function() {
+		        document.querySelector("div.mSideSearch").click();
+		        setTimeout(function() {
+		            document.querySelector("input.input.mSearchInput").focus();
+		        }, SPACING);
+		    }, SPACING);
+		})();
+-->
+    <string name="search_js">javascript: var SPACING=250; (function() { document.querySelector(\"td.left > a.pageHeaderChromelessButton\").click(); setTimeout(function() { document.querySelector(\"div.mSideSearch\").click(); setTimeout(function() { document.querySelector(\"input.input.mSearchInput\").focus(); }, SPACING); }, SPACING); })();</string>
 </resources>
