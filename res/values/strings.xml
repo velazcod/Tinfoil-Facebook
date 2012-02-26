@@ -60,16 +60,4 @@
 \n
 	</string>
 	
-<!-- Formatted javascript to open search box
-		var SPACING=250; (function() {
-		    document.querySelector("td.left > a.pageHeaderChromelessButton").click(); 
-		    setTimeout(function() {
-		        document.querySelector("div.mSideSearch").click();
-		        setTimeout(function() {
-		            document.querySelector("input.input.mSearchInput").focus();
-		        }, SPACING);
-		    }, SPACING);
-		})();
--->
-    <string name="search_js">javascript: var SPACING=250; (function() { document.querySelector(\"td.left > a.pageHeaderChromelessButton\").click(); setTimeout(function() { document.querySelector(\"div.mSideSearch\").click(); setTimeout(function() { document.querySelector(\"input.input.mSearchInput\").focus(); }, SPACING); }, SPACING); })();</string>
 </resources>

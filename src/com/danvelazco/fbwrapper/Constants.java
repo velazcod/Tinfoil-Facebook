@@ -44,4 +44,19 @@ public class Constants {
 	public final static String PREFS_LOGCAT_ENABLED = "pref_logcat";
 	public final static String PREFS_ABOUT = "pref_about";
 	
+	/** Custom Javascript - Used to inject */
+	
+	public final static String JS_OPEN_SEARCH_BOX = "javascript:" +
+			"window.scrollTo(0,0);" + //Make sure we go to the top first
+			"(function() {" +
+				"document.querySelector(\"td.left > a.pageHeaderChromelessButton\").click(); " +
+				"setTimeout(function() {" +
+					"document.querySelector(\"div.mSideSearch\").click();" +
+					"setTimeout(function() {" +
+						//"document.querySelector(\"input.input.mSearchInput\").focus();" +
+						"document.querySelector(\"div.mSearchProxy\").click();" +
+					"}, 250);" +
+				"}, 250);" +
+			"})();";
+
 }
