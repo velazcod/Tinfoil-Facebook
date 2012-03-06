@@ -1,8 +1,8 @@
 # Android Generated Files #
 ###########################
-.classpath
-.project
-.settings
+#.classpath
+#.project
+#.settings
 resources.ap_
 R.java
 bin
