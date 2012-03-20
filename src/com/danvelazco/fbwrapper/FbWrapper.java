@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieSyncManager;
 import android.webkit.GeolocationPermissions.Callback;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -35,6 +36,9 @@ import android.widget.ProgressBar;
 public class FbWrapper extends Activity {
 	
 	private WebView mFBWrapper;
+	
+	private ValueCallback<Uri> mUploadMessage;
+	private final static int RESULTCODE_PICUPLOAD = 1;
 	
 	private boolean mDesktopView = false;
 	private String USERAGENT_ANDROID_DEFAULT;
@@ -54,7 +58,7 @@ public class FbWrapper extends Activity {
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.webview);
-        
+		
         /** Load shared preferences */
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         
@@ -209,6 +213,20 @@ public class FbWrapper extends Activity {
     		}
     	}
     };
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode,
+									Intent intent) {
+		if (requestCode == RESULTCODE_PICUPLOAD) {
+			
+			if (null == mUploadMessage) return;
+			
+			Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+			mUploadMessage.onReceiveValue(result);
+			mUploadMessage = null;
+			
+		}
+	}
  
     private class FbWebChromeClient extends WebChromeClient {
     	@Override
@@ -224,6 +242,20 @@ public class FbWrapper extends Activity {
     		
     		callback.invoke(origin, mAllowCheckins, false);
     	}
+		
+		public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {  
+			mUploadMessage = uploadMsg;  
+			Intent i = new Intent(Intent.ACTION_GET_CONTENT);  
+			i.addCategory(Intent.CATEGORY_OPENABLE);  
+			i.setType("image/*");  
+			FbWrapper.this.startActivityForResult(Intent.createChooser(i, "File Chooser" ), FbWrapper.RESULTCODE_PICUPLOAD);  
+		}
+		
+		@SuppressWarnings("unused")
+		public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+			openFileChooser(uploadMsg, "");
+		}
+		
     }
     
     private class FbWebViewClient extends WebViewClient {
