@@ -451,6 +451,10 @@ public class FbWrapper extends Activity {
     		mFBWrapper.loadUrl(Constants.URL_DESKTOP_NOTIFICATIONS);
     }
     
+    private void webViewJumpTop() {
+    	mFBWrapper.loadUrl("javascript:window.scrollTo(0,0);");
+    }
+    
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         
@@ -487,7 +491,10 @@ public class FbWrapper extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	
     	switch (item.getItemId()) {
-	    	case R.id.menu_news_feed:
+	    	case R.id.menu_jump_top:
+	    		webViewJumpTop();
+				return true;
+    		case R.id.menu_news_feed:
 				initSession(null);
 				return true;
     		case R.id.menu_refresh:

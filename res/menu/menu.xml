@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	
     <item
+		android:id="@+id/menu_jump_top"
+		android:title="@string/menu_jump_top"
+		android:icon="@android:drawable/ic_menu_view"
+		android:alphabeticShortcut="@string/menu_jump_top"
+		android:showAsAction="never|withText" />
+    
+    <item
 		android:id="@+id/menu_news_feed"
 		android:title="@string/menu_news_feed"
 		android:icon="@android:drawable/ic_menu_view"
