@@ -7,7 +7,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
-public class Preferences extends PreferenceActivity {
+public class Preferences extends PreferenceActivity implements Constants {
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -21,7 +21,7 @@ public class Preferences extends PreferenceActivity {
 		
 		String key = preference.getKey();
 		
-		if (Constants.PREFS_ABOUT.equals(key)) {
+		if (PREFS_ABOUT.equals(key)) {
 			showAboutAlert();
 		}
 		
