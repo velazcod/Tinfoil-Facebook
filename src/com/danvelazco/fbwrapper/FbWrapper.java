@@ -333,6 +333,8 @@ public class FbWrapper extends Activity {
     	public void onPageStarted(WebView view, String url, Bitmap favicon) {
     		super.onPageStarted(view, url, favicon);
     		
+    		mActionBar.show();
+    		
     		/** We just started loading new content, show ProgressBar */
     		mProgressBar.setVisibility(View.VISIBLE);
     	}
@@ -340,6 +342,8 @@ public class FbWrapper extends Activity {
     	@Override
     	public void onPageFinished (WebView view, String url) {
     		super.onPageFinished(view, url);
+    		
+    		mActionBar.hide();
     		
     		/** We just finished loading the new content, hide ProgressBar */
     		mProgressBar.setVisibility(View.INVISIBLE);
