@@ -512,7 +512,8 @@ public class FbWrapper extends Activity implements OnGestureListener {
     	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(getString(R.string.lbl_dialog_alert));
         alertDialog.setMessage(getString(R.string.txt_checkins_disables)); 
-        alertDialog.setButton(getString(R.string.lbl_dialog_ok), new DialogInterface.OnClickListener() {
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.lbl_dialog_ok), 
+        		new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int which) {
         		return;
         	} 
