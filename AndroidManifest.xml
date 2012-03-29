@@ -21,7 +21,7 @@
             android:name=".FbWrapper"
             android:theme="@style/Theme.FullScreenCustom"
             android:uiOptions="splitActionBarWhenNarrow"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation|screenSize" >
             
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
