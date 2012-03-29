@@ -9,6 +9,7 @@ import android.preference.PreferenceScreen;
 
 public class Preferences extends PreferenceActivity {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,7 +33,8 @@ public class Preferences extends PreferenceActivity {
         alertDialog.setTitle(getString(R.string.menu_about));
         alertDialog.setMessage(getString(R.string.txt_about));
         alertDialog.setIcon(R.drawable.ic_launcher); 
-        alertDialog.setButton(getString(R.string.lbl_dialog_close), new DialogInterface.OnClickListener() {
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.lbl_dialog_close), 
+        		new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int which) {
         		return;
         	} 
