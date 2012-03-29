@@ -6,10 +6,10 @@ package com.danvelazco.fbwrapper;
  * @author Daniel Velazco
  *
  */
-public class Constants {
+public interface Constants {
 
 	/** TAG used for Logging */
-	public static final String TAG = "FB-Wrapper";
+	public static final String LOG_TAG = "FB-Wrapper";
 	
 	/** Milliseconds to wait to hide the action bar after it was shown again */
 	public static final long ACTION_BAR_HIDE_TIMEOUT = 5000;

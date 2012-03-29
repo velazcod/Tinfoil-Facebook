@@ -40,7 +40,7 @@ import android.widget.ProgressBar;
  * @author Daniel Velazco
  *
  */
-public class FbWrapper extends Activity implements OnGestureListener {
+public class FbWrapper extends Activity implements Constants, OnGestureListener {
 	
 	private ActionBar mActionBar;
 	private long abLastShown;
@@ -81,10 +81,10 @@ public class FbWrapper extends Activity implements OnGestureListener {
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         
         /** Logcat verbose */
-        V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
+        V = mSharedPrefs.getBoolean(PREFS_LOGCAT_ENABLED, false);
         
         /** Whether the site should be loaded as the mobile or desktop version */
-        mSiteMode = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
+        mSiteMode = mSharedPrefs.getString(PREFS_SITE_MODE, PREFS_SITE_MODE_AUTO);
         
         /** Creates new CookieSyncManager instance that will manage cookies */
         CookieSyncManager.createInstance(this);
@@ -133,7 +133,7 @@ public class FbWrapper extends Activity implements OnGestureListener {
 		
 		if (sharedUrl != null) {
 			if (!sharedUrl.equals("")) {
-				String formattedSharedUrl = String.format(Constants.URL_SHARE_LINKS, sharedUrl, sharedSubject);
+				String formattedSharedUrl = String.format(URL_SHARE_LINKS, sharedUrl, sharedSubject);
 				urlToLoad = Uri.parse(formattedSharedUrl);
 			}
 		}
@@ -164,23 +164,23 @@ public class FbWrapper extends Activity implements OnGestureListener {
     public void onResume() {
     	super.onResume();
     	
-    	if (V) Log.w(Constants.TAG, "Reset activity destroyer timeout");
-    	mDestroyHandy.removeMessages(Constants.REQUEST_WEB_VIEW_CLEANUP);
+    	if (V) Log.w(LOG_TAG, "Reset activity destroyer timeout");
+    	mDestroyHandy.removeMessages(REQUEST_WEB_VIEW_CLEANUP);
     	
     	/** Start synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().startSync();
     	
     	/** Re-load these preferences in case some of them were changed */
-    	V = mSharedPrefs.getBoolean(Constants.PREFS_LOGCAT_ENABLED, false);
-    	mAllowCheckins = mSharedPrefs.getBoolean(Constants.PREFS_ALLOW_CHECKINS, false);
+    	V = mSharedPrefs.getBoolean(PREFS_LOGCAT_ENABLED, false);
+    	mAllowCheckins = mSharedPrefs.getBoolean(PREFS_ALLOW_CHECKINS, false);
     	
-    	mOpenLinksInside = mSharedPrefs.getBoolean(Constants.PREFS_OPEN_LINKS_INSIDE, false);
+    	mOpenLinksInside = mSharedPrefs.getBoolean(PREFS_OPEN_LINKS_INSIDE, false);
     	
     	/** Check to see if the Site mode preference was just changed */
-    	if (!mSiteMode.equals(mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO))) {
+    	if (!mSiteMode.equals(mSharedPrefs.getString(PREFS_SITE_MODE, PREFS_SITE_MODE_AUTO))) {
     	
     		/** Store the new changes on the global field */
-    		mSiteMode = mSharedPrefs.getString(Constants.PREFS_SITE_MODE, Constants.PREFS_SITE_MODE_AUTO);
+    		mSiteMode = mSharedPrefs.getString(PREFS_SITE_MODE, PREFS_SITE_MODE_AUTO);
     		
     		/** Loads proper URL depending on device type */
         	initSession(null);
@@ -200,10 +200,10 @@ public class FbWrapper extends Activity implements OnGestureListener {
     public void onStop() {
     	super.onStop();
     	
-    	if (V) Log.w(Constants.TAG, "Schedule activity cleanup in " + Constants.REQUEST_WEB_VIEW_CLEANUP_TIMEOUT + " millis");
+    	if (V) Log.w(LOG_TAG, "Schedule activity cleanup in " + REQUEST_WEB_VIEW_CLEANUP_TIMEOUT + " millis");
     	
     	mDestroyHandy.sendMessageDelayed(Message.obtain(mDestroyHandy, 
-    			Constants.REQUEST_WEB_VIEW_CLEANUP), Constants.REQUEST_WEB_VIEW_CLEANUP_TIMEOUT);
+    			REQUEST_WEB_VIEW_CLEANUP), REQUEST_WEB_VIEW_CLEANUP_TIMEOUT);
     }
     
     private void destroyWebView() {
@@ -228,9 +228,9 @@ public class FbWrapper extends Activity implements OnGestureListener {
     public void onDestroy() {
     	super.onDestroy();
     	
-    	if (V) Log.w(Constants.TAG, "Cleaning up and destroying activity");
+    	if (V) Log.w(LOG_TAG, "Cleaning up and destroying activity");
     	
-    	mDestroyHandy.removeMessages(Constants.REQUEST_WEB_VIEW_CLEANUP);
+    	mDestroyHandy.removeMessages(REQUEST_WEB_VIEW_CLEANUP);
     	
     	destroyWebView();
     	
@@ -243,11 +243,11 @@ public class FbWrapper extends Activity implements OnGestureListener {
     	@Override
     	public void handleMessage(Message m) 
     	{
-    		if (m.what == Constants.REQUEST_WEB_VIEW_CLEANUP) {
+    		if (m.what == REQUEST_WEB_VIEW_CLEANUP) {
     			new Thread() {
 	    			public void run() 
 					{
-	    				if (V) Log.w(Constants.TAG, "Request the activity to be cleaned up and destroyed");
+	    				if (V) Log.w(LOG_TAG, "Request the activity to be cleaned up and destroyed");
 	    				destroyWebView();
 		    			return;
 					} 
@@ -332,7 +332,7 @@ public class FbWrapper extends Activity implements OnGestureListener {
         	if (domain != null) {
         	
 	        	/** Output URL */
-	        	if (V) Log.d(Constants.TAG, "Loading URL: " + url);
+	        	if (V) Log.d(LOG_TAG, "Loading URL: " + url);
 	        	
 	        	/** Let this WebView load the page. */
 	            if (domain.equals("m.facebook.com")) {
@@ -382,7 +382,7 @@ public class FbWrapper extends Activity implements OnGestureListener {
      */
     private void setDefaultUserAgent(Uri urlToLoad) {
     	
-    	if (V) Log.w(Constants.TAG, "Initialize default user-agent");
+    	if (V) Log.w(LOG_TAG, "Initialize default user-agent");
     	
     	mDesktopView = false;
     	mFBWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
@@ -390,7 +390,7 @@ public class FbWrapper extends Activity implements OnGestureListener {
     	if (urlToLoad != null)
     		mFBWrapper.loadUrl(urlToLoad.toString());
     	else
-    		mFBWrapper.loadUrl(Constants.URL_MOBILE_SITE);
+    		mFBWrapper.loadUrl(URL_MOBILE_SITE);
     }
     
     /**
@@ -399,15 +399,15 @@ public class FbWrapper extends Activity implements OnGestureListener {
      */
     private void setMobileUserAgent(Uri urlToLoad) {
     	
-    	if (V) Log.w(Constants.TAG, "Initialize for mobile");
+    	if (V) Log.w(LOG_TAG, "Initialize for mobile");
     	
     	mDesktopView = false;
-    	mFBWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_MOBILE);
+    	mFBWrapper.getSettings().setUserAgentString(USER_AGENT_MOBILE);
     	
     	if (urlToLoad != null)
     		mFBWrapper.loadUrl(urlToLoad.toString());
     	else
-    		mFBWrapper.loadUrl(Constants.URL_MOBILE_SITE);
+    		mFBWrapper.loadUrl(URL_MOBILE_SITE);
     }
     
     /**
@@ -416,15 +416,15 @@ public class FbWrapper extends Activity implements OnGestureListener {
      */
     private void setDesktopUserAgent(Uri urlToLoad) {
     	
-    	if (V) Log.w(Constants.TAG, "Initialize for desktop");
+    	if (V) Log.w(LOG_TAG, "Initialize for desktop");
     	
     	mDesktopView = true;
-    	mFBWrapper.getSettings().setUserAgentString(Constants.USER_AGENT_DESKTOP);
+    	mFBWrapper.getSettings().setUserAgentString(USER_AGENT_DESKTOP);
     	
     	if (urlToLoad != null)
     		mFBWrapper.loadUrl(urlToLoad.toString());
     	else
-    		mFBWrapper.loadUrl(Constants.URL_DESKTOP_SITE);
+    		mFBWrapper.loadUrl(URL_DESKTOP_SITE);
     }
     
     /**
@@ -434,7 +434,7 @@ public class FbWrapper extends Activity implements OnGestureListener {
     private void initSession(Uri urlToLoad) {
     	
     	/** Automatically check the proper site to load depending on screen size */
-    	if (mSiteMode.equals(Constants.PREFS_SITE_MODE_AUTO)) {
+    	if (mSiteMode.equals(PREFS_SITE_MODE_AUTO)) {
     	
 	    	/** ICS allows phones AND tablets */
 	    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -459,11 +459,11 @@ public class FbWrapper extends Activity implements OnGestureListener {
 	    	}
 	    
 	    /** Force the desktop version to load */
-    	} else if (mSiteMode.equals(Constants.PREFS_SITE_MODE_DESKTOP)) {
+    	} else if (mSiteMode.equals(PREFS_SITE_MODE_DESKTOP)) {
     		setDesktopUserAgent(urlToLoad);
     	
     	/** Force the mobile version to load */
-    	} else if (mSiteMode.equals(Constants.PREFS_SITE_MODE_MOBILE)) {
+    	} else if (mSiteMode.equals(PREFS_SITE_MODE_MOBILE)) {
     		setMobileUserAgent(urlToLoad);
     		
     	/** Otherwise force the mobile version to load */
@@ -479,9 +479,9 @@ public class FbWrapper extends Activity implements OnGestureListener {
     private void loadNotificationsView() {
     	
     	if (!mDesktopView)
-    		mFBWrapper.loadUrl(Constants.URL_MOBILE_NOTIFICATIONS);
+    		mFBWrapper.loadUrl(URL_MOBILE_NOTIFICATIONS);
     	else
-    		mFBWrapper.loadUrl(Constants.URL_DESKTOP_NOTIFICATIONS);
+    		mFBWrapper.loadUrl(URL_DESKTOP_NOTIFICATIONS);
     }
     
     private void webViewJumpTop() {
@@ -554,7 +554,7 @@ public class FbWrapper extends Activity implements OnGestureListener {
 		
 		if (e1.getRawY() > e2.getRawY()) {
 			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
-			if ((System.currentTimeMillis()-abLastShown) > Constants.ACTION_BAR_HIDE_TIMEOUT) {
+			if ((System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
 				mActionBar.hide();
 			}
 		} else {
@@ -574,7 +574,7 @@ public class FbWrapper extends Activity implements OnGestureListener {
 		
 		if (e1.getRawY() > e2.getRawY()) {
 			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
-			if ((System.currentTimeMillis()-abLastShown) > Constants.ACTION_BAR_HIDE_TIMEOUT) {
+			if ((System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
 				mActionBar.hide();
 			}
 		} else {
