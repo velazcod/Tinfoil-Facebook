@@ -188,14 +188,7 @@ public class FbWrapper extends Activity {
     			Constants.REQUEST_WEB_VIEW_CLEANUP), Constants.REQUEST_WEB_VIEW_CLEANUP_TIMEOUT);
     }
     
-    @Override
-    public void onDestroy() {
-    	super.onDestroy();
-    	
-    	if (V) Log.w(Constants.TAG, "Cleaning up and destroying activity");
-    	
-    	mDestroyHandy.removeMessages(Constants.REQUEST_WEB_VIEW_CLEANUP);
-    	
+    private void destroyWebView() {
     	/** Avoid an NPE */
     	if (mFBWrapper != null) {
     		
@@ -211,6 +204,17 @@ public class FbWrapper extends Activity {
     		/** Clean up shared preferences */
     		mSharedPrefs = null;
     	}
+    }
+    
+    @Override
+    public void onDestroy() {
+    	super.onDestroy();
+    	
+    	if (V) Log.w(Constants.TAG, "Cleaning up and destroying activity");
+    	
+    	mDestroyHandy.removeMessages(Constants.REQUEST_WEB_VIEW_CLEANUP);
+    	
+    	destroyWebView();
     	
     	/** Force Garbage Collector */
     	System.gc();
@@ -226,7 +230,7 @@ public class FbWrapper extends Activity {
 	    			public void run() 
 					{
 	    				if (V) Log.w(Constants.TAG, "Request the activity to be cleaned up and destroyed");
-	    				finish();
+	    				destroyWebView();
 		    			return;
 					} 
 				}.start();
