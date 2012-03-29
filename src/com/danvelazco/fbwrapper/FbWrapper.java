@@ -71,8 +71,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         super.onCreate(savedInstanceState);
         
         mActionBar = getActionBar();
-        mActionBar.setDisplayShowTitleEnabled(false);
-        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setTitle(R.string.app_name_short);
         
         setContentView(R.layout.webview);
         
