@@ -15,11 +15,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.webkit.CookieSyncManager;
 import android.webkit.GeolocationPermissions.Callback;
 import android.webkit.ValueCallback;
@@ -36,11 +40,14 @@ import android.widget.ProgressBar;
  * @author Daniel Velazco
  *
  */
-public class FbWrapper extends Activity {
+public class FbWrapper extends Activity implements OnGestureListener {
 	
 	private ActionBar mActionBar;
+	private long abLastShown;
 	
 	private WebView mFBWrapper;
+	
+	private GestureDetector mGestureScanner;
 	
 	private ValueCallback<Uri> mUploadMessage;
 	private final static int RESULTCODE_PICUPLOAD = 1;
@@ -67,6 +74,8 @@ public class FbWrapper extends Activity {
         mActionBar.setDisplayShowHomeEnabled(false);
         
         setContentView(R.layout.webview);
+        
+        mGestureScanner = new GestureDetector(this, this);
 		
         /** Load shared preferences */
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -88,6 +97,15 @@ public class FbWrapper extends Activity {
         mFBWrapper.setWebViewClient(new FbWebViewClient());
         mFBWrapper.setWebChromeClient(new FbWebChromeClient());
         mFBWrapper.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        
+        mFBWrapper.setOnTouchListener(new OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if (mGestureScanner.onTouchEvent(event)) {
+					return false;
+				}
+				return false;
+			}
+        });
         
         /** Apply settings for WebView */
         WebSettings webSettings = mFBWrapper.getSettings(); 
@@ -530,5 +548,54 @@ public class FbWrapper extends Activity {
     
     	return false;
     }
+
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float arg2, float arg3) {
+		
+		if (e1.getRawY() > e2.getRawY()) {
+			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
+			if ((System.currentTimeMillis()-abLastShown) > Constants.ACTION_BAR_HIDE_TIMEOUT) {
+				mActionBar.hide();
+			}
+		} else {
+			/* If the user flings down, show the action bar */
+			if (!mActionBar.isShowing()) {
+				mActionBar.show();
+				abLastShown = System.currentTimeMillis();
+			}
+			return true;
+		}	
+		
+		return false;
+	}
+
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
+		
+		if (e1.getRawY() > e2.getRawY()) {
+			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
+			if ((System.currentTimeMillis()-abLastShown) > Constants.ACTION_BAR_HIDE_TIMEOUT) {
+				mActionBar.hide();
+			}
+		} else {
+			if (!mActionBar.isShowing()) {
+				mActionBar.show();
+				abLastShown = System.currentTimeMillis();
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean onDown(MotionEvent arg0) {
+		return false;
+	}
+	
+	public boolean onSingleTapUp(MotionEvent e) {
+		return false;
+	}
+
+	public void onLongPress(MotionEvent e) {}
+	
+	public void onShowPress(MotionEvent e) {}
     
 }

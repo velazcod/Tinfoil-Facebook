@@ -11,6 +11,9 @@ public class Constants {
 	/** TAG used for Logging */
 	public static final String TAG = "FB-Wrapper";
 	
+	/** Milliseconds to wait to hide the action bar after it was shown again */
+	public static final long ACTION_BAR_HIDE_TIMEOUT = 5000;
+	
 	/** Ability to cleanup/destroy the web view some time after exiting the app */
 	public static final int REQUEST_WEB_VIEW_CLEANUP = 0x1000;
 	public static final long REQUEST_WEB_VIEW_CLEANUP_TIMEOUT = 120000;
