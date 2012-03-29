@@ -1,5 +1,6 @@
 package com.danvelazco.fbwrapper;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,6 +38,8 @@ import android.widget.ProgressBar;
  */
 public class FbWrapper extends Activity {
 	
+	private ActionBar mActionBar;
+	
 	private WebView mFBWrapper;
 	
 	private ValueCallback<Uri> mUploadMessage;
@@ -58,6 +61,10 @@ public class FbWrapper extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        mActionBar = getActionBar();
+        mActionBar.setDisplayShowTitleEnabled(false);
+        mActionBar.setDisplayShowHomeEnabled(false);
         
         setContentView(R.layout.webview);
 		
