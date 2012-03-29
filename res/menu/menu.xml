@@ -4,7 +4,7 @@
     <item
 		android:id="@+id/menu_jump_top"
 		android:title="@string/menu_jump_top"
-		android:icon="@android:drawable/ic_menu_view"
+		android:icon="@android:drawable/ic_menu_upload"
 		android:alphabeticShortcut="@string/menu_jump_top"
 		android:showAsAction="never|withText" />
     
