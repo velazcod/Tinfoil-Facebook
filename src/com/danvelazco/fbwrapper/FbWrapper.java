@@ -98,8 +98,19 @@ public class FbWrapper extends Activity {
         /** Check to see if we receive Intent Data */
         if (intent.getData() != null) {
         	urlToLoad = intent.getData();
-        }        
-        
+        }
+		
+        /* Get a subject and text and check if this is a link trying to be shared */
+		String sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
+		String sharedUrl = intent.getStringExtra(Intent.EXTRA_TEXT);
+		
+		if (sharedUrl != null) {
+			if (!sharedUrl.equals("")) {
+				String formattedSharedUrl = String.format(Constants.URL_SHARE_LINKS, sharedUrl, sharedSubject);
+				urlToLoad = Uri.parse(formattedSharedUrl);
+			}
+		}
+		
         if (savedInstanceState != null) {
         	/** Restore the state of the WebView using the saved instance state */
         	mFBWrapper.restoreState(savedInstanceState);
