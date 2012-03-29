@@ -1,6 +1,8 @@
 package com.danvelazco.fbwrapper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -251,6 +253,10 @@ public class FbWrapper extends Activity {
     	public void onGeolocationPermissionsShowPrompt(String origin, Callback callback) {
     		super.onGeolocationPermissionsShowPrompt(origin, callback);
     		
+    		if (!mAllowCheckins) {
+    			showCheckinsDisabledAlert();
+    		}
+    		
     		callback.invoke(origin, mAllowCheckins, false);
     	}
 		
@@ -463,6 +469,18 @@ public class FbWrapper extends Activity {
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.menu, menu);
     	return true;
+    }
+    
+    private void showCheckinsDisabledAlert() {
+    	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(getString(R.string.lbl_dialog_alert));
+        alertDialog.setMessage(getString(R.string.txt_checkins_disables)); 
+        alertDialog.setButton(getString(R.string.lbl_dialog_ok), new DialogInterface.OnClickListener() {
+        	public void onClick(DialogInterface dialog, int which) {
+        		return;
+        	} 
+        });
+        alertDialog.show();
     }
 
     @Override

@@ -13,6 +13,7 @@
 	<string name="menu_about">About</string>
 	<string name="menu_exit">Exit</string>
 	
+	<string name="lbl_dialog_alert">Alert</string>
 	<string name="lbl_dialog_close">Close</string>
     <string name="lbl_dialog_ok">Ok</string>
      
@@ -47,6 +48,14 @@
 		    
 	<!-- End preferences -->
 
+
+	<!-- Text used on the "about" dialog -->
+    <string name="txt_checkins_disables">\nFacebook is trying to access your location.\n
+\nMost likely you are trying to \"Check-in\" to a specific place. While Tinfoil has optional permissions used for this, it is disabled by default.\n
+\nYou can enable this feature by going to the Preferences and checking the option that says \"Allow Check-ins.\"\n
+\nTinfoil only shares \"Coarse location\", this doesn\'t use the GPS, only Network and Wi-fi location in order to save battery. However, Coarse Location is not as accurate as Fine Location.\n
+\n
+	</string>
 
 	<!-- Text used on the "about" dialog -->
     <string name="txt_about">\nDeveloped by Daniel Velazco.
