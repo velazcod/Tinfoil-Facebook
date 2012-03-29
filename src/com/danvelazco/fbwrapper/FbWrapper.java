@@ -445,10 +445,6 @@ public class FbWrapper extends Activity {
     		mFBWrapper.loadUrl(Constants.URL_DESKTOP_NOTIFICATIONS);
     }
     
-    private void openSearchBox() {
-    	mFBWrapper.loadUrl(Constants.JS_OPEN_SEARCH_BOX);
-    }
-    
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         
@@ -456,8 +452,6 @@ public class FbWrapper extends Activity {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mFBWrapper.canGoBack()) {
         	mFBWrapper.goBack();
             return true;
-        } else if (keyCode == KeyEvent.KEYCODE_SEARCH) {
-        	openSearchBox();
         }
         
         return super.onKeyDown(keyCode, event);
