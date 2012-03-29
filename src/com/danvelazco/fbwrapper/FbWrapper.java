@@ -495,12 +495,14 @@ public class FbWrapper extends Activity {
 	    		webViewJumpTop();
 				return true;
     		case R.id.menu_news_feed:
+    			//TODO: attempt to inject JS instead
 				initSession(null);
 				return true;
     		case R.id.menu_refresh:
     			mFBWrapper.reload();
     			return true;
     		case R.id.menu_notifications:
+    			//TODO: attempt to inject JS instead
     			loadNotificationsView();
     			return true;
     		case R.id.menu_preferences:
