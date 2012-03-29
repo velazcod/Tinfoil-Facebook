@@ -6,41 +6,41 @@
 		android:title="@string/menu_jump_top"
 		android:icon="@android:drawable/ic_menu_upload"
 		android:alphabeticShortcut="@string/menu_jump_top"
-		android:showAsAction="never|withText" />
+		android:showAsAction="ifRoom" />"
     
     <item
 		android:id="@+id/menu_news_feed"
 		android:title="@string/menu_news_feed"
 		android:icon="@android:drawable/ic_menu_view"
 		android:alphabeticShortcut="@string/menu_news_feed"
-		android:showAsAction="never|withText" />
+		android:showAsAction="ifRoom" />
     
 	<item
 		android:id="@+id/menu_refresh"
 		android:title="@string/menu_refresh"
 		android:icon="@android:drawable/ic_menu_rotate"
 		android:alphabeticShortcut="@string/menu_refresh"
-		android:showAsAction="never|withText" />
+		android:showAsAction="ifRoom" />
 
 	<item
 		android:id="@+id/menu_notifications"
 		android:title="@string/menu_notifications"
 		android:icon="@android:drawable/ic_menu_info_details"
 		android:alphabeticShortcut="@string/menu_notifications"
-		android:showAsAction="never|withText" />
+		android:showAsAction="ifRoom" />
 	
 	<item
 		android:id="@+id/menu_preferences"
 		android:title="@string/menu_preferences"
 		android:icon="@android:drawable/ic_menu_preferences"
 		android:alphabeticShortcut="@string/menu_preferences"
-		android:showAsAction="never|withText" />
+		android:showAsAction="ifRoom" />
 	
 	<item
 		android:id="@+id/menu_exit"
 		android:title="@string/menu_exit"
 		android:icon="@android:drawable/ic_menu_close_clear_cancel"
 		android:alphabeticShortcut="@string/menu_exit"
-		android:showAsAction="never|withText" />
+		android:showAsAction="ifRoom" />
 		
 </menu>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
  
 <resources>
-	<!-- <style name="Theme.FullScreenCustom" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen" /> -->
-	<style name="Theme.FullScreenCustom" parent="@android:style/Theme.Holo.NoActionBar" />
+	<style name="Theme.FullScreenCustom" parent="@android:style/Theme.Holo" />
 </resources>
