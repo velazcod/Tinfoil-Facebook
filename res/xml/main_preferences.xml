@@ -28,6 +28,12 @@
 	
 	<PreferenceCategory android:title="@string/pref_cat_general">
 		
+	    <CheckBoxPreference 
+			android:key="pref_hide_ab" 
+			android:title="@string/pref_hide_ab" 
+			android:summary="@string/pref_hide_ab_sry"
+			android:defaultValue="false"/>
+	    
 		<CheckBoxPreference 
 			android:key="pref_logcat" 
 			android:title="@string/pref_logcat" 

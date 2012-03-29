@@ -16,7 +16,7 @@
 	
 	<string name="lbl_dialog_alert">Alert</string>
 	<string name="lbl_dialog_close">Close</string>
-    <string name="lbl_dialog_ok">Ok</string>
+    <string name="lbl_dialog_ok">OK</string>
      
 	<!-- Preferences -->
 		<string name="pref_cat_access">Access</string>
@@ -40,7 +40,10 @@
 	    	<item>mobile</item>
 	    	<item>desktop</item>
 	    </array>
-		    
+		
+	    <string name="pref_hide_ab">Hide ActionBar</string>
+		<string name="pref_hide_ab_sry">Automatically hide the ActionBar when not being used. Fling down to make it appear again.</string>
+	    
 		<string name="pref_logcat">System logging</string>
 		<string name="pref_logcat_sry">Enable system logging. Useful when helping developer debug problems with the app</string>
 		

@@ -45,6 +45,7 @@ public interface Constants {
 	public final static String PREFS_SITE_MODE_MOBILE = "mobile";
 	public final static String PREFS_SITE_MODE_DESKTOP = "desktop";
 	public final static String PREFS_LOGCAT_ENABLED = "pref_logcat";
+	public final static String PREFS_HIDE_AB = "pref_hide_ab";
 	public final static String PREFS_ABOUT = "pref_about";
 
 }

@@ -58,6 +58,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 	private ProgressBar mProgressBar;
 	
 	private boolean V = false;
+	private boolean mHideAb = false;
 	private boolean mAllowCheckins = false;
 	private boolean mOpenLinksInside = false;
 	private String mSiteMode;
@@ -79,6 +80,9 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		
         /** Load shared preferences */
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        
+        /** Hide ActionBar based on user's preferences */
+        mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
         
         /** Logcat verbose */
         V = mSharedPrefs.getBoolean(PREFS_LOGCAT_ENABLED, false);
@@ -171,6 +175,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	CookieSyncManager.getInstance().startSync();
     	
     	/** Re-load these preferences in case some of them were changed */
+    	mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
     	V = mSharedPrefs.getBoolean(PREFS_LOGCAT_ENABLED, false);
     	mAllowCheckins = mSharedPrefs.getBoolean(PREFS_ALLOW_CHECKINS, false);
     	
@@ -365,7 +370,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	public void onPageFinished (WebView view, String url) {
     		super.onPageFinished(view, url);
     		
-    		mActionBar.hide();
+    		if (mHideAb) mActionBar.hide();
     		
     		/** We just finished loading the new content, hide ProgressBar */
     		mProgressBar.setVisibility(View.INVISIBLE);
@@ -554,7 +559,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		
 		if (e1.getRawY() > e2.getRawY()) {
 			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
-			if ((System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
+			if (mHideAb && (System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
 				mActionBar.hide();
 			}
 		} else {
@@ -574,7 +579,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		
 		if (e1.getRawY() > e2.getRawY()) {
 			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
-			if ((System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
+			if (mHideAb && (System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
 				mActionBar.hide();
 			}
 		} else {
