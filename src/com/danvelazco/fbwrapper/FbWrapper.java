@@ -70,8 +70,11 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mActionBar = getActionBar();
-        mActionBar.setTitle(R.string.app_name_short);
+        /* Only mess with ActionBar if device is on honeycomb or higher */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        	mActionBar = getActionBar();
+	        mActionBar.setTitle(R.string.app_name_short);
+        }
         
         setContentView(R.layout.webview);
         
@@ -359,7 +362,9 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	public void onPageStarted(WebView view, String url, Bitmap favicon) {
     		super.onPageStarted(view, url, favicon);
     		
-    		mActionBar.show();
+    		if (mActionBar != null) {
+    			mActionBar.show();
+    		}
     		
     		/** We just started loading new content, show ProgressBar */
     		mProgressBar.setVisibility(View.VISIBLE);
@@ -369,7 +374,9 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	public void onPageFinished (WebView view, String url) {
     		super.onPageFinished(view, url);
     		
-    		if (mHideAb) mActionBar.hide();
+    		if (mActionBar != null) {
+    			if (mHideAb) mActionBar.hide();
+    		}
     		
     		/** We just finished loading the new content, hide ProgressBar */
     		mProgressBar.setVisibility(View.INVISIBLE);
@@ -556,6 +563,10 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float arg2, float arg3) {
 		
+		if (mActionBar == null) {
+			return false;
+		}
+		
 		if (e1.getRawY() > e2.getRawY()) {
 			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
 			if (mHideAb && (System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
@@ -575,6 +586,10 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
 			float distanceY) {
+		
+		if (mActionBar == null) {
+			return false;
+		}
 		
 		if (e1.getRawY() > e2.getRawY()) {
 			/* Only hide the bar if the last time we showed it is over 5 seconds ago */

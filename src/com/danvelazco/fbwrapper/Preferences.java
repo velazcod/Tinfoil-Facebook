@@ -2,9 +2,12 @@ package com.danvelazco.fbwrapper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
 public class Preferences extends PreferenceActivity implements Constants {
@@ -14,6 +17,14 @@ public class Preferences extends PreferenceActivity implements Constants {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.main_preferences);
+		
+		/* Hide ActionBar preference if device is before Honeycomb */
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			CheckBoxPreference hideAbCheckboxPref = (CheckBoxPreference) findPreference(PREFS_HIDE_AB);
+			PreferenceCategory generalCategory = (PreferenceCategory) findPreference(PREFS_CAT_GENERAL);
+			generalCategory.removePreference(hideAbCheckboxPref);
+		}
+		
 	}
 	
 	@Override

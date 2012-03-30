@@ -38,6 +38,7 @@ public interface Constants {
 	public static final String URL_SHARE_LINKS = "http://www.facebook.com/sharer.php?u=%s&t=%s"; //u = url & t = title
 		
 	/** Preferences */
+	public final static String PREFS_CAT_GENERAL = "pref_cat_general";
 	public final static String PREFS_ALLOW_CHECKINS = "prefs_allow_checkins";
 	public final static String PREFS_OPEN_LINKS_INSIDE = "prefs_open_links_inside";
 	public final static String PREFS_SITE_MODE = "prefs_mobile_site";
