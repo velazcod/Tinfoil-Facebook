@@ -105,7 +105,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         mFBWrapper.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (mGestureScanner.onTouchEvent(event)) {
-					return false;
+					//TODO: what?!
+					return true;
 				}
 				return false;
 			}
@@ -519,18 +520,13 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 			return false;
 		}
 		
-		if (e1.getRawY() > e2.getRawY()) {
-			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
-			if (mHideAb && (System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
-				mActionBar.hide();
-			}
-		} else {
+		if (e1.getRawY() < e2.getRawY()) {
 			/* If the user flings down, show the action bar */
 			if (!mActionBar.isShowing()) {
 				mActionBar.show();
 				abLastShown = System.currentTimeMillis();
+				return true;
 			}
-			return true;
 		}	
 		
 		return false;
@@ -547,11 +543,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 			/* Only hide the bar if the last time we showed it is over 5 seconds ago */
 			if (mHideAb && (System.currentTimeMillis()-abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
 				mActionBar.hide();
-			}
-		} else {
-			if (!mActionBar.isShowing()) {
-				mActionBar.show();
-				abLastShown = System.currentTimeMillis();
 			}
 		}
 		
