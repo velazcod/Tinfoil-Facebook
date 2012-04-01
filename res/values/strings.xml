@@ -42,7 +42,7 @@
 	    </array>
 		
 	    <string name="pref_hide_ab">Hide ActionBar</string>
-		<string name="pref_hide_ab_sry">Automatically hide the ActionBar when not being used. Fling down to make it appear again.</string>
+		<string name="pref_hide_ab_sry">EXPERIMENTAL: Automatically hide the ActionBar when not being used. Fling down to make it appear again.</string>
 	    
 		<string name="pref_logcat">System logging</string>
 		<string name="pref_logcat_sry">Enable system logging. Useful when helping developer debug problems with the app</string>
