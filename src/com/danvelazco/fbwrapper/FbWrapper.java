@@ -84,8 +84,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         /** Hide ActionBar based on user's preferences */
         mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
         
-        /** Logcat verbose */
-        V = mSharedPrefs.getBoolean(PREFS_LOGCAT_ENABLED, false);
+        /** Logcat verbose, enable if we are in debug mode, otherwise get from preferences */
+        V = BuildConfig.DEBUG ? true : mSharedPrefs.getBoolean(PREFS_LOGCAT_ENABLED, false);
         
         /** Whether the site should be loaded as the mobile or desktop version */
         mSiteMode = mSharedPrefs.getString(PREFS_SITE_MODE, PREFS_SITE_MODE_AUTO);
