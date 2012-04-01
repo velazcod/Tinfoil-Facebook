@@ -7,6 +7,20 @@
 		android:icon="@android:drawable/ic_menu_upload"
 		android:alphabeticShortcut="@string/menu_jump_top"
 		android:showAsAction="ifRoom" />
+	
+    <item
+		android:id="@+id/menu_preferences"
+		android:title="@string/menu_preferences"
+		android:icon="@android:drawable/ic_menu_preferences"
+		android:alphabeticShortcut="@string/menu_preferences"
+		android:showAsAction="ifRoom" />
+    
+	<item
+		android:id="@+id/menu_refresh"
+		android:title="@string/menu_refresh"
+		android:icon="@android:drawable/ic_menu_rotate"
+		android:alphabeticShortcut="@string/menu_refresh"
+		android:showAsAction="ifRoom" />
     
     <item
 		android:id="@+id/menu_news_feed"
@@ -21,20 +35,6 @@
 		android:icon="@android:drawable/ic_menu_info_details"
 		android:alphabeticShortcut="@string/menu_notifications"
 		android:showAsAction="never" />
-    
-	<item
-		android:id="@+id/menu_refresh"
-		android:title="@string/menu_refresh"
-		android:icon="@android:drawable/ic_menu_rotate"
-		android:alphabeticShortcut="@string/menu_refresh"
-		android:showAsAction="never" />
-	
-	<item
-		android:id="@+id/menu_preferences"
-		android:title="@string/menu_preferences"
-		android:icon="@android:drawable/ic_menu_preferences"
-		android:alphabeticShortcut="@string/menu_preferences"
-		android:showAsAction="ifRoom" />
 	
 	<item
 		android:id="@+id/menu_exit"
