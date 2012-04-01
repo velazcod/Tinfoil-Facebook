@@ -105,7 +105,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         mFBWrapper.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if (mGestureScanner.onTouchEvent(event)) {
-					//TODO: what?!
 					return true;
 				}
 				return false;
@@ -514,14 +513,14 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	return false;
     }
 
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float arg2, float arg3) {
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		
 		if (mActionBar == null) {
 			return false;
 		}
 		
-		if (e1.getRawY() < e2.getRawY()) {
-			/* If the user flings down, show the action bar */
+		/* Only show action bar if user flings down very fast */
+		if (e1.getRawY() < e2.getRawY() && velocityY > ACTION_BAR_SHOW_FLING_SPEED) {
 			if (!mActionBar.isShowing()) {
 				mActionBar.show();
 				abLastShown = System.currentTimeMillis();
