@@ -11,8 +11,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -170,9 +168,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     public void onResume() {
     	super.onResume();
     	
-    	if (V) Log.w(LOG_TAG, "Reset activity destroyer timeout");
-    	mDestroyHandy.removeMessages(REQUEST_WEB_VIEW_CLEANUP);
-    	
     	/** Start synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().startSync();
     	
@@ -203,16 +198,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	CookieSyncManager.getInstance().stopSync();
     }
     
-    @Override
-    public void onStop() {
-    	super.onStop();
-    	
-    	if (V) Log.w(LOG_TAG, "Schedule activity cleanup in " + REQUEST_WEB_VIEW_CLEANUP_TIMEOUT + " millis");
-    	
-    	mDestroyHandy.sendMessageDelayed(Message.obtain(mDestroyHandy, 
-    			REQUEST_WEB_VIEW_CLEANUP), REQUEST_WEB_VIEW_CLEANUP_TIMEOUT);
-    }
-    
     private void destroyWebView() {
     	/** Avoid an NPE */
     	if (mFBWrapper != null) {
@@ -230,38 +215,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     		mSharedPrefs = null;
     	}
     }
-    
-    @Override
-    public void onDestroy() {
-    	super.onDestroy();
-    	
-    	if (V) Log.w(LOG_TAG, "Cleaning up and destroying activity");
-    	
-    	mDestroyHandy.removeMessages(REQUEST_WEB_VIEW_CLEANUP);
-    	
-    	destroyWebView();
-    	
-    	/** Force Garbage Collector */
-    	System.gc();
-    	
-    }
-    
-    private final Handler mDestroyHandy = new Handler() {
-    	@Override
-    	public void handleMessage(Message m) 
-    	{
-    		if (m.what == REQUEST_WEB_VIEW_CLEANUP) {
-    			new Thread() {
-	    			public void run() 
-					{
-	    				if (V) Log.w(LOG_TAG, "Request the activity to be cleaned up and destroyed");
-	    				destroyWebView();
-		    			return;
-					} 
-				}.start();
-    		}
-    	}
-    };
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
@@ -554,6 +507,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     			startActivity(new Intent(this, Preferences.class));
     			return true;
     		case R.id.menu_exit:
+    			destroyWebView();
     			finish();
     			return true;
     	}
