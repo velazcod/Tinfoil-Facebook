@@ -125,8 +125,10 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		webSettings.setSavePassword(false);
 		webSettings.setSaveFormData(true);
 		webSettings.setSupportZoom(true);
-
-		webSettings.setBuiltInZoomControls(false);
+		webSettings.setSaveFormData(false);
+		webSettings.setSavePassword(false);
+		
+		mFBWrapper.clearFormData();
 
 		/** Load default User Agent */
 		USERAGENT_ANDROID_DEFAULT = webSettings.getUserAgentString();
