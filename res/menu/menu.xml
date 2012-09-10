@@ -35,6 +35,13 @@
 		android:icon="@android:drawable/ic_menu_view"
 		android:alphabeticShortcut="@string/menu_news_feed"
 		android:showAsAction="never" />
+		
+	<item
+		android:id="@+id/menu_copy_url"
+		android:title="@string/menu_copy_url"
+		android:icon="@android:drawable/ic_menu_share"
+		android:alphabeticShortcut="@string/menu_copy_url"
+		android:showAsAction="never" />
 	
 	<item
 		android:id="@+id/menu_exit"

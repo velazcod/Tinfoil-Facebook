@@ -8,6 +8,8 @@
 	<string name="menu_mobile">Mobile</string>
 	<string name="menu_jump_top">Jump to top</string>
 	<string name="menu_news_feed">News feed</string>
+	<string name="menu_share">Share</string>
+	<string name="menu_copy_url">Copy URL</string>
 	<string name="menu_refresh">Refresh</string>
 	<string name="menu_notifications">Notifications</string>
 	<string name="menu_preferences">Preferences</string>

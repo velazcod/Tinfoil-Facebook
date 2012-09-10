@@ -1,35 +1,19 @@
 package com.danvelazco.fbwrapper;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
-import android.webkit.CookieSyncManager;
-import android.webkit.GeolocationPermissions.Callback;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
+import android.app.*;
+import android.content.*;
+import android.content.res.*;
+import android.graphics.*;
+import android.net.*;
+import android.os.*;
+import android.preference.*;
+import android.util.*;
+import android.view.*;
+import android.view.GestureDetector.*;
+import android.view.View.*;
+import android.webkit.*;
+import android.webkit.GeolocationPermissions.*;
+import android.widget.*;
 
 /**
  * Activity with a WebView wrapping facebook.com with its
@@ -46,6 +30,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 	private WebView mFBWrapper;
 	
 	private GestureDetector mGestureScanner;
+	
+	private ClipboardManager mClipboard;
 	
 	private ValueCallback<Uri> mUploadMessage;
 	private final static int RESULTCODE_PICUPLOAD = 1;
@@ -80,6 +66,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		
         /** Load shared preferences */
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		mClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         
         /** Hide ActionBar based on user's preferences */
         mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
@@ -207,6 +195,11 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	/** Stop synchronizing the CookieSyncManager */
     	CookieSyncManager.getInstance().stopSync();
     }
+	
+	public void copyToClipboard(String text) {
+		ClipData clip = ClipData.newPlainText("label", text);
+		mClipboard.setPrimaryClip(clip);
+	}
     
     private void destroyWebView() {
     	
@@ -516,6 +509,9 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     		case R.id.menu_news_feed:
 				initSession(null);
 				return true;
+			case R.id.menu_copy_url:
+			    copyToClipboard(mFBWrapper.getUrl());
+			    return true;
     		case R.id.menu_refresh:
     			mFBWrapper.reload();
     			return true;
