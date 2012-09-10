@@ -196,9 +196,17 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	CookieSyncManager.getInstance().stopSync();
     }
 	
-	public void copyToClipboard(String text) {
+    private void copyToClipboard(String text) {
 		ClipData clip = ClipData.newPlainText("label", text);
 		mClipboard.setPrimaryClip(clip);
+	}
+	
+	private void shareCurrentPage() {
+		Intent i = new Intent(android.content.Intent.ACTION_SEND);
+		i.setType("text/plain");
+		i.putExtra(Intent.EXTRA_SUBJECT, "Facebook page");
+		i.putExtra(Intent.EXTRA_TEXT, mFBWrapper.getUrl());
+		startActivity(Intent.createChooser(i, "Share URL"));
 	}
     
     private void destroyWebView() {
@@ -511,6 +519,9 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 				return true;
 			case R.id.menu_copy_url:
 			    copyToClipboard(mFBWrapper.getUrl());
+			    return true;
+			case R.id.menu_share:
+			    shareCurrentPage();
 			    return true;
     		case R.id.menu_refresh:
     			mFBWrapper.reload();
