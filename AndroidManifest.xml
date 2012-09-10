@@ -42,6 +42,9 @@
                 
                 <data android:scheme="http" android:host="m.facebook.com" />
                 <data android:scheme="https" android:host="m.facebook.com" />
+				
+				<data android:scheme="http" android:host="touch.facebook.com" />
+                <data android:scheme="https" android:host="touch.facebook.com" />
                 
                 <data android:scheme="http" android:host="facebook.com" />
                 <data android:scheme="https" android:host="facebook.com" />

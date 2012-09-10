@@ -29,8 +29,8 @@ public interface Constants {
 			+ "AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
 	/** URLs for Mobile site */
-	public static final String URL_MOBILE_SITE = "https://m.facebook.com";
-	public static final String URL_MOBILE_NOTIFICATIONS = "https://m.facebook.com/notifications.php";
+	public static final String URL_MOBILE_SITE = "https://touch.facebook.com";
+	public static final String URL_MOBILE_NOTIFICATIONS = "https://touch.facebook.com/notifications.php";
 	
 	/** URLs for Desktop site */
 	public static final String URL_DESKTOP_SITE = "https://www.facebook.com";
