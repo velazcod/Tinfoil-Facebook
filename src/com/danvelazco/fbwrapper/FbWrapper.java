@@ -264,18 +264,22 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     		
     		callback.invoke(origin, mAllowCheckins, false);
     	}
-		
-		public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {  
+	
+    	public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {  
 			mUploadMessage = uploadMsg;  
 			Intent i = new Intent(Intent.ACTION_GET_CONTENT);  
 			i.addCategory(Intent.CATEGORY_OPENABLE);  
 			i.setType("image/*");  
 			FbWrapper.this.startActivityForResult(Intent.createChooser(i, "File Chooser" ), FbWrapper.RESULTCODE_PICUPLOAD);  
 		}
+	
+		public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {  
+			openFileChooser(uploadMsg, "", "");  
+		}
 		
 		@SuppressWarnings("unused")
 		public void openFileChooser(ValueCallback<Uri> uploadMsg) {
-			openFileChooser(uploadMsg, "");
+			openFileChooser(uploadMsg, "", "");
 		}
 		
     }
