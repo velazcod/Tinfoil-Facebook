@@ -105,6 +105,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         webSettings.setSavePassword(false);
         webSettings.setSaveFormData(true);
         webSettings.setSupportZoom(true);
+		
         webSettings.setBuiltInZoomControls(false);
         
         /** Load default User Agent */
@@ -182,7 +183,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     		
     		/** Loads proper URL depending on device type */
         	initSession(null);
-    	}
+		}
     	
     }
     
@@ -414,6 +415,17 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     	else
     		mFBWrapper.loadUrl(URL_DESKTOP_SITE);
     }
+	
+	private void setupConfigForTablets() {
+		mFBWrapper.getSettings().setBuiltInZoomControls(true);
+		mFBWrapper.getSettings().setDisplayZoomControls(false);
+	}
+	
+	private void setupConfigForPhones() {
+		mFBWrapper.getSettings().setBuiltInZoomControls(false);
+		mFBWrapper.getSettings().setDisplayZoomControls(false);
+	}	
+	
     
     /**
      * Determines whether to load the mobile or desktop version
@@ -430,32 +442,39 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		    	Configuration config = getResources().getConfiguration();
 		    	if (config.smallestScreenWidthDp >= 600) {
 		    		/** For tablets */
+					setupConfigForTablets();
 		    		setDesktopUserAgent(urlToLoad);
 		    	} else {
 		    		/** For phones */
+					setupConfigForPhones();
 		    		setDefaultUserAgent(urlToLoad);
 		    	}
 		   
 		    /** Honeycomb only allowed tablets, always assume it's a tablet */
 	    	} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
 	    			&& Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
+				setupConfigForTablets();
 	    		setDesktopUserAgent(urlToLoad);
 	    	
 	    	/** There were no tablets before Honeycomb, assume it's a phone */
 	    	} else {
+				setupConfigForPhones();
 	    		setDefaultUserAgent(urlToLoad);
 	    	}
 	    
 	    /** Force the desktop version to load */
     	} else if (mSiteMode.equals(PREFS_SITE_MODE_DESKTOP)) {
+			setupConfigForTablets();
     		setDesktopUserAgent(urlToLoad);
     	
     	/** Force the mobile version to load */
     	} else if (mSiteMode.equals(PREFS_SITE_MODE_MOBILE)) {
+			setupConfigForPhones();
     		setMobileUserAgent(urlToLoad);
     		
     	/** Otherwise force the mobile version to load */
     	} else {
+			setupConfigForPhones();
     		setDefaultUserAgent(urlToLoad);
     	}
     	
