@@ -13,7 +13,7 @@ import android.preference.PreferenceScreen;
 import android.view.MenuItem;
 
 public class Preferences extends PreferenceActivity implements Constants {
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class Preferences extends PreferenceActivity implements Constants {
 		}
 
 	}
-	
+
 	@Override
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
 		String key = preference.getKey();
-		
+
 		if (PREFS_ABOUT.equals(key))
 			showAboutAlert();
 
@@ -53,19 +53,19 @@ public class Preferences extends PreferenceActivity implements Constants {
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				return;
-				} 
+			} 
 		});
 		alertDialog.show();
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case android.R.id.home:
-				finish();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		case android.R.id.home:
+			finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 
