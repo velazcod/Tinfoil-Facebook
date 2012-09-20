@@ -452,12 +452,16 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
 	private void setupConfigForTablets() {
 		mFBWrapper.getSettings().setBuiltInZoomControls(true);
-		mFBWrapper.getSettings().setDisplayZoomControls(false);
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			mFBWrapper.getSettings().setDisplayZoomControls(false);
 	}
 
 	private void setupConfigForPhones() {
 		mFBWrapper.getSettings().setBuiltInZoomControls(false);
-		mFBWrapper.getSettings().setDisplayZoomControls(false);
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			mFBWrapper.getSettings().setDisplayZoomControls(false);
 	}	
 
 
