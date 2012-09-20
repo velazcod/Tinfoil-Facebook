@@ -5,7 +5,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +33,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+
 /**
  * Activity with a WebView wrapping facebook.com with its
  * own CookieSyncManager to hold cookies persistently.
@@ -41,7 +41,7 @@ import android.widget.ProgressBar;
  * @author Daniel Velazco
  *
  */
-@SuppressLint("SetJavaScriptEnabled")
+@SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 public class FbWrapper extends Activity implements Constants, OnGestureListener {
 
 	private ActionBar mActionBar;
@@ -50,8 +50,11 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 	private WebView mFBWrapper;
 
 	private GestureDetector mGestureScanner;
-
-	private ClipboardManager mClipboard;
+	
+	@SuppressWarnings("deprecation")
+	private android.text.ClipboardManager mAncientClipboard;
+	
+	private android.content.ClipboardManager mClipboard;
 
 	private ValueCallback<Uri> mUploadMessage;
 	private final static int RESULTCODE_PICUPLOAD = 1;
@@ -71,6 +74,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
 	/** Called when the activity is first created. */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -78,6 +82,10 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			mActionBar = getActionBar();
 			mActionBar.setTitle(R.string.app_name_short);
+			
+			mClipboard = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+		} else {
+			mAncientClipboard = (android.text.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 		}
 
 		setContentView(R.layout.webview);
@@ -85,10 +93,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		mGestureScanner = new GestureDetector(this, this);
 
 		/** Load shared preferences */
-		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-		mClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-
+		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); 
+		
 		/** Hide ActionBar based on user's preferences */
 		mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
 
@@ -219,9 +225,14 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 		CookieSyncManager.getInstance().stopSync();
 	}
 
+	@SuppressWarnings("deprecation")
 	private void copyToClipboard(String text) {
-		ClipData clip = ClipData.newPlainText("label", text);
-		mClipboard.setPrimaryClip(clip);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			ClipData clip = ClipData.newPlainText("label", text);
+			mClipboard.setPrimaryClip(clip);
+		} else {
+			mAncientClipboard.setText(text);
+		}
 	}
 
 	private void shareCurrentPage() {
