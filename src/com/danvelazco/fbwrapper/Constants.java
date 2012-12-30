@@ -42,6 +42,9 @@ public interface Constants {
   public static final String URL_DESKTOP_SITE = "https://www.facebook.com";
   public static final String URL_DESKTOP_NOTIFICATIONS = "https://www.facebook.com/notifications.php";
 
+  /** URL for Fastbook mobile site */
+  public static final String URL_FASTBOOK = "http://fb.html5isready.com/android/";
+
   /** URL for Sharing Links */
   public static final String URL_SHARE_LINKS = "http://www.facebook.com/sharer.php?u=%s&t=%s";
   // u = url & t = title
@@ -54,6 +57,7 @@ public interface Constants {
   public final static String PREFS_SITE_MODE_AUTO = "auto";
   public final static String PREFS_SITE_MODE_MOBILE = "mobile";
   public final static String PREFS_SITE_MODE_DESKTOP = "desktop";
+  public final static String PREFS_SITE_MODE_FASTBOOK = "fastbook";
   public final static String PREFS_LOGCAT_ENABLED = "pref_logcat";
   public final static String PREFS_HIDE_AB = "pref_hide_ab";
   public final static String PREFS_ABOUT = "pref_about";

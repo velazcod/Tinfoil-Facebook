@@ -453,10 +453,14 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     mDesktopView = false;
     mFBWrapper.getSettings().setUserAgentString(USER_AGENT_MOBILE);
 
-    if (urlToLoad != null)
+    if (urlToLoad != null) {
       mFBWrapper.loadUrl(urlToLoad.toString());
-    else
-      mFBWrapper.loadUrl(URL_MOBILE_SITE);
+    } else {
+      if (PREFS_SITE_MODE_FASTBOOK.equals(mSiteMode))
+        mFBWrapper.loadUrl(URL_FASTBOOK);
+      else
+        mFBWrapper.loadUrl(URL_MOBILE_SITE);
+    }
   }
 
   /**
@@ -532,6 +536,10 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
       /** Force the mobile version to load */
     } else if (mSiteMode.equals(PREFS_SITE_MODE_MOBILE)) {
+      setupConfigForPhones();
+      setMobileUserAgent(urlToLoad);
+
+    } else if (mSiteMode.equals(PREFS_SITE_MODE_FASTBOOK)) {
       setupConfigForPhones();
       setMobileUserAgent(urlToLoad);
 
