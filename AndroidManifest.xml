@@ -1,66 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.danvelazco.fbwrapper"
-    android:versionCode="20120920"
-    android:versionName="1.1.5" >
+  package="com.danvelazco.fbwrapper" android:versionCode="20120920"
+  android:versionName="1.1.5">
 
-    <uses-sdk 
-        android:minSdkVersion="7"
-        android:targetSdkVersion="16" />
+  <uses-sdk
+    android:minSdkVersion="7"
+    android:targetSdkVersion="16" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:required="false" />
-    <uses-permission android:name="android.permission.INTERNET" android:required="true" />
-    
-    <application
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:largeHeap="true"
-        android:hardwareAccelerated="true" >
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:required="false" />
+  <uses-permission android:name="android.permission.INTERNET" android:required="true" />
 
-        <activity
-            android:label="@string/app_name"
-            android:name=".FbWrapper"
-            android:theme="@style/Theme.FullScreenCustom"
-            android:hardwareAccelerated="false"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
+  <application
+    android:icon="@drawable/ic_launcher"
+    android:label="@string/app_name"
+    android:largeHeap="true"
+    android:allowBackup="true"
+    android:hardwareAccelerated="true">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            
-            <intent-filter >
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-            
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                
-                <data android:scheme="http" android:host="m.facebook.com" />
-                <data android:scheme="https" android:host="m.facebook.com" />
+    <activity
+      android:label="@string/app_name"
+      android:name=".FbWrapper"
+      android:theme="@style/Theme.FullScreenCustom"
+      android:hardwareAccelerated="false"
+      android:configChanges="keyboardHidden|orientation|screenSize">
 
-                <data android:scheme="http" android:host="touch.facebook.com" />
-                <data android:scheme="https" android:host="touch.facebook.com" />
-                
-                <data android:scheme="http" android:host="facebook.com" />
-                <data android:scheme="https" android:host="facebook.com" />
-                
-                <data android:scheme="http" android:host="www.facebook.com" />
-                <data android:scheme="https" android:host="www.facebook.com" />
-            </intent-filter>
-            
-        </activity>
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
 
-        <activity 
-            android:name=".Preferences" 
-            android:label="@string/app_name"
-            android:theme="@style/Theme.FullScreenCustom">
-        </activity>
-        
-    </application>
+      <intent-filter>
+        <action android:name="android.intent.action.SEND" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="text/plain" />
+      </intent-filter>
+
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data android:scheme="http" android:host="m.facebook.com" />
+        <data android:scheme="https" android:host="m.facebook.com" />
+
+        <data android:scheme="http" android:host="touch.facebook.com" />
+        <data android:scheme="https" android:host="touch.facebook.com" />
+
+        <data android:scheme="http" android:host="facebook.com" />
+        <data android:scheme="https" android:host="facebook.com" />
+
+        <data android:scheme="http" android:host="www.facebook.com" />
+        <data android:scheme="https" android:host="www.facebook.com" />
+      </intent-filter>
+
+    </activity>
+
+    <activity android:name=".Preferences" android:label="@string/app_name"
+      android:theme="@style/Theme.FullScreenCustom">
+    </activity>
+
+  </application>
 
 </manifest>
