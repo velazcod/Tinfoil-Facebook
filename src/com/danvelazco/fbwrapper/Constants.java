@@ -43,7 +43,7 @@ public interface Constants {
   public static final String URL_DESKTOP_NOTIFICATIONS = "https://www.facebook.com/notifications.php";
 
   /** URL for Fastbook mobile site */
-  public static final String URL_FASTBOOK = "http://fb.html5isready.com/android/";
+  public static final String URL_FASTBOOK = "http://fb.html5isready.com";
 
   /** URL for Sharing Links */
   public static final String URL_SHARE_LINKS = "http://www.facebook.com/sharer.php?u=%s&t=%s";

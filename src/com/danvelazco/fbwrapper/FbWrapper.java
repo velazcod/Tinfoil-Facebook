@@ -378,6 +378,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
           return false;
         } else if (domain.equals("www.facebook.com")) {
           return false;
+        } else if (domain.equals("fb.html5isready.com")) {
+          return false;
         }
 
       }

@@ -51,6 +51,9 @@
 
         <data android:scheme="http" android:host="www.facebook.com" />
         <data android:scheme="https" android:host="www.facebook.com" />
+
+        <data android:scheme="http" android:host="fb.html5isready.com" />
+        <data android:scheme="https" android:host="fb.html5isready.com" />
       </intent-filter>
 
     </activity>
