@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- App name -->
     <string name="app_name">Tinfoil for Facebook</string>
     <string name="app_name_short">Tinfoil</string>
+
+    <!-- Labels -->
+    <string name="lbl_dialog_alert">Alert</string>
+    <string name="lbl_dialog_close">Close</string>
+    <string name="lbl_dialog_ok">OK</string>
+
+    <!-- Context menu items -->
     <string name="menu_desktop">Desktop</string>
     <string name="menu_mobile">Mobile</string>
     <string name="menu_jump_top">Jump to top</string>
@@ -14,9 +22,7 @@
     <string name="menu_preferences">Preferences</string>
     <string name="menu_about">About</string>
     <string name="menu_exit">Kill</string>
-    <string name="lbl_dialog_alert">Alert</string>
-    <string name="lbl_dialog_close">Close</string>
-    <string name="lbl_dialog_ok">OK</string>
+
     <!-- Preferences -->
     <string name="pref_cat_access">Access</string>
     <string name="pref_cat_general">General</string>
