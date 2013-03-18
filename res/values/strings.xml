@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Tinfoil for Facebook</string>
     <string name="app_name_short">Tinfoil</string>
     <string name="menu_desktop">Desktop</string>
@@ -25,6 +26,7 @@
     <string name="prefs_open_links_inside_sry">Any links being opened from the mobile app will open from within the app instead of the browser</string>
     <string name="prefs_mobile_site">Mobile/Desktop site</string>
     <string name="prefs_mobile_site_sry">Force the use of the mobile or desktop site</string>
+
     <array name="prefs_mobile_site_list">
         <item>Auto</item>
         <item>Force mobile site</item>
@@ -37,6 +39,7 @@
         <item>desktop</item>
         <item>fastbook</item>
     </array>
+
     <string name="pref_hide_ab">Hide ActionBar</string>
     <string name="pref_hide_ab_sry">EXPERIMENTAL: Automatically hide the ActionBar when not being used. Fling down to make it appear again.</string>
     <string name="pref_logcat">System logging</string>
@@ -60,4 +63,5 @@
 \n
 \nThis app is for those users that require a Tinfoil Hat when logging in to Facebook. It creates a sandbox for facebook\'s mobile site. Requires INTERNET permissions, and if you are skeptic about it, feel free to check the source code listed above. Coarse location permissions are required but location is not used unless you turn \"Allow Check-ins\" in the preferences.\n
 \n</string>
+
 </resources>

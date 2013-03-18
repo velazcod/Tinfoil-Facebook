@@ -3,15 +3,18 @@
     android:id="@+id/layout_full"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fadeScrollbars="true" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="fill_parent"
         android:layout_height="5dip"
         android:layout_alignParentTop="true" />
+
 </RelativeLayout>

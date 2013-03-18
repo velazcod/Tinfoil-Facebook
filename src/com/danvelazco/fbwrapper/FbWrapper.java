@@ -36,9 +36,9 @@ import android.widget.ProgressBar;
 /**
  * Activity with a WebView wrapping facebook.com with its own CookieSyncManager
  * to hold cookies persistently.
- *
+ * 
  * @author Daniel Velazco
- *
+ * 
  */
 @SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 public class FbWrapper extends Activity implements Constants, OnGestureListener {
@@ -98,11 +98,11 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         // Logcat verbose, enable if we are in debug mode, otherwise get from
         // preferences
         V = BuildConfig.DEBUG ? true : mSharedPrefs.getBoolean(
-                        PREFS_LOGCAT_ENABLED, false);
+                PREFS_LOGCAT_ENABLED, false);
 
         // Whether the site should be loaded as the mobile or desktop version
         mSiteMode = mSharedPrefs.getString(PREFS_SITE_MODE,
-                        PREFS_SITE_MODE_AUTO);
+                PREFS_SITE_MODE_AUTO);
 
         // Creates new CookieSyncManager instance that will manage cookies
         CookieSyncManager.createInstance(this);
@@ -157,7 +157,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         if (sharedUrl != null) {
             if (!sharedUrl.equals("")) {
                 String formattedSharedUrl = String.format(URL_SHARE_LINKS,
-                                sharedUrl, sharedSubject);
+                        sharedUrl, sharedSubject);
                 urlToLoad = Uri.parse(formattedSharedUrl);
             }
         }
@@ -202,22 +202,22 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         // Re-load these preferences in case some of them were changed
         mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
         V = BuildConfig.DEBUG ? true : mSharedPrefs.getBoolean(
-                        PREFS_LOGCAT_ENABLED, false);
+                PREFS_LOGCAT_ENABLED, false);
         mAllowCheckins = mSharedPrefs.getBoolean(PREFS_ALLOW_CHECKINS, false);
 
         if (V)
             Log.i(LOG_TAG, "On resume");
 
         mOpenLinksInside = mSharedPrefs.getBoolean(PREFS_OPEN_LINKS_INSIDE,
-                        false);
+                false);
 
         // Check to see if the Site mode preference was just changed
         if (!mSiteMode.equals(mSharedPrefs.getString(PREFS_SITE_MODE,
-                        PREFS_SITE_MODE_AUTO))) {
+                PREFS_SITE_MODE_AUTO))) {
 
             // Store the new changes on the global field
             mSiteMode = mSharedPrefs.getString(PREFS_SITE_MODE,
-                            PREFS_SITE_MODE_AUTO);
+                    PREFS_SITE_MODE_AUTO);
 
             // Loads proper URL depending on device type
             initSession(null);
@@ -278,14 +278,14 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
-                    Intent intent) {
+            Intent intent) {
         if (requestCode == RESULTCODE_PICUPLOAD) {
 
             if (null == mUploadMessage)
                 return;
 
             Uri result = intent == null || resultCode != RESULT_OK ? null
-                            : intent.getData();
+                    : intent.getData();
             mUploadMessage.onReceiveValue(result);
             mUploadMessage = null;
 
@@ -302,7 +302,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
         @Override
         public void onGeolocationPermissionsShowPrompt(String origin,
-                        Callback callback) {
+                Callback callback) {
             super.onGeolocationPermissionsShowPrompt(origin, callback);
 
             if (V)
@@ -316,19 +316,19 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         }
 
         public void openFileChooser(ValueCallback<Uri> uploadMsg,
-                        String acceptType, String capture) {
+                String acceptType, String capture) {
             mUploadMessage = uploadMsg;
             Intent i = new Intent(Intent.ACTION_GET_CONTENT);
             i.addCategory(Intent.CATEGORY_OPENABLE);
             i.setType("image/*");
             FbWrapper.this.startActivityForResult(
-                            Intent.createChooser(i, "File Chooser"),
-                            FbWrapper.RESULTCODE_PICUPLOAD);
+                    Intent.createChooser(i, "File Chooser"),
+                    FbWrapper.RESULTCODE_PICUPLOAD);
         }
 
         @SuppressWarnings("unused")
         public void openFileChooser(ValueCallback<Uri> uploadMsg,
-                        String acceptType) {
+                String acceptType) {
             openFileChooser(uploadMsg, "", "");
         }
 
@@ -350,13 +350,13 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
             if (!mOpenLinksInside) {
                 if (url.startsWith("https://m.facebook.com/l.php")
-                                || url.startsWith("http://m.facebook.com/l.php")
-                                || url.startsWith("https://www.facebook.com/l.php")
-                                || url.startsWith("http://www.facebook.com/l.php")
-                                || url.startsWith("https://facebook.com/l.php")
-                                || url.startsWith("http://facebook.com/l.php")) {
+                        || url.startsWith("http://m.facebook.com/l.php")
+                        || url.startsWith("https://www.facebook.com/l.php")
+                        || url.startsWith("http://www.facebook.com/l.php")
+                        || url.startsWith("https://facebook.com/l.php")
+                        || url.startsWith("http://facebook.com/l.php")) {
                     Intent intent = new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse(url));
+                            Uri.parse(url));
                     startActivity(intent);
                     return true;
                 }
@@ -437,7 +437,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
         if (V)
             Log.d(LOG_TAG, "Initialize default user-agent: "
-                            + USERAGENT_ANDROID_DEFAULT);
+                    + USERAGENT_ANDROID_DEFAULT);
 
         mDesktopView = false;
         mFBWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
@@ -522,7 +522,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
                 }
 
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
-                            && Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                    && Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2) {
                 // Honeycomb only allowed tablets, always assume it's a tablet
                 setupConfigForTablets();
                 setDesktopUserAgent(urlToLoad);
@@ -594,13 +594,12 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         alertDialog.setTitle(getString(R.string.lbl_dialog_alert));
         alertDialog.setMessage(getString(R.string.txt_checkins_disables));
         alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,
-                        getString(R.string.lbl_dialog_ok),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                            int which) {
-                                return;
-                            }
-                        });
+                getString(R.string.lbl_dialog_ok),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                });
         alertDialog.show();
     }
 
@@ -639,7 +638,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     }
 
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-                    float velocityY) {
+            float velocityY) {
 
         if (mActionBar == null) {
             return false;
@@ -647,7 +646,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
         // Only show action bar if user flings down very fast
         if (e1.getRawY() < e2.getRawY()
-                        && velocityY > ACTION_BAR_SHOW_FLING_SPEED) {
+                && velocityY > ACTION_BAR_SHOW_FLING_SPEED) {
             if (V)
                 Log.i(LOG_TAG, "Fast fling down");
             if (!mActionBar.isShowing()) {
@@ -661,7 +660,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     }
 
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-                    float distanceY) {
+            float distanceY) {
 
         if (mActionBar == null) {
             return false;
@@ -673,7 +672,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             // Only hide the bar if the last time we showed it is over 5 seconds
             // ago
             if (mHideAb
-                            && (System.currentTimeMillis() - abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
+                    && (System.currentTimeMillis() - abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
                 mActionBar.hide();
             }
         }

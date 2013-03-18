@@ -37,7 +37,7 @@ public class Preferences extends PreferenceActivity implements Constants {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-                    Preference preference) {
+            Preference preference) {
         String key = preference.getKey();
 
         if (PREFS_ABOUT.equals(key))
@@ -52,13 +52,12 @@ public class Preferences extends PreferenceActivity implements Constants {
         alertDialog.setMessage(getString(R.string.txt_about));
         alertDialog.setIcon(R.drawable.ic_launcher);
         alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,
-                        getString(R.string.lbl_dialog_close),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                            int which) {
-                                return;
-                            }
-                        });
+                getString(R.string.lbl_dialog_close),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                });
         alertDialog.show();
     }
 
