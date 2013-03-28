@@ -12,7 +12,7 @@ public class FacebookWebView extends WebView {
     }
 
     public FacebookWebView(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        this(context, attrs, 0);
     }
 
     public FacebookWebView(Context context, AttributeSet attrs, int defStyle) {
