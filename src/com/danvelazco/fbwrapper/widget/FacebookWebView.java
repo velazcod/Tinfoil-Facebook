@@ -17,6 +17,7 @@ public class FacebookWebView extends WebView {
 
     public FacebookWebView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        initialize();
     }
 
     private void initialize() {
