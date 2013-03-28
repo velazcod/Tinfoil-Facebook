@@ -7,13 +7,15 @@
     <com.danvelazco.fbwrapper.widget.FacebookWebView
         android:id="@+id/webview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="5dip"
+        android:layout_height="@dimen/webview_top_progress_bar"
         android:layout_alignParentTop="true" />
 
 </RelativeLayout>

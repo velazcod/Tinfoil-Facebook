@@ -38,9 +38,9 @@ import com.danvelazco.fbwrapper.widget.FacebookWebView;
 /**
  * Activity with a WebView wrapping facebook.com with its own CookieSyncManager
  * to hold cookies persistently.
- * 
+ *
  * @author Daniel Velazco
- * 
+ *
  */
 @SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 public class FbWrapper extends Activity implements Constants, OnGestureListener {
