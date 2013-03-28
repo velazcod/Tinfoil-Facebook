@@ -29,6 +29,7 @@ import android.webkit.GeolocationPermissions.Callback;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -130,6 +131,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         // Apply settings for WebView
         WebSettings webSettings = mFBWrapper.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setPluginState(PluginState.ON);
         webSettings.setSavePassword(false);
         webSettings.setSaveFormData(true);
         webSettings.setSupportZoom(true);
