@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.KeyEvent;
@@ -47,7 +46,6 @@ import com.danvelazco.fbwrapper.widget.FacebookWebView;
 public class FbWrapper extends Activity implements Constants, OnGestureListener {
 
     private ActionBar mActionBar;
-    private long abLastShown;
 
     private FacebookWebView mFBWrapper;
 
@@ -66,8 +64,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
     private ProgressBar mProgressBar;
 
-    private boolean V = false;
-    private boolean mHideAb = false;
+    private boolean mAutoHideAb = false;
     private boolean mAllowCheckins = false;
     private boolean mOpenLinksInside = false;
     private String mSiteMode;
@@ -96,12 +93,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Hide ActionBar based on user's preferences
-        mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
-
-        // Logcat verbose, enable if we are in debug mode, otherwise get from
-        // preferences
-        V = BuildConfig.DEBUG ? true : mSharedPrefs.getBoolean(
-                PREFS_LOGCAT_ENABLED, false);
+        mAutoHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
 
         // Whether the site should be loaded as the mobile or desktop version
         mSiteMode = mSharedPrefs.getString(PREFS_SITE_MODE,
@@ -178,20 +170,12 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-
-        if (V)
-            Log.i(LOG_TAG, "Saving instance state");
-
         // Save the state of the WebView as a Bundle to the Instance State
         mFBWrapper.saveState(outState);
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-
-        if (V)
-            Log.i(LOG_TAG, "Handling configuration change");
-
         // Handle orientation configuration changes
         super.onConfigurationChanged(newConfig);
     }
@@ -204,13 +188,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         CookieSyncManager.getInstance().startSync();
 
         // Re-load these preferences in case some of them were changed
-        mHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
-        V = BuildConfig.DEBUG ? true : mSharedPrefs.getBoolean(
-                PREFS_LOGCAT_ENABLED, false);
+        mAutoHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
         mAllowCheckins = mSharedPrefs.getBoolean(PREFS_ALLOW_CHECKINS, false);
-
-        if (V)
-            Log.i(LOG_TAG, "On resume");
 
         mOpenLinksInside = mSharedPrefs.getBoolean(PREFS_OPEN_LINKS_INSIDE,
                 false);
@@ -232,9 +211,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     @Override
     public void onPause() {
         super.onPause();
-
-        if (V)
-            Log.i(LOG_TAG, "On pause");
 
         // Stop synchronizing the CookieSyncManager
         CookieSyncManager.getInstance().stopSync();
@@ -259,10 +235,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     }
 
     private void destroyWebView() {
-
-        if (V)
-            Log.w(LOG_TAG, "Destroying web view...");
-
         // Avoid an NPE
         if (mFBWrapper != null) {
 
@@ -308,9 +280,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         public void onGeolocationPermissionsShowPrompt(String origin,
                 Callback callback) {
             super.onGeolocationPermissionsShowPrompt(origin, callback);
-
-            if (V)
-                Log.w(LOG_TAG, "Web site is trying to access geoloction");
 
             if (!mAllowCheckins) {
                 showCheckinsDisabledAlert();
@@ -371,11 +340,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
             // Avoid an NPE
             if (domain != null) {
-
-                // Output URL
-                if (V)
-                    Log.d(LOG_TAG, "Loading URL: " + url);
-
                 // Let this WebView load the page.
                 if (domain.equals("m.facebook.com")) {
                     return false;
@@ -388,7 +352,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
                 } else if (domain.equals("fb.html5isready.com")) {
                     return false;
                 }
-
             }
 
             // This link is not for a page on my site, launch another Activity
@@ -402,9 +365,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
 
-            if (V)
-                Log.i(LOG_TAG, "Started loading a new page: " + url);
-
             if (mActionBar != null) {
                 mActionBar.show();
             }
@@ -416,14 +376,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-
-            if (V)
-                Log.i(LOG_TAG, "Finished loading the new page: " + url);
-
-            if (mActionBar != null) {
-                if (mHideAb)
-                    mActionBar.hide();
-            }
 
             // We just finished loading the new content, hide ProgressBar
             mProgressBar.setVisibility(View.INVISIBLE);
@@ -438,38 +390,31 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
      * Sets the user agent to the default user agent and load the mobile site.
      */
     private void setDefaultUserAgent(Uri urlToLoad) {
-
-        if (V)
-            Log.d(LOG_TAG, "Initialize default user-agent: "
-                    + USERAGENT_ANDROID_DEFAULT);
-
         mDesktopView = false;
         mFBWrapper.getSettings().setUserAgentString(USERAGENT_ANDROID_DEFAULT);
 
-        if (urlToLoad != null)
+        if (urlToLoad != null) {
             mFBWrapper.loadUrl(urlToLoad.toString());
-        else
+        } else {
             mFBWrapper.loadUrl(URL_MOBILE_SITE);
+        }
     }
 
     /**
      * Sets the user agent to the default user agent and load the mobile site.
      */
     private void setMobileUserAgent(Uri urlToLoad) {
-
-        if (V)
-            Log.d(LOG_TAG, "Initialize for mobile " + USER_AGENT_MOBILE);
-
         mDesktopView = false;
         mFBWrapper.getSettings().setUserAgentString(USER_AGENT_MOBILE);
 
         if (urlToLoad != null) {
             mFBWrapper.loadUrl(urlToLoad.toString());
         } else {
-            if (PREFS_SITE_MODE_FASTBOOK.equals(mSiteMode))
+            if (PREFS_SITE_MODE_FASTBOOK.equals(mSiteMode)) {
                 mFBWrapper.loadUrl(URL_FASTBOOK);
-            else
+            } else {
                 mFBWrapper.loadUrl(URL_MOBILE_SITE);
+            }
         }
     }
 
@@ -477,17 +422,14 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
      * Sets the user agent to the desktop one and load the desktop site
      */
     private void setDesktopUserAgent(Uri urlToLoad) {
-
-        if (V)
-            Log.d(LOG_TAG, "Initialize for desktop: " + USER_AGENT_DESKTOP);
-
         mDesktopView = true;
         mFBWrapper.getSettings().setUserAgentString(USER_AGENT_DESKTOP);
 
-        if (urlToLoad != null)
+        if (urlToLoad != null) {
             mFBWrapper.loadUrl(urlToLoad.toString());
-        else
+        } else {
             mFBWrapper.loadUrl(URL_DESKTOP_SITE);
+        }
     }
 
     private void setupConfigForTablets() {
@@ -571,8 +513,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     }
 
     private void webViewJumpTop() {
-        if (V)
-            Log.i(LOG_TAG, "Jump to the top!");
         mFBWrapper.loadUrl("javascript:window.scrollTo(0,0);");
     }
 
@@ -580,8 +520,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Check if the key event was the BACK key and if there's history
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mFBWrapper.canGoBack()) {
-            if (V)
-                Log.i(LOG_TAG, "User pressed back button");
             mFBWrapper.goBack();
             return true;
         }
@@ -647,42 +585,26 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
             float velocityY) {
-
-        if (mActionBar == null) {
-            return false;
-        }
-
-        // Only show action bar if user flings down very fast
-        if (e1.getRawY() < e2.getRawY()
-                && velocityY > ACTION_BAR_SHOW_FLING_SPEED) {
-            if (V)
-                Log.i(LOG_TAG, "Fast fling down");
-            if (!mActionBar.isShowing()) {
-                mActionBar.show();
-                abLastShown = System.currentTimeMillis();
-                return true;
-            }
-        }
-
         return false;
     }
 
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
             float distanceY) {
 
-        if (mActionBar == null) {
+        if (mActionBar == null || !mAutoHideAb) {
             return false;
         }
 
         if (e1.getRawY() > e2.getRawY()) {
-            if (V)
-                Log.i(LOG_TAG, "Scrolling up");
-            // Only hide the bar if the last time we showed it is over 5 seconds
-            // ago
-            if (mHideAb
-                    && (System.currentTimeMillis() - abLastShown) > ACTION_BAR_HIDE_TIMEOUT) {
-                mActionBar.hide();
-            }
+
+            // TODO: only hide it if scroll movement > action bar height
+
+            // Scrolling up
+            mActionBar.hide();
+
+        } else if (e1.getRawY() < e2.getRawY()) {
+            // Scrolling down
+            mActionBar.show();
         }
 
         return false;

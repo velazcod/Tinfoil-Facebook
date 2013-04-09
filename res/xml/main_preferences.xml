@@ -29,12 +29,6 @@
             android:key="pref_hide_ab"
             android:summary="@string/pref_hide_ab_sry"
             android:title="@string/pref_hide_ab" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="pref_logcat"
-            android:summary="@string/pref_logcat_sry"
-            android:title="@string/pref_logcat" />
-
         <PreferenceScreen
             android:key="pref_about"
             android:summary="@string/pref_about_sry"
