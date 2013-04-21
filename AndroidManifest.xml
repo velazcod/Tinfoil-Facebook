@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.danvelazco.fbwrapper"
-    android:versionCode="20121230"
-    android:versionName="1.2a" >
+    android:versionCode="20130421"
+    android:versionName="1.1.6" >
 
     <uses-sdk
         android:minSdkVersion="7"
