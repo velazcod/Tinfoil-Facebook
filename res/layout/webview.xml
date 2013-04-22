@@ -4,10 +4,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <com.danvelazco.fbwrapper.widget.FacebookWebView
+    <WebView
         android:id="@+id/webview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:fadeScrollbars="true"
         android:focusable="true"
         android:focusableInTouchMode="true" />
 

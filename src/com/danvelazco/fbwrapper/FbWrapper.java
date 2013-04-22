@@ -33,8 +33,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.danvelazco.fbwrapper.widget.FacebookWebView;
-
 /**
  * Activity with a WebView wrapping facebook.com with its own CookieSyncManager
  * to hold cookies persistently.
@@ -47,7 +45,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
     private ActionBar mActionBar;
 
-    private FacebookWebView mFBWrapper;
+    private WebView mFBWrapper;
 
     private GestureDetector mGestureScanner;
 
@@ -106,7 +104,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         // Configure WebView
-        mFBWrapper = (FacebookWebView) findViewById(R.id.webview);
+        mFBWrapper = (WebView) findViewById(R.id.webview);
         mFBWrapper.setWebViewClient(new FbWebViewClient());
         mFBWrapper.setWebChromeClient(new FbWebChromeClient());
         mFBWrapper.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
