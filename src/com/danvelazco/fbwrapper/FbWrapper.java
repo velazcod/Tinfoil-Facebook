@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.*;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnTouchListener;
@@ -320,6 +321,13 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
                     Intent intent = new Intent(Intent.ACTION_VIEW,
                             Uri.parse(url));
                     startActivity(intent);
+
+                    // Facebook uses a linker helper, it's blank when coming back to app
+                    // from an outside link, make sure we attempt to go back to avoid this
+                    if (mFBWrapper.canGoBack()) {
+                        mFBWrapper.goBack();
+                    }
+
                     return true;
                 }
             }
@@ -347,6 +355,13 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             // that handles URLs
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
+
+            // Facebook uses a linker helper, it's blank when coming back to app
+            // from an outside link, make sure we attempt to go back to avoid this
+            if (mFBWrapper.canGoBack()) {
+                mFBWrapper.goBack();
+            }
+
             return true;
         }
 
