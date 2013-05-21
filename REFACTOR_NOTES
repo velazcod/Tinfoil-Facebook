@@ -1,0 +1,10 @@
+
+Problems:
+
+* It would be nice to run this as single instance, but file upload gets broken due to
+  startActivityForResult getting cancelled as soon as it's called from a singleInstance
+  activity.
+
+* Ability to playback HTML5 videos natively.
+
+* Will add more soon.
