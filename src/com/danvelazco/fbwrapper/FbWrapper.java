@@ -14,23 +14,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.GestureDetector;
+import android.view.*;
 import android.view.GestureDetector.OnGestureListener;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.View.OnTouchListener;
-import android.webkit.CookieSyncManager;
+import android.webkit.*;
 import android.webkit.GeolocationPermissions.Callback;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 /**
@@ -44,6 +33,7 @@ import android.widget.ProgressBar;
 public class FbWrapper extends Activity implements Constants, OnGestureListener {
 
     private ActionBar mActionBar;
+    private Activity mActivity;
 
     private WebView mFBWrapper;
 
@@ -71,17 +61,22 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
     @Override
     @SuppressWarnings("deprecation")
+    @SuppressLint({"ServiceCast", "NewApi"})
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Only mess with ActionBar if device is on honeycomb or higher
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             mActionBar = getActionBar();
-            mActionBar.setTitle(R.string.app_name_short);
+            if (mActionBar != null) {
+                mActionBar.setTitle(R.string.app_name_short);
+            }
             mClipboard = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         } else {
             mAncientClipboard = (android.text.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         }
+
+        mActivity = this;
 
         setContentView(R.layout.webview);
 
@@ -111,10 +106,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
         mFBWrapper.setOnTouchListener(new OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
-                if (mGestureScanner.onTouchEvent(event)) {
-                    return true;
-                }
-                return false;
+                return mGestureScanner.onTouchEvent(event);
             }
         });
 
@@ -254,10 +246,9 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     protected void onActivityResult(int requestCode, int resultCode,
             Intent intent) {
         if (requestCode == RESULTCODE_PICUPLOAD) {
-
-            if (null == mUploadMessage)
+            if (null == mUploadMessage) {
                 return;
-
+            }
             Uri result = intent == null || resultCode != RESULT_OK ? null
                     : intent.getData();
             mUploadMessage.onReceiveValue(result);
@@ -292,15 +283,15 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             Intent i = new Intent(Intent.ACTION_GET_CONTENT);
             i.addCategory(Intent.CATEGORY_OPENABLE);
             i.setType("image/*");
-            FbWrapper.this.startActivityForResult(
+            mActivity.startActivityForResult(
                     Intent.createChooser(i, "File Chooser"),
-                    FbWrapper.RESULTCODE_PICUPLOAD);
+                    RESULTCODE_PICUPLOAD);
         }
 
         @SuppressWarnings("unused")
         public void openFileChooser(ValueCallback<Uri> uploadMsg,
                 String acceptType) {
-            openFileChooser(uploadMsg, "", "");
+            openFileChooser(uploadMsg, acceptType, "");
         }
 
         @SuppressWarnings("unused")
@@ -359,6 +350,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             return true;
         }
 
+        @SuppressLint("NewApi")
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
@@ -586,6 +578,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         return false;
     }
 
+    @SuppressLint("NewApi")
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
             float distanceY) {
 
