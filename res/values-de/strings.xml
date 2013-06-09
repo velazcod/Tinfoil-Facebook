@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2013 Daniel Velazco
+
+    German Translation (C) 2013 averageapps
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <!-- App name -->
+    <string name="app_name">Tinfoil für Facebook</string>
+    <string name="app_name_short">Tinfoil</string>
+
+    <!-- Labels -->
+    <string name="lbl_dialog_alert">Hinweis</string>
+    <string name="lbl_dialog_close">Schließen</string>
+    <string name="lbl_dialog_ok">OK</string>
+
+    <!-- Context menu items -->
+    <string name="menu_desktop">Desktop</string>
+    <string name="menu_mobile">Mobil</string>
+    <string name="menu_jump_top">Nach oben springen</string>
+    <string name="menu_news_feed">Neuigkeiten</string>
+    <string name="menu_share">Teilen</string>
+    <string name="menu_copy_url">URL kopieren</string>
+    <string name="menu_refresh">Aktualisieren</string>
+    <string name="menu_notifications">Benachrichtigungen</string>
+    <string name="menu_preferences">Einstellungen</string>
+    <string name="menu_about">Über</string>
+    <string name="menu_exit">Beenden</string>
+
+    <!-- Preferences -->
+    <string name="pref_cat_access">Zugriff</string>
+    <string name="pref_cat_general">Allgemein</string>
+    <string name="prefs_allow_checkins">Einchecken erlauben</string>
+    <string name="prefs_allow_checkins_sry">Erlaubt der App, den ungefähren Standort zu benutzen, um mit Facebook einchecken zu können</string>
+    <string name="prefs_open_links_inside">Links in der App öffnen</string>
+    <string name="prefs_open_links_inside_sry">Links werden direkt in der App geöffnet, nicht in einem externen Browser</string>
+    <string name="prefs_mobile_site">Mobile oder Desktop-Seite</string>
+    <string name="prefs_mobile_site_sry">Nutzung der mobilen oder der Desktop-Version von Facebook erzwingen.</string>
+
+    <array name="prefs_mobile_site_list">
+        <item>Automatisch</item>
+        <item>Erzwinge mobile Version</item>
+        <item>Erzwinge Desktop-Version</item>
+        <item>Fastbook (Experimentell)</item>
+    </array>
+    <array name="prefs_mobile_site_list_values">
+        <item>auto</item>
+        <item>mobile</item>
+        <item>desktop</item>
+        <item>fastbook</item>
+    </array>
+
+    <string name="pref_hide_ab">ActionBar ausblenden</string>
+    <string name="pref_hide_ab_sry">EXPERIMENTELL: Blende die ActionBar automatisch aus, wenn sie nicht benutzt wird. Hochscrollen, um sie wieder einzublenden.</string>
+    <string name="pref_logcat">System-Logging</string>
+    <string name="pref_logcat_sry">System-Logging aktivieren. Hilfreich, um dem Entwickler bei der Problembehebung zu helfen</string>
+    <string name="pref_about">Über</string>
+    <string name="pref_about_sry">Geschrieben von Daniel Velazco. Hier klicken für weitere Infos.</string>
+    <!-- End preferences -->
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_checkins_disables">\nFacebook versucht, auf deinen Standort zuzugreifen.\n
+\nWahrscheinlich versuchst du gerade an einem bestimmten Ort \"einzuchecken\". Tinfoil hat eine optionale Berechtigung dafür, die aber standardmäßig deaktiviert ist.\n
+\nDu kannst diese Funktion in den Einstellungen unter \"Einchecken erlauben\" aktivieren.\n
+\nTinfoil bestimmt den Standort nur durch W-LAN und Funknetz, um Akku zu sparen. Das ist allerdings nicht so genau wie die echte GPS-Position.\n
+\n</string>
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_about">\nEntwickelt von Daniel Velazco.
+\nvelazcod@gmail.com
+\nhttp://www.danvelazco.com\n
+\n
+\nQuellcode:
+\nhttps://github.com/velazcod/Tinfoil-Facebook\n
+\n
+\nDiese App ist für Leute, die einen Aluhut (englisch: \"tin foil hat\") für Facebook brauchen. Sie benutzt eine Sandbox (isolierter Bereich ohne Zugriff auf persönliche Daten, z.B. Adressbuch), in der die mobile Internetseite von Facebook läuft. Benötigt die Berechtigung für Internetzugriff, und wer skeptisch ist, kann sich gerne den Quellcode ansehen (s. oben). Die Berechtigung für Standortbestimmung wird nur benutzt, falls \"Einchecken erlauben\" in den Einstellungen aktiviert ist.\n
+\n</string>
+
+</resources>
