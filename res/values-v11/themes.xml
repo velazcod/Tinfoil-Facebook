@@ -18,4 +18,13 @@
 
     <style name="Theme.Tinfoil" parent="@android:style/Theme.Holo" />
 
+    <style name="Theme.Tinfoil.ActionBarOverlay" parent="@android:style/Theme.Holo">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/TinfoilActionBar</item>
+    </style>
+
+    <style name="TinfoilActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@android:color/black</item>
+    </style>
+
 </resources>

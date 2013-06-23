@@ -43,7 +43,7 @@
             android:launchMode="standard"
             android:windowSoftInputMode="adjustResize"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Tinfoil" >
+            android:theme="@style/Theme.Tinfoil.ActionBarOverlay" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

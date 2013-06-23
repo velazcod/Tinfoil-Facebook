@@ -16,8 +16,8 @@
 -->
 <resources>
 
-  <!-- dimensions -->
+    <!-- dimensions -->
 
-  <dimen name="webview_top_progress_bar">3dp</dimen>
+    <dimen name="webview_top_progress_bar">3dp</dimen>
 
 </resources>

@@ -17,6 +17,7 @@
 package com.danvelazco.fbwrapper;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,15 +30,28 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.*;
+import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.View.OnTouchListener;
-import android.webkit.*;
+import android.webkit.CookieSyncManager;
 import android.webkit.GeolocationPermissions.Callback;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 /**
  * Activity with a WebView wrapping facebook.com with its own CookieSyncManager
@@ -49,26 +63,26 @@ import android.widget.ProgressBar;
 @SuppressLint({ "SetJavaScriptEnabled", "NewApi" })
 public class FbWrapper extends Activity implements Constants, OnGestureListener {
 
+    // Constants
+    protected static final int MSG_AUTO_HIDE_AB = 1;
+    protected static final long MSG_AUTO_HIDE_AB_DELAY_MS = 4000;
+    protected static final long MSG_QUICK_AUTO_HIDE_AB_DELAY_MS = 700;
+
+    // Members
     private ActionBar mActionBar;
+    private int mActionBarHeight;
+    private RelativeLayout mFullLayout;
     private Activity mActivity;
-
     private WebView mFBWrapper;
-
     private GestureDetector mGestureScanner;
-
     @SuppressWarnings("deprecation")
     private android.text.ClipboardManager mAncientClipboard;
-
     private android.content.ClipboardManager mClipboard;
-
     private ValueCallback<Uri> mUploadMessage;
     private final static int RESULTCODE_PICUPLOAD = 1;
-
     private boolean mDesktopView = false;
     private String USERAGENT_ANDROID_DEFAULT;
-
     private ProgressBar mProgressBar;
-
     private boolean mAutoHideAb = false;
     private boolean mAllowCheckins = false;
     private boolean mOpenLinksInside = false;
@@ -76,6 +90,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
     private SharedPreferences mSharedPrefs;
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     @SuppressWarnings("deprecation")
     @SuppressLint({"ServiceCast", "NewApi"})
@@ -87,6 +102,7 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             mActionBar = getActionBar();
             if (mActionBar != null) {
                 mActionBar.setTitle(R.string.app_name_short);
+                mActionBarHeight = mActionBar.getHeight();
             }
             mClipboard = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         } else {
@@ -114,6 +130,8 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
         // Declare ProgressBar in order for it to be used later
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        mFullLayout = (RelativeLayout) findViewById(R.id.layout_full);
 
         // Configure WebView
         mFBWrapper = (WebView) findViewById(R.id.webview);
@@ -172,7 +190,6 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             // Loads proper URL depending on device type
             initSession(urlToLoad);
         }
-
     }
 
     @Override
@@ -198,6 +215,15 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         mAutoHideAb = mSharedPrefs.getBoolean(PREFS_HIDE_AB, false);
         mAllowCheckins = mSharedPrefs.getBoolean(PREFS_ALLOW_CHECKINS, false);
 
+        // TODO: fix this
+        if (mActionBar != null) {
+            if (mAutoHideAb) {
+                mFullLayout.setPadding(0, 0, 0, 0);
+            } else {
+                mFullLayout.setPadding(0, mActionBarHeight, 0, 0);
+            }
+        }
+
         mOpenLinksInside = mSharedPrefs.getBoolean(PREFS_OPEN_LINKS_INSIDE,
                 false);
 
@@ -212,6 +238,9 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             // Loads proper URL depending on device type
             initSession(null);
         }
+
+        //
+        delayedQuickAutoHideActionBar(MSG_QUICK_AUTO_HIDE_AB_DELAY_MS);
 
     }
 
@@ -256,6 +285,63 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
 
             /** Clean up shared preferences */
             mSharedPrefs = null;
+        }
+    }
+
+    // handles counting down
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_AUTO_HIDE_AB:
+                    autoHideActionBar();
+                    break;
+
+            }
+        }
+    };
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void showActionBar() {
+        if (mActionBar != null) {
+            mActionBar.show();
+
+            // Cancel current message to auto hide action bar
+            mHandler.removeMessages(MSG_AUTO_HIDE_AB);
+
+            if (mAutoHideAb) {
+                // Schedule message to hide action bar
+                mHandler.sendEmptyMessageDelayed(MSG_AUTO_HIDE_AB,
+                        MSG_AUTO_HIDE_AB_DELAY_MS);
+            }
+        }
+    }
+
+    private void delayedQuickAutoHideActionBar(long delay) {
+        if (mAutoHideAb) {
+            // Cancel current message to auto hide action bar
+            mHandler.removeMessages(MSG_AUTO_HIDE_AB);
+
+            // Schedule message to hide action bar
+            mHandler.sendEmptyMessageDelayed(MSG_AUTO_HIDE_AB,
+                    delay);
+        }
+    }
+
+    private void autoHideActionBar() {
+        if (mAutoHideAb) {
+            hideActionBar();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void hideActionBar() {
+
+        // Cancel current message to auto hide action bar
+        mHandler.removeMessages(MSG_AUTO_HIDE_AB);
+
+        if (mActionBar != null) {
+            mActionBar.hide();
         }
     }
 
@@ -386,17 +472,17 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
 
-            if (mActionBar != null) {
-                mActionBar.show();
-            }
-
             // We just started loading new content, show ProgressBar
             mProgressBar.setVisibility(View.VISIBLE);
         }
 
+        @SuppressLint("NewApi")
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+
+            // See if we should auto-hide the action bar
+            autoHideActionBar();
 
             // We just finished loading the new content, hide ProgressBar
             mProgressBar.setVisibility(View.INVISIBLE);
@@ -573,9 +659,13 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        // TODO; message
+        showActionBar();
+
         switch (item.getItemId()) {
         case R.id.menu_jump_top:
             webViewJumpTop();
+            autoHideActionBar();
             return true;
         case R.id.menu_news_feed:
             initSession(null);
@@ -622,11 +712,11 @@ public class FbWrapper extends Activity implements Constants, OnGestureListener 
             // TODO: only hide it if scroll movement > action bar height
 
             // Scrolling up
-            mActionBar.hide();
+            hideActionBar();
 
         } else if (e1.getRawY() < e2.getRawY()) {
             // Scrolling down
-            mActionBar.show();
+            showActionBar();
         }
 
         return false;
