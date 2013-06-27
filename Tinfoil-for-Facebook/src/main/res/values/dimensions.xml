@@ -19,5 +19,7 @@
     <!-- dimensions -->
 
     <dimen name="webview_top_progress_bar">3dp</dimen>
+    <dimen name="loading_spinner_top_padding">5dip</dimen>
+    <dimen name="loading_video_text_size">14sp</dimen>
 
 </resources>

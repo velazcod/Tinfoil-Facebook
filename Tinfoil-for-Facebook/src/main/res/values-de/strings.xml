@@ -64,7 +64,7 @@
     </array>
 
     <string name="pref_hide_ab">ActionBar ausblenden</string>
-    <string name="pref_hide_ab_sry">EXPERIMENTELL: Blende die ActionBar automatisch aus, wenn sie nicht benutzt wird. Hochscrollen, um sie wieder einzublenden.</string>
+    <string name="pref_hide_ab_sry">Blende die ActionBar automatisch aus, wenn sie nicht benutzt wird. Hochscrollen, um sie wieder einzublenden.</string>
     <string name="pref_logcat">System-Logging</string>
     <string name="pref_logcat_sry">System-Logging aktivieren. Hilfreich, um dem Entwickler bei der Problembehebung zu helfen</string>
     <string name="pref_about">Über</string>

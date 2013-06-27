@@ -19,6 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Our actual WebView -->
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
@@ -27,6 +28,15 @@
         android:focusable="true"
         android:focusableInTouchMode="true" />
 
+    <!-- Mostly use for full-screen video playback -->
+    <FrameLayout
+        android:id="@+id/fullscreen_custom_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="gone"/>
+
+    <!-- Progress bar used to show the loading progress -->
     <ProgressBar
         android:id="@+id/progress_bar"
         style="@android:style/Widget.ProgressBar.Horizontal"
