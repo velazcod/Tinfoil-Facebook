@@ -1,5 +1,3 @@
 Tinfoil for Facebook
 
 Play Store link: https://play.google.com/store/apps/details?id=com.danvelazco.fbwrapper
-
-This code needs clean up and refactoring, it started as a simple WebView to handle touch.facebook.com and it ended up with many features and bug fixes.
