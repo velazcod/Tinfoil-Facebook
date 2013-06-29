@@ -94,8 +94,9 @@ public class FacebookWebView extends WebView {
     }
 
     /**
-     * Destroy WebView
+     * Destroy this WebView
      */
+    @Override
     public void destroy() {
         mInitialized = false;
         mContext = null;
@@ -110,6 +111,8 @@ public class FacebookWebView extends WebView {
         if (mWebViewClient != null) {
             mWebViewClient.destroy();
         }
+
+        super.destroy();
     }
 
     /**
@@ -191,10 +194,25 @@ public class FacebookWebView extends WebView {
      *                 in the Activity context.
      */
     public void setWebChromeClientListener(FacebookWebChromeClient.WebChromeClientListener listener) {
-        if (!mInitialized) {
+        if (!mInitialized || (mWebChromeClient == null)) {
             throw new IllegalStateException("The WebView must be initialized first.");
         }
         mWebChromeClient.setListener(listener);
+    }
+
+    /**
+     * Allow web applications to access this device's location.<br/>
+     * Need
+     *
+     * @param allow {@link boolean} flag stating whether or not to allow
+     *              this web application to see the
+     *              device's location.
+     */
+    public void setAllowGeolocation(boolean allow) {
+        if (!mInitialized || (mWebChromeClient == null)) {
+            throw new IllegalStateException("The WebView must be initialized first.");
+        }
+        mWebChromeClient.setAllowGeolocation(allow);
     }
 
     /**
@@ -204,7 +222,7 @@ public class FacebookWebView extends WebView {
      *                 in the Activity context.
      */
     public void setWebViewClientListener(FacebookWebViewClient.WebViewClientListener listener) {
-        if (!mInitialized) {
+        if (!mInitialized || (mWebViewClient == null)) {
             throw new IllegalStateException("The WebView must be initialized first.");
         }
         mWebViewClient.setListener(listener);
@@ -216,7 +234,7 @@ public class FacebookWebView extends WebView {
      *
      * @param allow {@link boolean}
      */
-    public void setAllowAnyURL(boolean allow) {
+    public void setAllowAnyDomain(boolean allow) {
         if (!mInitialized || (mWebViewClient == null)) {
             throw new IllegalStateException("The WebView must be initialized first.");
         }

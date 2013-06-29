@@ -16,9 +16,7 @@
 
 package com.danvelazco.fbwrapper.webview;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -209,39 +207,16 @@ public class FacebookWebChromeClient extends WebChromeClient {
      * {@inheritDoc}
      */
     @Override
-    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-
-        // Log JavaScript alerts  in debug
-        Logger.d(getClass().getSimpleName(), "onJsAlert: ");
-        Logger.d(getClass().getSimpleName(), "\turl: " + url);
-        Logger.d(getClass().getSimpleName(), "\tmessage: " + message);
-
-        // Show alert dialog with the message
-        if (mContext != null && message != null) {
-            AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
-            alertDialog.setTitle("Error");
-            alertDialog.setMessage(message);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
-                    mContext.getResources().getText(R.string.lbl_dialog_ok),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-            alertDialog.show();
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onGeolocationPermissionsShowPrompt(String origin,
                                                    GeolocationPermissions.Callback callback) {
         super.onGeolocationPermissionsShowPrompt(origin, callback);
+
+        // If we are not allowed to use geolocation, show an alert, if possible.
+        if (!mAllowGeolocation) {
+            if (mListener != null) {
+                mListener.showGeolocationDisabledAlert();
+            }
+        }
 
         // Invoke the callback stating whether or not geolocation is allowed
         callback.invoke(origin, mAllowGeolocation, false);
@@ -298,13 +273,20 @@ public class FacebookWebChromeClient extends WebChromeClient {
     public interface WebChromeClientListener {
 
         /**
-         * This method will be called anytime the progress
-         * of the page being loaded changes.
+         * Called anytime the progress of the page being loaded changes.
          *
          * @param view     {@link WebView} where the page is being loaded.
          * @param progress {@link int} progress.
          */
         void onProgressChanged(WebView view, int progress);
+
+        /**
+         * Called anytime the web site is trying to access geolocation
+         * data and this client is not allowing us to use it. Use this
+         * to show an alert to the user in the case they want to enable
+         * the use of geolocation.
+         */
+        void showGeolocationDisabledAlert();
 
         /**
          * This method will be called anytime the file chooser

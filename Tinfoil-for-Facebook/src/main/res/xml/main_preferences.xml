@@ -42,12 +42,6 @@
         android:key="pref_cat_general"
         android:title="@string/pref_cat_general" >
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="pref_hide_ab"
-            android:summary="@string/pref_hide_ab_sry"
-            android:title="@string/pref_hide_ab" />
-
         <PreferenceScreen
             android:key="pref_about"
             android:summary="@string/pref_about_sry"

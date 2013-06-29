@@ -9,7 +9,7 @@ buildscript {
 apply plugin: 'android'
 
 dependencies {
-    compile 'com.android.support:support-v13:13.0.0'
+    compile 'com.android.support:support-v4:13.0.0'
 }
 
 android {
@@ -20,7 +20,7 @@ android {
         versionCode 20130520
         versionName "1.1.8"
 
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 17
     }
 }

@@ -34,4 +34,18 @@
         <item name="android:background">@null</item>
     </style>
 
+    <!-- Base Preferences theme -->
+    <style name="AppBasePreferencesTheme" parent="android:Theme.Light">
+    </style>
+
+    <!-- Preferences theme -->
+    <style name="Theme.Tinfoil.Preferences" parent="AppBasePreferencesTheme">
+    </style>
+
+    <!-- Custom style used for the top ProgressBar -->
+    <style name="Widget.Tinfoil.ProgressBar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@android:drawable/progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+    </style>
+
 </resources>

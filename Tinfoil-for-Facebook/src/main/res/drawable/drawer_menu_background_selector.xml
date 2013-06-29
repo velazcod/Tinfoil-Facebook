@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_focused="true">
+        <color android:color="@color/light_gray_alt2" />
+    </item>
+
+    <item android:state_pressed="true">
+        <color android:color="@color/light_gray_alt3" />
+    </item>
+
+    <item android:state_selected="true" >
+        <color android:color="@color/light_gray_alt3" />
+    </item>
+
+    <item android:state_activated="true" >
+        <color android:color="@color/light_gray_alt" />
+    </item>
+
+    <item>
+        <color android:color="@null" />
+    </item>
+
+</selector>

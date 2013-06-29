@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2013 Daniel Velazco
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FacebookNewWrapper">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Our actual WebView -->
+        <com.danvelazco.fbwrapper.webview.FacebookWebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <!-- Progress bar used to show the loading progress -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/webview_top_progress_bar"
+            style="@style/Widget.Tinfoil.ProgressBar"
+            android:layout_alignParentTop="true"/>
+
+    </RelativeLayout>
+
+    <!-- Mostly use for full-screen video playback -->
+    <FrameLayout
+        android:id="@+id/fullscreen_custom_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="gone" />
+
+    <!-- Menu drawer (right) -->
+    <ListView
+        android:id="@+id/lv_right_drawer"
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:choiceMode="singleChoice"
+        android:divider="@color/gray"
+        android:dividerHeight="@dimen/navigation_drawer_items_divider_height"
+        android:background="@color/light_gray" />
+
+</android.support.v4.widget.DrawerLayout>

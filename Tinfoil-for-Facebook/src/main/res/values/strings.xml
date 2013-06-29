@@ -25,8 +25,26 @@
     <string name="lbl_dialog_close">Close</string>
     <string name="lbl_dialog_ok">OK</string>
     <string name="loading_video">Loading video&#8230;</string>
+    <string name="upload_file_choose">Choose file</string>
+
+    <!-- Sharing -->
+    <string name="share_action">Share current page</string>
+    <string name="share_action_subject">Facebook page</string>
+
+    <!-- Sample menu -->
+    <array name="sample_menu_array">
+        <item>Jump to top</item>
+        <item>Refresh</item>
+        <item>News feed</item>
+        <item>Notifications</item>
+        <item>Share this page</item>
+        <item>Preferences</item>
+        <item>About</item>
+        <item>Kill</item>
+    </array>
 
     <!-- Context menu items -->
+    <string name="menu_open_drawer">Open drawer</string>
     <string name="menu_desktop">Desktop</string>
     <string name="menu_mobile">Mobile</string>
     <string name="menu_jump_top">Jump to top</string>
@@ -40,7 +58,7 @@
     <string name="menu_exit">Kill</string>
 
     <!-- Preferences -->
-    <string name="pref_cat_access">Access</string>
+    <string name="pref_cat_access">Facebook access</string>
     <string name="pref_cat_general">General</string>
     <string name="prefs_allow_checkins">Allow Check-ins</string>
     <string name="prefs_allow_checkins_sry">Allows the mobile app to use coarse location in order to check-in to places</string>

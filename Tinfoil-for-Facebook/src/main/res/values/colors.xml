@@ -14,12 +14,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<resources>
 
-    <item
-        android:id="@+id/menu_open_drawer"
-        android:alphabeticShortcut="@string/menu_open_drawer"
-        android:showAsAction="always"
-        android:title="@string/menu_open_drawer"/>
+    <color name="gray">#cdcdcd</color>
+    <color name="light_gray">#ededed</color>
+    <color name="light_gray_alt">#dddddd</color>
+    <color name="light_gray_alt2">#bbbbbb</color>
+    <color name="light_gray_alt3">#aeaeae</color>
+    <color name="dark_gray">#555555</color>
 
-</menu>
+</resources>

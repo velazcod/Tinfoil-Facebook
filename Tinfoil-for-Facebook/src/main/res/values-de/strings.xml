@@ -54,13 +54,11 @@
         <item>Automatisch</item>
         <item>Erzwinge mobile Version</item>
         <item>Erzwinge Desktop-Version</item>
-        <item>Fastbook (Experimentell)</item>
     </array>
     <array name="prefs_mobile_site_list_values">
         <item>auto</item>
         <item>mobile</item>
         <item>desktop</item>
-        <item>fastbook</item>
     </array>
 
     <string name="pref_hide_ab">ActionBar ausblenden</string>
