@@ -1,6 +1,5 @@
 package com.danvelazco.fbwrapper;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -16,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
 import com.danvelazco.fbwrapper.preferences.FacebookSettings;
+import com.danvelazco.fbwrapper.util.Logger;
 
 /**
  * Facebook web wrapper activity.
@@ -38,6 +38,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      */
     @Override
     protected void onActivityCreated() {
+        Logger.d(getClass().getSimpleName(), "onActivityCreated()");
 
         // Set the content view layout
         setContentView(R.layout.main_layout);
@@ -60,9 +61,10 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      */
     @Override
     protected void onWebViewInit(Bundle savedInstanceState) {
+        Logger.d(getClass().getSimpleName(), "onWebViewInit()");
 
         // Load the application's preferences
-        setPreferences();
+        loadPreferences();
 
         // Get the Intent data in case we need to load a specific URL
         Intent intent = getIntent();
@@ -76,6 +78,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
             if (!sharedUrl.equals("")) {
                 String formattedSharedUrl = String.format(mDomainToUse + URL_PAGE_SHARE_LINKS,
                         sharedUrl, sharedSubject);
+                Logger.d(getClass().getSimpleName(), "Loading the sharer page...");
                 loadNewPage(Uri.parse(formattedSharedUrl).toString());
                 return;
             }
@@ -83,6 +86,8 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
         // Open the proper URL in case the user clicked on a link that brought us here
         if (intent.getData() != null) {
+            Logger.d(getClass().getSimpleName(), "Loading a specific Facebook URL a user " +
+                    "clicked on somewhere else");
             loadNewPage(intent.getData().toString());
             return;
         }
@@ -90,9 +95,11 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         // Attempt to either restore the activity or open the default page
         if (savedInstanceState != null) {
             // Restore the state of the WebView using the saved instance state
+            Logger.d(getClass().getSimpleName(), "Restoring the WebView state");
             restoreWebView(savedInstanceState);
         } else {
             // Load the URL depending on the type of device or preference
+            Logger.d(getClass().getSimpleName(), "Loading the init Facebook URL");
             loadNewPage(mDomainToUse);
         }
     }
@@ -102,16 +109,13 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      */
     @Override
     protected void onResumeActivity() {
-
-        // TODO: Fix all this lifecycle hack below
+        Logger.d(getClass().getSimpleName(), "onResumeActivity()");
 
         // This will allow us to check and see if the domain to be used changed
         String previousDomainUsed = mDomainToUse;
 
         // Reload the preferences in case the user changed something critical
-        setPreferences();
-
-        // TODO: we may have a problem here... there might always be a mismatch...
+        loadPreferences();
 
         // If the domain changes, reload the page with the new domain
         if (!mDomainToUse.equalsIgnoreCase(previousDomainUsed)) {
@@ -156,7 +160,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      * {@link PreferenceManager} to load the Default shared preferences.<br />
      * Most preferences will be automatically set for the {@link com.danvelazco.fbwrapper.webview.FacebookWebView}.
      */
-    private void setPreferences() {
+    private void loadPreferences() {
 
         if (mSharedPreferences == null) {
             // Get the default shared preferences instance

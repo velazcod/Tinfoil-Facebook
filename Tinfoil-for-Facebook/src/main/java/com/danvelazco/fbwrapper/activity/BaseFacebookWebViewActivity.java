@@ -58,6 +58,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected final static String INIT_URL_MOBILE = "https://touch.facebook.com";
     protected final static String INIT_URL_DESKTOP = "https://www.facebook.com";
     protected final static String URL_PAGE_NOTIFICATIONS = "/notifications.php";
+
     // URL for Sharing Links
     // u = url & t = title
     protected final static String URL_PAGE_SHARE_LINKS = "/sharer.php?u=%s&t=%s";
@@ -69,6 +70,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     // Mobile user agent (Mobile user agent from a Google Nexus S running Android 2.3.3
     protected static final String USER_AGENT_MOBILE = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; Nexus S Build/GRI20) "
             + "AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+
     // Members
     protected ConnectivityManager mConnectivityManager = null;
     protected CookieSyncManager mCookieSyncManager = null;
@@ -76,6 +78,8 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected ProgressBar mProgressBar = null;
     protected WebSettings mWebSettings = null;
     protected ValueCallback<Uri> mUploadMessage = null;
+    private boolean mCreatingActivity = true;
+
     /**
      * BroadcastReceiver to handle ConnectivityManager.CONNECTIVITY_ACTION intent action.
      */
@@ -164,6 +168,12 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         // Register a Connectivity action receiver so that we can update the cache mode accordingly
         registerReceiver(mConnectivityReceiver,
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
+        // TODO: fix this, this is a horrible lifecycle hack...
+        if (mCreatingActivity) {
+            mCreatingActivity = false;
+            return;
+        }
 
         // Resume this activity properly, reload preferences, etc.
         onResumeActivity();
@@ -334,9 +344,10 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     private void updateCacheMode() {
         if (checkNetworkConnection()) {
-            // Use 'LOAD_DEFAULT' if 'LOAD_CACHE_ELSE_NETWORK' is too aggressive
+            Logger.d(getClass().getSimpleName(), "Setting cache mode to: LOAD_DEFAULT");
             mWebSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         } else {
+            Logger.d(getClass().getSimpleName(), "Setting cache mode to: LOAD_CACHE_ONLY");
             mWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
         }
     }
