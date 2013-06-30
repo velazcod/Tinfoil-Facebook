@@ -1,5 +1,6 @@
 package com.danvelazco.fbwrapper;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -44,7 +45,13 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.layout_main);
         mDrawerList = (ListView) findViewById(R.id.lv_right_drawer);
 
-        // TODO: create a new list adapter?
+        // TODO: allow user to customize theme
+        // No action bar, right drawer
+        //          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        // Action bar, no right drawer
+        //          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        // TODO: create a new list adapter for the drawer menu?
 
     }
 
