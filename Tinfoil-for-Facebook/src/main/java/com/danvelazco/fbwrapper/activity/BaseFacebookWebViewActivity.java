@@ -453,6 +453,13 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         // that handles this URL
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
+
+        // Hack: Facebook uses a linker helper, it's blank when coming back to app
+        // from an outside link, so let's attempt to go back to avoid this blank page
+        if (mWebView.canGoBack()) {
+            Logger.d(getClass().getSimpleName(), "Attempting to go back to avoid blank page");
+            mWebView.goBack();
+        }
     }
 
     /**
@@ -462,7 +469,6 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Override the back button
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
             if (mWebView.canGoBack()) {
                 // Check to see if there's history to go back to
                 mWebView.goBack();
