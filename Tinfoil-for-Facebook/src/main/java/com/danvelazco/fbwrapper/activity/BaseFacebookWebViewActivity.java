@@ -165,7 +165,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         registerReceiver(mConnectivityReceiver,
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        // TOOD: comment and shit...
+        // Resume this activity properly, reload preferences, etc.
         onResumeActivity();
     }
 

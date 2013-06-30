@@ -19,6 +19,8 @@ package com.danvelazco.fbwrapper.webview;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.view.KeyEvent;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.danvelazco.fbwrapper.util.Logger;
@@ -70,6 +72,24 @@ public class FacebookWebViewClient extends WebViewClient {
         Logger.e(getClass().getSimpleName(), "\tError code: " + errorCod);
         Logger.e(getClass().getSimpleName(), "\tDescription: " + description);
         Logger.e(getClass().getSimpleName(), "\tFailed URL: " + failingUrl);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public WebResourceResponse shouldInterceptRequest (final WebView view, String url) {
+        // We are currently not intercepting any resources
+        return super.shouldInterceptRequest(view, url);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean shouldOverrideKeyEvent(WebView view, KeyEvent event) {
+        // Allow the WebView to handle all KeyEvents for now
+        return false;
     }
 
     /**

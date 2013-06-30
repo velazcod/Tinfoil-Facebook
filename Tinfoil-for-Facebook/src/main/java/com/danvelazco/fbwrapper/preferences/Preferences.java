@@ -40,13 +40,8 @@ public class Preferences extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         addPreferencesFromResource(R.xml.main_preferences);
-
-        // Only mess with ActionBar if device is on honeycomb or higher
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
     }
 
     /**
