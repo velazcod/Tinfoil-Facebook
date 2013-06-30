@@ -181,21 +181,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         // Stop synchronizing the CookieSyncManager
         mCookieSyncManager.stopSync();
 
-        // Pass lifecycle events to the WebView
-        mWebView.onPause();
-
         super.onPause();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onStop() {
-        // Make sure we stop loading anything on the WebView
-        mWebView.stopLoading();
-
-        super.onStop();
     }
 
     /**
