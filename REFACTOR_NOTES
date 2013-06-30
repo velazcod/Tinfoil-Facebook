@@ -5,8 +5,6 @@ Problems:
   startActivityForResult getting cancelled as soon as it's called from a singleInstance
   activity.
 
-* Ability to playback HTML5 videos natively.
-
 * Better support for facebook linker (l.php) and avoid blank pages when coming back to app.
 
 * Will add more soon.
