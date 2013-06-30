@@ -77,15 +77,17 @@ public class FacebookWebViewClient extends WebViewClient {
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        Logger.d(getClass().getSimpleName(), "");
-
-        // Avoid NPEs when clicking on weird blank links
-        if (url.equals("about:blank")) {
-            return false;
-        }
+        Logger.d(getClass().getSimpleName(), "shouldOverrideUrlLoading? " + url);
 
         // Do not override any type of loading if we can load any URL
         if (mAllowAnyUrl) {
+            Logger.d(getClass().getSimpleName(), "The user is allowing us to open any URL in this WebView, let it load.");
+            return false;
+        }
+
+        // Avoid NPEs when clicking on weird blank links
+        if (url.equals("about:blank")) {
+            Logger.d(getClass().getSimpleName(), "Blank page, let it load");
             return false;
         }
 
@@ -97,16 +99,17 @@ public class FacebookWebViewClient extends WebViewClient {
 
         if (domain != null) {
             // Let this WebView open the URL
+            // TODO: Check the proper domain names that facebook uses or find another way
             if (domain.contains("facebook") || domain.contains("fb")) {
-                Logger.d(getClass().getSimpleName(), "This URL should be loaded internally.");
+                Logger.d(getClass().getSimpleName(), "This URL should be loaded internally. Let it load.");
                 view.loadUrl(url);
-                return true;
+                return false;
             }
         }
 
         // Otherwise, fire the listener to open the URL by
         // any app that can handle it
-        Logger.d(getClass().getSimpleName(), "This URL should be loaded by a 3rd party.");
+        Logger.d(getClass().getSimpleName(), "This URL should be loaded by a 3rd party. Override.");
         fireOpenExternalSiteListener(url);
 
         return true;

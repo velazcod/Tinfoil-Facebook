@@ -38,8 +38,6 @@ public class FacebookWebView extends WebView {
     final boolean DEFAULT_SAVE_FORM_DATA = false;
     final boolean DEFAULT_SAVE_PASSWORD = false;
     final boolean DEFAULT_DOM_STORAGE_ENABLED = true;
-    final boolean DEFAULT_JS_OPEN_WINDOWS = true;
-    final boolean DEFAULT_JS_MULTIPLE_WINDOWS = true;
     final boolean DEFAULT_ALLOW_GEOLOCATION = false;
     final boolean DEFAULT_ALLOW_FILE_UPLOAD = true;
     final boolean DEFAULT_WIDE_VIEWPORT = false;
@@ -146,8 +144,6 @@ public class FacebookWebView extends WebView {
 
         // Default WebSettings
         mWebSettings.setJavaScriptEnabled(DEFAULT_JS_ENABLED);
-        mWebSettings.setJavaScriptCanOpenWindowsAutomatically(DEFAULT_JS_OPEN_WINDOWS);
-        mWebSettings.setSupportMultipleWindows(DEFAULT_JS_MULTIPLE_WINDOWS);
         mWebSettings.setPluginState(DEFAULT_PLUGIN_STATE);
         mWebSettings.setSupportZoom(DEFAULT_SUPPORT_ZOOM);
         mWebSettings.setSaveFormData(DEFAULT_SAVE_FORM_DATA);
