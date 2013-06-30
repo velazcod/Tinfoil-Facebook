@@ -414,7 +414,6 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.addCategory(Intent.CATEGORY_OPENABLE);
         i.setType("image/*");
-        i.setType("video/*");
         startActivityForResult(
                 Intent.createChooser(i,
                         getString(R.string.upload_file_choose)),
