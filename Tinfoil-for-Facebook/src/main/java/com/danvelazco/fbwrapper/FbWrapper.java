@@ -14,7 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
-import com.danvelazco.fbwrapper.preferences.FacebookSettings;
+import com.danvelazco.fbwrapper.preferences.FacebookPreferences;
 import com.danvelazco.fbwrapper.util.Logger;
 
 /**
@@ -168,22 +168,22 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         }
 
         // Get the URL load and check-in settings
-        boolean anyDomain = mSharedPreferences.getBoolean(FacebookSettings.OPEN_LINKS_INSIDE, false);
-        boolean allowCheckins = mSharedPreferences.getBoolean(FacebookSettings.ALLOW_CHECKINS, false);
+        boolean anyDomain = mSharedPreferences.getBoolean(FacebookPreferences.OPEN_LINKS_INSIDE, false);
+        boolean allowCheckins = mSharedPreferences.getBoolean(FacebookPreferences.ALLOW_CHECKINS, false);
 
         // Set the flags for loading URLs and allowing geolocation
         setAllowCheckins(allowCheckins);
         setAllowAnyDomain(anyDomain);
 
         // Whether the site should be loaded as the mobile or desktop version
-        String mode = mSharedPreferences.getString(FacebookSettings.SITE_MODE,
-                FacebookSettings.SITE_MODE_AUTO);
+        String mode = mSharedPreferences.getString(FacebookPreferences.SITE_MODE,
+                FacebookPreferences.SITE_MODE_AUTO);
 
         // Force or detect the site mode to load
-        if (mode.equalsIgnoreCase(FacebookSettings.SITE_MODE_MOBILE)) {
+        if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_MOBILE)) {
             // Force the webview config to mobile
             setupFacebookWebViewConfig(true, true);
-        } else if (mode.equalsIgnoreCase(FacebookSettings.SITE_MODE_DESKTOP)) {
+        } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_DESKTOP)) {
             // Force the webview config to desktop mode
             setupFacebookWebViewConfig(true, false);
         } else {
@@ -192,12 +192,12 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         }
 
         // If we haven't shown the new menu drawer to the user, auto open it
-        if (!mSharedPreferences.getBoolean(FacebookSettings.MENU_DRAWER_SHOWED_OPENED, false)) {
+        if (!mSharedPreferences.getBoolean(FacebookPreferences.MENU_DRAWER_SHOWED_OPENED, false)) {
             openMenuDrawer();
 
             // Make sure we don't auto-open the menu ever again
             SharedPreferences.Editor editor = mSharedPreferences.edit();
-            editor.putBoolean(FacebookSettings.MENU_DRAWER_SHOWED_OPENED, true);
+            editor.putBoolean(FacebookPreferences.MENU_DRAWER_SHOWED_OPENED, true);
             editor.apply();
         }
 
