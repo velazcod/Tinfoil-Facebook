@@ -16,6 +16,7 @@
 -->
 <resources>
 
+    <color name="holo">#33b5e5</color>
     <color name="gray">#cdcdcd</color>
     <color name="light_gray">#ededed</color>
     <color name="light_gray_alt">#dddddd</color>

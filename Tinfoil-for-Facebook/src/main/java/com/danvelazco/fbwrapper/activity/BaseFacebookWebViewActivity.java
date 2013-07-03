@@ -169,7 +169,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         registerReceiver(mConnectivityReceiver,
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        // TODO: fix this, this is a horrible lifecycle hack...
+        // Horrible lifecycle hack
         if (mCreatingActivity) {
             mCreatingActivity = false;
             return;

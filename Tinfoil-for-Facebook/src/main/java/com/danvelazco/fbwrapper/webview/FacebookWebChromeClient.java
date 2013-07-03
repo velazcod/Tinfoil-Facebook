@@ -178,6 +178,10 @@ public class FacebookWebChromeClient extends WebChromeClient {
      */
     @Override
     public void onHideCustomView() {
+
+        // [TODO][BUG]: video player won't close sometimes, only toggle media controls
+        // [TODO][BUG]: sound from video will keep playing sometimes
+
         if (mCustomViewCallback != null) {
             // Fire the callback
             mCustomViewCallback.onCustomViewHidden();
