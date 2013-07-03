@@ -37,6 +37,6 @@
         android:layout_gravity="center"
         android:text="@string/loading_video"
         android:textSize="@dimen/loading_video_text_size"
-        android:textColor="?android:attr/textColorPrimary"/>
+        android:textColor="@color/light_gray"/>
 
 </LinearLayout>

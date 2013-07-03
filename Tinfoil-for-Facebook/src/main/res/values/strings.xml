@@ -31,18 +31,6 @@
     <string name="share_action">Share current page</string>
     <string name="share_action_subject">Facebook page</string>
 
-    <!-- Sample menu -->
-    <array name="sample_menu_array">
-        <item>Jump to top</item>
-        <item>Refresh</item>
-        <item>News feed</item>
-        <item>Notifications</item>
-        <item>Share this page</item>
-        <item>Preferences</item>
-        <item>About</item>
-        <item>Kill</item>
-    </array>
-
     <!-- Context menu items -->
     <string name="menu_open_drawer">Open drawer</string>
     <string name="menu_desktop">Desktop</string>

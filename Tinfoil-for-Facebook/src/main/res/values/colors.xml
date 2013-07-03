@@ -22,6 +22,7 @@
     <color name="light_gray_alt">#dddddd</color>
     <color name="light_gray_alt2">#bbbbbb</color>
     <color name="light_gray_alt3">#aeaeae</color>
+    <color name="mild_gray">#888888</color>
     <color name="dark_gray">#555555</color>
 
 </resources>

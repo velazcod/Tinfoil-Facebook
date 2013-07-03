@@ -1,5 +1,7 @@
 package com.danvelazco.fbwrapper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -12,7 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
 import com.danvelazco.fbwrapper.preferences.FacebookPreferences;
 import com.danvelazco.fbwrapper.util.Logger;
@@ -26,8 +28,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
     private final static int MENU_DRAWER_GRAVITY = GravityCompat.END;
 
     // Members
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout = null;
     private String mDomainToUse = INIT_URL_MOBILE;
 
     // Preferences stuff
@@ -40,20 +41,21 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
     protected void onActivityCreated() {
         Logger.d(getClass().getSimpleName(), "onActivityCreated()");
 
-        // Set the content view layout
-        setContentView(R.layout.main_layout);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.layout_main);
-        mDrawerList = (ListView) findViewById(R.id.lv_right_drawer);
-
         // TODO: allow user to customize theme
+        // TODO: this will require the  app to be restarted and theme set before setting layout
         // No action bar, right drawer
         //          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         // Action bar, no right drawer
         //          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-        // TODO: create a new list adapter for the drawer menu?
+        // Set the content view layout
+        setContentView(R.layout.main_layout);
 
+        // Keep a reference of the DrawerLayout
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.layout_main);
+
+        // Set the click listener interface for the buttons
+        setOnClickListeners();
     }
 
     /**
@@ -121,6 +123,25 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         if (!mDomainToUse.equalsIgnoreCase(previousDomainUsed)) {
             loadNewPage(mDomainToUse);
         }
+    }
+
+    /**
+     * Sets the click listener on all the buttons in the activity
+     */
+    private void setOnClickListeners() {
+        // Create a new listener
+        MenuDrawerButtonListener buttonsListener = new MenuDrawerButtonListener();
+
+        // Set this listener to all the buttons
+        findViewById(R.id.menu_drawer_right).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_item_jump_to_top).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_item_refresh).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_item_newsfeed).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_items_notifications).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_share_this).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_preferences).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_about).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_kill).setOnClickListener(buttonsListener);
     }
 
     /**
@@ -256,6 +277,71 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         }
 
         return isTablet;
+    }
+
+    /**
+     * Menu drawer button listener interface
+     */
+    private class MenuDrawerButtonListener implements View.OnClickListener {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.menu_item_jump_to_top:
+                    closeMenuDrawer();
+                    jumpToTop();
+                    break;
+                case R.id.menu_item_refresh:
+                    closeMenuDrawer();
+                    refreshCurrentPage();
+                    break;
+                case R.id.menu_item_newsfeed:
+                    closeMenuDrawer();
+                    loadNewPage(mDomainToUse);
+                    break;
+                case R.id.menu_items_notifications:
+                    closeMenuDrawer();
+                    loadNewPage(mDomainToUse + URL_PAGE_NOTIFICATIONS);
+                    break;
+                case R.id.menu_share_this:
+                    closeMenuDrawer();
+                    shareCurrentPage();
+                    break;
+                case R.id.menu_preferences:
+                    closeMenuDrawer();
+                    startActivity(new Intent(FbWrapper.this, FacebookPreferences.class));
+                    break;
+                case R.id.menu_about:
+                    closeMenuDrawer();
+                    showAboutAlert();
+                    break;
+                case R.id.menu_kill:
+                    closeMenuDrawer();
+                    mWebView.destroy();
+                    finish();
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Show an alert dialog with the information about the application.
+     */
+    private void showAboutAlert() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(getString(R.string.menu_about));
+        alertDialog.setMessage(getString(R.string.txt_about));
+        alertDialog.setIcon(R.drawable.ic_launcher);
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,
+                getString(R.string.lbl_dialog_close),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Don't do anything, simply close the dialog
+                    }
+                });
+        alertDialog.show();
     }
 
     /**

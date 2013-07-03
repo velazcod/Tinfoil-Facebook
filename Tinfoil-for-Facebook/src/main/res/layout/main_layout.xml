@@ -54,14 +54,6 @@
         android:visibility="gone" />
 
     <!-- Menu drawer (right) -->
-    <ListView
-        android:id="@+id/lv_right_drawer"
-        android:layout_width="@dimen/navigation_drawer_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:choiceMode="singleChoice"
-        android:divider="@color/gray"
-        android:dividerHeight="@dimen/navigation_drawer_items_divider_height"
-        android:background="@color/light_gray" />
+    <include layout="@layout/drawer_menu" />
 
 </android.support.v4.widget.DrawerLayout>

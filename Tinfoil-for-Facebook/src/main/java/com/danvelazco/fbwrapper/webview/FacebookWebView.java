@@ -34,7 +34,7 @@ public class FacebookWebView extends WebView {
     // Constants, default values for this WebView's configuration
     final boolean DEFAULT_JS_ENABLED = true;
     final WebSettings.PluginState DEFAULT_PLUGIN_STATE = WebSettings.PluginState.ON;
-    final boolean DEFAULT_SUPPORT_ZOOM = false;
+    final boolean DEFAULT_SUPPORT_ZOOM = true;
     final boolean DEFAULT_SAVE_FORM_DATA = false;
     final boolean DEFAULT_SAVE_PASSWORD = false;
     final boolean DEFAULT_DOM_STORAGE_ENABLED = true;
@@ -146,6 +146,8 @@ public class FacebookWebView extends WebView {
         mWebSettings.setJavaScriptEnabled(DEFAULT_JS_ENABLED);
         mWebSettings.setPluginState(DEFAULT_PLUGIN_STATE);
         mWebSettings.setSupportZoom(DEFAULT_SUPPORT_ZOOM);
+        mWebSettings.setDisplayZoomControls(DEFAULT_SUPPORT_ZOOM);
+        mWebSettings.setBuiltInZoomControls(DEFAULT_SUPPORT_ZOOM);
         mWebSettings.setSaveFormData(DEFAULT_SAVE_FORM_DATA);
         mWebSettings.setSavePassword(DEFAULT_SAVE_PASSWORD);
         mWebSettings.setDomStorageEnabled(DEFAULT_DOM_STORAGE_ENABLED);

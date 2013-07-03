@@ -259,6 +259,15 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     }
 
     /**
+     * Method used to allow the user to refresh the current page
+     */
+    protected void refreshCurrentPage() {
+        if (mWebView != null) {
+            mWebView.reload();
+        }
+    }
+
+    /**
      * Method used to allow the user to jump to the top of the webview
      */
     protected void jumpToTop() {

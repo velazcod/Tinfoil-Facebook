@@ -48,4 +48,11 @@
         <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
     </style>
 
+    <style name="MenuDrawerTextStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">@dimen/navigation_drawer_items_text_size</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
 </resources>
