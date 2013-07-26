@@ -32,7 +32,6 @@
     <string name="share_action_subject">Facebook page</string>
 
     <!-- Context menu items -->
-    <string name="menu_open_drawer">Open drawer</string>
     <string name="menu_desktop">Desktop</string>
     <string name="menu_mobile">Mobile</string>
     <string name="menu_jump_top">Jump to top</string>

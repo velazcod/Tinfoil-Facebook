@@ -11,10 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.RelativeLayout;
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
 import com.danvelazco.fbwrapper.preferences.FacebookPreferences;
@@ -176,6 +173,17 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
             return mDrawerLayout.isDrawerOpen(MENU_DRAWER_GRAVITY);
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Used to toggle the menu drawer
+     */
+    private void toggleMenuDrawer() {
+        if (isMenuDrawerOpen()) {
+            closeMenuDrawer();
+        } else {
+            openMenuDrawer();
         }
     }
 
@@ -346,37 +354,20 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      * {@inheritDoc}
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_open_drawer:
-                openMenuDrawer();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch(keyCode){
+        case KeyEvent.KEYCODE_MENU:
+            toggleMenuDrawer();
+            return true;
+        case KeyEvent.KEYCODE_BACK:
+            // If the back button is pressed while the drawer
+            // is open try to close it
+            if (isMenuDrawerOpen()) {
+                closeMenuDrawer();
                 return true;
+            }
         }
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void onBackPressed() {
-        // If the back button is pressed while the drawer
-        // is open try to close it
-        if (isMenuDrawerOpen()) {
-            closeMenuDrawer();
-        } else {
-            super.onBackPressed();
-        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }
