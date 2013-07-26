@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
 import com.danvelazco.fbwrapper.preferences.FacebookPreferences;
 import com.danvelazco.fbwrapper.util.Logger;
@@ -30,6 +31,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
     // Members
     private DrawerLayout mDrawerLayout = null;
     private String mDomainToUse = INIT_URL_MOBILE;
+    private RelativeLayout mWebViewContainer = null;
 
     // Preferences stuff
     private SharedPreferences mSharedPreferences = null;
@@ -53,6 +55,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
         // Keep a reference of the DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.layout_main);
+        mWebViewContainer = (RelativeLayout) findViewById(R.id.webview_container);
 
         // Set the click listener interface for the buttons
         setOnClickListeners();
@@ -290,39 +293,34 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.menu_item_jump_to_top:
-                    closeMenuDrawer();
                     jumpToTop();
                     break;
                 case R.id.menu_item_refresh:
-                    closeMenuDrawer();
                     refreshCurrentPage();
                     break;
                 case R.id.menu_item_newsfeed:
-                    closeMenuDrawer();
                     loadNewPage(mDomainToUse);
                     break;
                 case R.id.menu_items_notifications:
-                    closeMenuDrawer();
                     loadNewPage(mDomainToUse + URL_PAGE_NOTIFICATIONS);
                     break;
                 case R.id.menu_share_this:
-                    closeMenuDrawer();
                     shareCurrentPage();
                     break;
                 case R.id.menu_preferences:
-                    closeMenuDrawer();
                     startActivity(new Intent(FbWrapper.this, FacebookPreferences.class));
                     break;
                 case R.id.menu_about:
-                    closeMenuDrawer();
                     showAboutAlert();
                     break;
                 case R.id.menu_kill:
-                    closeMenuDrawer();
+                    mWebViewContainer.removeView(mWebView);
+                    mWebView.removeAllViews();
                     mWebView.destroy();
                     finish();
                     break;
             }
+            closeMenuDrawer();
         }
     }
 
