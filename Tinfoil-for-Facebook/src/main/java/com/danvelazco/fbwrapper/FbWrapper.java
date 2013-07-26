@@ -30,8 +30,8 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
     // Members
     private DrawerLayout mDrawerLayout = null;
-    private String mDomainToUse = INIT_URL_MOBILE;
     private RelativeLayout mWebViewContainer = null;
+    private String mDomainToUse = INIT_URL_MOBILE;
 
     // Preferences stuff
     private SharedPreferences mSharedPreferences = null;

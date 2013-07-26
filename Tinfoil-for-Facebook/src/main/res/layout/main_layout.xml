@@ -23,9 +23,9 @@
     tools:context=".FacebookNewWrapper">
 
     <RelativeLayout
+        android:id="@+id/webview_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/webview_container">
+        android:layout_height="match_parent">
 
         <!-- Our actual WebView -->
         <com.danvelazco.fbwrapper.webview.FacebookWebView
