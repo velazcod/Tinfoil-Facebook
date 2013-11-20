@@ -119,7 +119,7 @@
 
     </RelativeLayout>
 
-    <!-- Menu item: Refresh -->
+    <!-- Menu item: News feed -->
     <RelativeLayout
         android:id="@+id/menu_item_newsfeed"
         android:layout_width="match_parent"
@@ -166,7 +166,7 @@
             android:layout_height="@dimen/navigation_drawer_icon_size"
             android:layout_centerVertical="true"
             android:src="@android:drawable/ic_menu_info_details"
-            android:contentDescription="@string/menu_refresh" />
+            android:contentDescription="@string/menu_notifications" />
 
         <TextView
             android:id="@+id/tv_notifications"
@@ -178,6 +178,37 @@
             android:gravity="left"
             style="@style/MenuDrawerTextStyle"
             android:text="@string/menu_notifications"/>
+
+    </RelativeLayout>
+    
+    <!-- Menu item: Messages -->
+    <RelativeLayout
+        android:id="@+id/menu_item_messages"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_drawer_items_height"
+        android:padding="@dimen/navigation_drawer_items_padding"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/iv_messages"
+            android:layout_width="@dimen/navigation_drawer_icon_size"
+            android:layout_height="@dimen/navigation_drawer_icon_size"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="@string/menu_messages" />
+
+        <TextView
+            android:id="@+id/tv_messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_messages"
+            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+            android:gravity="left"
+            style="@style/MenuDrawerTextStyle"
+            android:text="@string/menu_messages"/>
 
     </RelativeLayout>
 
