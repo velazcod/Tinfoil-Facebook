@@ -36,6 +36,12 @@
             android:key="prefs_mobile_site"
             android:summary="@string/prefs_mobile_site_sry"
             android:title="@string/prefs_mobile_site" />
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefs_api"
+            android:summary="@string/prefs_api_sry"
+            android:title="@string/prefs_api" />
 
     </PreferenceCategory>
     <PreferenceCategory

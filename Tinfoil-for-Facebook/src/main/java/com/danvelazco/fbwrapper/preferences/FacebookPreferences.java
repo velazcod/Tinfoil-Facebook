@@ -17,15 +17,25 @@
 package com.danvelazco.fbwrapper.preferences;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
+import android.webkit.WebViewFragment;
+
+import com.danvelazco.fbwrapper.AccessTokenDialogFragment;
 import com.danvelazco.fbwrapper.R;
+import com.danvelazco.fbwrapper.TagFriendDialogFragment;
 
 /**
  * Preferences activity
@@ -49,6 +59,7 @@ public class FacebookPreferences extends PreferenceActivity {
     public final static String SITE_MODE_MOBILE = "mobile";
     public final static String SITE_MODE_DESKTOP = "desktop";
     public final static String ABOUT = "pref_about";
+    public final static String API = "prefs_api";
 
     // Preferences
     private EditTextPreference mPrefProxyHost = null;
@@ -111,8 +122,39 @@ public class FacebookPreferences extends PreferenceActivity {
         if (ABOUT.equals(key)) {
             showAboutAlert();
             return true;
+        } else if (API.equals(key)) {
+        	if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(API, false)) {
+        		FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("api_dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                // Create and show the dialog.
+                DialogFragment newFragment = AccessTokenDialogFragment.newInstance();
+                newFragment.show(ft, "api_dialog");
+                
+                // un-check the preference, until such time as the dialog manages to get an access token
+            	((CheckBoxPreference)findPreference("prefs_api")).setChecked(false);
+        	} else {
+        		PreferenceManager.getDefaultSharedPreferences(this)
+        			.edit()
+        			.remove("API_KEY")
+        			.commit();
+        	}
+        	return true;
         }
         return false;
+    }
+    
+    public void received_access_token(String token) {
+    	Log.d("FP", "access token: " + token);
+    	((CheckBoxPreference)findPreference("prefs_api")).setChecked(true);
+    	PreferenceManager.getDefaultSharedPreferences(this)
+    		.edit()
+    		.putString("API_KEY", token)
+    		.commit();
     }
 
     /**
