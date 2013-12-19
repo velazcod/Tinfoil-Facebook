@@ -54,6 +54,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         FacebookWebChromeClient.WebChromeClientListener {
 
     // Constants
+    private final static String LOG_TAG = "BaseFacebookWebViewActivity";
     protected final static int RESULT_CODE_FILE_UPLOAD = 1001;
     protected final static String INIT_URL_MOBILE = "https://touch.facebook.com";
     protected final static String INIT_URL_DESKTOP = "https://www.facebook.com";
@@ -353,10 +354,10 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     private void updateCacheMode() {
         if (checkNetworkConnection()) {
-            Logger.d(getClass().getSimpleName(), "Setting cache mode to: LOAD_DEFAULT");
+            Logger.d(LOG_TAG, "Setting cache mode to: LOAD_DEFAULT");
             mWebSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         } else {
-            Logger.d(getClass().getSimpleName(), "Setting cache mode to: LOAD_CACHE_ONLY");
+            Logger.d(LOG_TAG, "Setting cache mode to: LOAD_CACHE_ONLY");
             mWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
         }
     }
@@ -384,7 +385,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     @Override
     public void onProgressChanged(WebView view, int progress) {
-        Logger.d(getClass().getSimpleName(), "onProgressChanged(), progress: " + progress);
+        Logger.d(LOG_TAG, "onProgressChanged(), progress: " + progress);
 
         // Posts current progress to the ProgressBar
         mProgressBar.setProgress(progress);
@@ -418,7 +419,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     @Override
     public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
-        Logger.d(getClass().getSimpleName(), "openFileChooser()");
+        Logger.d(LOG_TAG, "openFileChooser()");
         mUploadMessage = uploadMsg;
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
         i.addCategory(Intent.CATEGORY_OPENABLE);
@@ -434,7 +435,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     @Override
     public void onPageLoadStarted(String url) {
-        Logger.d(getClass().getSimpleName(), "onPageLoadStarted() -- url: " + url);
+        Logger.d(LOG_TAG, "onPageLoadStarted() -- url: " + url);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
@@ -443,7 +444,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     @Override
     public void onPageLoadFinished(String url) {
-        Logger.d(getClass().getSimpleName(), "onPageLoadFinished() -- url: " + url);
+        Logger.d(LOG_TAG, "onPageLoadFinished() -- url: " + url);
         mProgressBar.setVisibility(View.GONE);
     }
 
@@ -452,7 +453,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     @Override
     public void openExternalSite(String url) {
-        Logger.d(getClass().getSimpleName(), "openExternalSite() -- url: " + url);
+        Logger.d(LOG_TAG, "openExternalSite() -- url: " + url);
 
         // This link is not for a page on my site, launch another Activity
         // that handles this URL
@@ -462,7 +463,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         // Hack: Facebook uses a linker helper, it's blank when coming back to app
         // from an outside link, so let's attempt to go back to avoid this blank page
         if (mWebView.canGoBack()) {
-            Logger.d(getClass().getSimpleName(), "Attempting to go back to avoid blank page");
+            Logger.d(LOG_TAG, "Attempting to go back to avoid blank page");
             mWebView.goBack();
         }
     }

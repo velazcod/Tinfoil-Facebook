@@ -23,6 +23,7 @@ import com.danvelazco.fbwrapper.util.Logger;
 public class FbWrapper extends BaseFacebookWebViewActivity {
 
     // Constant
+    private final static String LOG_TAG = "FbWrapper";
     private final static int MENU_DRAWER_GRAVITY = GravityCompat.END;
 
     // Members
@@ -38,14 +39,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      */
     @Override
     protected void onActivityCreated() {
-        Logger.d(getClass().getSimpleName(), "onActivityCreated()");
-
-        // TODO: allow user to customize theme
-        // TODO: this will require the  app to be restarted and theme set before setting layout
-        // No action bar, right drawer
-        //          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        // Action bar, no right drawer
-        //          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        Logger.d(LOG_TAG, "onActivityCreated()");
 
         // Set the content view layout
         setContentView(R.layout.main_layout);
@@ -63,7 +57,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      */
     @Override
     protected void onWebViewInit(Bundle savedInstanceState) {
-        Logger.d(getClass().getSimpleName(), "onWebViewInit()");
+        Logger.d(LOG_TAG, "onWebViewInit()");
 
         // Load the application's preferences
         loadPreferences();
@@ -80,7 +74,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
             if (!sharedUrl.equals("")) {
                 String formattedSharedUrl = String.format(mDomainToUse + URL_PAGE_SHARE_LINKS,
                         sharedUrl, sharedSubject);
-                Logger.d(getClass().getSimpleName(), "Loading the sharer page...");
+                Logger.d(LOG_TAG, "Loading the sharer page...");
                 loadNewPage(Uri.parse(formattedSharedUrl).toString());
                 return;
             }
@@ -88,7 +82,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
         // Open the proper URL in case the user clicked on a link that brought us here
         if (intent.getData() != null) {
-            Logger.d(getClass().getSimpleName(), "Loading a specific Facebook URL a user " +
+            Logger.d(LOG_TAG, "Loading a specific Facebook URL a user " +
                     "clicked on somewhere else");
             loadNewPage(intent.getData().toString());
             return;
@@ -97,11 +91,11 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         // Attempt to either restore the activity or open the default page
         if (savedInstanceState != null) {
             // Restore the state of the WebView using the saved instance state
-            Logger.d(getClass().getSimpleName(), "Restoring the WebView state");
+            Logger.d(LOG_TAG, "Restoring the WebView state");
             restoreWebView(savedInstanceState);
         } else {
             // Load the URL depending on the type of device or preference
-            Logger.d(getClass().getSimpleName(), "Loading the init Facebook URL");
+            Logger.d(LOG_TAG, "Loading the init Facebook URL");
             loadNewPage(mDomainToUse);
         }
     }
@@ -111,7 +105,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      */
     @Override
     protected void onResumeActivity() {
-        Logger.d(getClass().getSimpleName(), "onResumeActivity()");
+        Logger.d(LOG_TAG, "onResumeActivity()");
 
         // This will allow us to check and see if the domain to be used changed
         String previousDomainUsed = mDomainToUse;
