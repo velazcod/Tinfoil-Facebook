@@ -254,8 +254,7 @@ public class FacebookWebChromeClient extends WebChromeClient {
      *                   associated with this file picker.
      */
     @SuppressWarnings("unused")
-    public void openFileChooser(ValueCallback<Uri> uploadMsg,
-                                String acceptType) {
+    public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
         openFileChooser(uploadMsg, acceptType, "");
     }
 

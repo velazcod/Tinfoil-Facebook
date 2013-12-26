@@ -333,6 +333,8 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     protected void destroyWebView() {
         if (mWebView != null) {
+            mWebView.removeAllViews();
+
             /** Free memory and destroy WebView */
             mWebView.freeMemory();
             mWebView.destroy();

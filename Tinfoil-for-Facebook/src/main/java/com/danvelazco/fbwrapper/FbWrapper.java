@@ -313,8 +313,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
                     break;
                 case R.id.menu_kill:
                     mWebViewContainer.removeView(mWebView);
-                    mWebView.removeAllViews();
-                    mWebView.destroy();
+                    destroyWebView();
                     finish();
                     break;
             }
