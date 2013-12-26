@@ -20,7 +20,7 @@ android {
         versionCode 20131105
         versionName "1.2.2"
 
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 19
     }
 }
