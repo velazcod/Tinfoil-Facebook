@@ -11,7 +11,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.*;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
 import com.danvelazco.fbwrapper.preferences.FacebookPreferences;
@@ -241,21 +242,16 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      *               whether to use the mobile or desktop site.
      */
     private void setupFacebookWebViewConfig(boolean force, boolean mobile) {
-        if (force && mobile) {
-            // Force the mobile site to load
-            mDomainToUse = INIT_URL_MOBILE;
-        } else if (force && !mobile) {
+        if (force && !mobile) {
             // Force the desktop site to load
             mDomainToUse = INIT_URL_DESKTOP;
         } else {
-            // Detect whether this device is a phone or tablet
-            // Use respective domain
-            mDomainToUse = isDeviceTablet() ? INIT_URL_DESKTOP : INIT_URL_MOBILE;
+            // Otherwise, just load the mobile site for all devices
+            mDomainToUse = INIT_URL_MOBILE;
         }
 
         // Set the user agent depending on config
         setUserAgent(force, mobile);
-
     }
 
     /**
@@ -275,10 +271,10 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
             // Honeycomb only allowed tablets, always assume it's a tablet
             isTablet = true;
         } else {
-            // If the device's screen width is higher than 600dp,
-            // it's a tablet, otherwise, it's a phone
+            // If the device's screen width is higher than 720dp, it's a tablet,
+            // otherwise, it's, at least, a phone (could be a phablet, or small tablet)
             Configuration config = getResources().getConfiguration();
-            isTablet = config.smallestScreenWidthDp >= 600;
+            isTablet = config.smallestScreenWidthDp >= 720;
         }
 
         return isTablet;
