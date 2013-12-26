@@ -18,11 +18,16 @@ package com.danvelazco.fbwrapper.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -64,13 +69,15 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     // u = url & t = title
     protected final static String URL_PAGE_SHARE_LINKS = "/sharer.php?u=%s&t=%s";
 
-    // TODO: update these user agents?
-    // Desktop user agent (Google Chrome's user agent from a MacBook running 10.7.2
-    protected static final String USER_AGENT_DESKTOP = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) "
-            + "AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.202 Safari/535.1";
+    // Desktop user agent (Google Chrome's user agent from a MacBook running 10.9.1
+    protected static final String USER_AGENT_DESKTOP = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) " +
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36";
     // Mobile user agent (Mobile user agent from a Google Nexus S running Android 2.3.3
-    protected static final String USER_AGENT_MOBILE = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; Nexus S Build/GRI20) "
-            + "AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    protected static final String USER_AGENT_MOBILE_OLD = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; " +
+            "Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    // Mobile user agent (Mobile user agent from a Google Nexus 5 running Android 4.4.2
+    protected static final String USER_AGENT_MOBILE = "Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) " +
+            "AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36";
 
     // Members
     protected ConnectivityManager mConnectivityManager = null;
@@ -240,7 +247,11 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      */
     protected void setUserAgent(boolean force, boolean mobile) {
         if (force && mobile) {
-            mWebSettings.setUserAgentString(USER_AGENT_MOBILE);
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                mWebSettings.setUserAgentString(USER_AGENT_MOBILE_OLD);
+            } else {
+                mWebSettings.setUserAgentString(USER_AGENT_MOBILE);
+            }
         } else if (force && !mobile) {
             mWebSettings.setUserAgentString(USER_AGENT_DESKTOP);
         } else {
