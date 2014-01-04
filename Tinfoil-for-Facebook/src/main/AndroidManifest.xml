@@ -21,7 +21,7 @@
     <!-- versionCode and versionName will be populated by build.gradle -->
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19"/>
 
     <uses-permission
