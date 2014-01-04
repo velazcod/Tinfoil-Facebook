@@ -11,12 +11,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
 import com.danvelazco.fbwrapper.preferences.FacebookPreferences;
 import com.danvelazco.fbwrapper.util.Logger;
+import com.danvelazco.fbwrapper.util.OrbotHelper;
 
 /**
  * Facebook web wrapper activity.
@@ -194,13 +196,32 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
             mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         }
 
-        // Get the URL load and check-in settings
+        // Get the URL to load, check-in and proxy settings
         boolean anyDomain = mSharedPreferences.getBoolean(FacebookPreferences.OPEN_LINKS_INSIDE, false);
         boolean allowCheckins = mSharedPreferences.getBoolean(FacebookPreferences.ALLOW_CHECKINS, false);
+        boolean enableProxy = mSharedPreferences.getBoolean(FacebookPreferences.KEY_PROXY_ENABLED, false);
+        String proxyHost = mSharedPreferences.getString(FacebookPreferences.KEY_PROXY_HOST, null);
+        String proxyPort = mSharedPreferences.getString(FacebookPreferences.KEY_PROXY_PORT, null);
 
         // Set the flags for loading URLs and allowing geolocation
         setAllowCheckins(allowCheckins);
         setAllowAnyDomain(anyDomain);
+
+        if (enableProxy && !TextUtils.isEmpty(proxyHost) && !TextUtils.isEmpty(proxyPort)) {
+            int proxyPortInt = -1;
+            try {
+                proxyPortInt = Integer.parseInt(proxyPort);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            setProxy(proxyHost, proxyPortInt);
+
+            // If Orbot is installed and not running, request to start it
+            OrbotHelper orbotHelper = new OrbotHelper(this);
+            if (orbotHelper.isOrbotInstalled() && !orbotHelper.isOrbotRunning()) {
+                orbotHelper.requestOrbotStart(this);
+            }
+        }
 
         // Whether the site should be loaded as the mobile or desktop version
         String mode = mSharedPreferences.getString(FacebookPreferences.SITE_MODE,

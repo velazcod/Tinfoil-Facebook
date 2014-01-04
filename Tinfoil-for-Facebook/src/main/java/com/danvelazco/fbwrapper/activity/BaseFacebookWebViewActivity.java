@@ -29,6 +29,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.CookieSyncManager;
@@ -39,6 +40,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import com.danvelazco.fbwrapper.R;
 import com.danvelazco.fbwrapper.util.Logger;
+import com.danvelazco.fbwrapper.util.OrbotHelper;
+import com.danvelazco.fbwrapper.util.WebViewProxyUtil;
 import com.danvelazco.fbwrapper.webview.FacebookWebChromeClient;
 import com.danvelazco.fbwrapper.webview.FacebookWebView;
 import com.danvelazco.fbwrapper.webview.FacebookWebViewClient;
@@ -222,6 +225,18 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     }
 
     /**
+     * Set a proxy for the {@link com.danvelazco.fbwrapper.webview.FacebookWebView}
+     *
+     * @param host {@link String}
+     * @param port {@link int}
+     */
+    protected final void setProxy(String host, int port) {
+        if (mWebView != null && !TextUtils.isEmpty(host) && port > 0) {
+            WebViewProxyUtil.setProxy(getApplicationContext(), mWebView, host, port);
+        }
+    }
+
+    /**
      * Restore the state of the {@link FacebookWebView}
      *
      * @param inState {@link Bundle}
@@ -379,17 +394,20 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      * {@inheritDoc}
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent intent) {
-        // Handle file uploads
-        if (requestCode == RESULT_CODE_FILE_UPLOAD) {
-            if (null == mUploadMessage) {
-                return;
-            }
-            Uri result = intent == null || resultCode != RESULT_OK ? null
-                    : intent.getData();
-            mUploadMessage.onReceiveValue(result);
-            mUploadMessage = null;
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        switch (requestCode) {
+            case OrbotHelper.REQUEST_CODE_START_ORBOT:
+                mWebView.reload();
+                break;
+            case RESULT_CODE_FILE_UPLOAD:
+                if (null == mUploadMessage) {
+                    return;
+                }
+                Uri result = intent == null || resultCode != RESULT_OK ? null
+                        : intent.getData();
+                mUploadMessage.onReceiveValue(result);
+                mUploadMessage = null;
+                break;
         }
     }
 

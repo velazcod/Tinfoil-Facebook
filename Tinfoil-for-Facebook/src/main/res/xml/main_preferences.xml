@@ -39,6 +39,29 @@
 
     </PreferenceCategory>
     <PreferenceCategory
+        android:key="pref_cat_proxy"
+        android:title="@string/pref_cat_proxy" >
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefs_enable_proxy"
+            android:summary="@string/prefs_enable_proxy_sry"
+            android:title="@string/prefs_enable_proxy" />
+
+        <EditTextPreference
+            android:defaultValue="localhost"
+            android:key="prefs_proxy_host"
+            android:dependency="prefs_enable_proxy"
+            android:title="@string/prefs_proxy_host" />
+
+        <EditTextPreference
+            android:defaultValue="8118"
+            android:key="prefs_proxy_port"
+            android:dependency="prefs_enable_proxy"
+            android:title="@string/prefs_proxy_port" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
         android:key="pref_cat_general"
         android:title="@string/pref_cat_general" >
 

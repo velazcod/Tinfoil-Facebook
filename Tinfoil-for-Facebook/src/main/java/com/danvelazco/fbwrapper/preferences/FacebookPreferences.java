@@ -18,8 +18,8 @@ package com.danvelazco.fbwrapper.preferences;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -37,15 +37,22 @@ public class FacebookPreferences extends PreferenceActivity {
     // Custom preferences
     public final static String MENU_DRAWER_SHOWED_OPENED = "drawer_shown_opened";
 
-    // Shared preferences
+    // Shared preference keys
     public final static String CAT_GENERAL = "pref_cat_general";
     public final static String ALLOW_CHECKINS = "prefs_allow_checkins";
     public final static String OPEN_LINKS_INSIDE = "prefs_open_links_inside";
+    public final static String KEY_PROXY_ENABLED = "prefs_enable_proxy";
+    public final static String KEY_PROXY_HOST = "prefs_proxy_host";
+    public final static String KEY_PROXY_PORT = "prefs_proxy_port";
     public final static String SITE_MODE = "prefs_mobile_site";
     public final static String SITE_MODE_AUTO = "auto";
     public final static String SITE_MODE_MOBILE = "mobile";
     public final static String SITE_MODE_DESKTOP = "desktop";
     public final static String ABOUT = "pref_about";
+
+    // Preferences
+    private EditTextPreference mPrefProxyHost = null;
+    private EditTextPreference mPrefProxyPort = null;
 
     /**
      * {@inheritDoc}
@@ -55,6 +62,41 @@ public class FacebookPreferences extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         addPreferencesFromResource(R.xml.main_preferences);
+
+        mPrefProxyHost = (EditTextPreference) findPreference(KEY_PROXY_HOST);
+        mPrefProxyHost.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String newProxyHostValue = (String) newValue;
+                mPrefProxyHost.setSummary(newProxyHostValue);
+                return true;
+            }
+        });
+
+        mPrefProxyPort = (EditTextPreference) findPreference(KEY_PROXY_PORT);
+        mPrefProxyPort.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String newProxyPortValue = (String) newValue;
+                mPrefProxyPort.setSummary(newProxyPortValue);
+                return true;
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mPrefProxyHost != null) {
+            mPrefProxyHost.setSummary(mPrefProxyHost.getText());
+        }
+        if (mPrefProxyPort != null) {
+            mPrefProxyPort.setSummary(mPrefProxyPort.getText());
+        }
     }
 
     /**
