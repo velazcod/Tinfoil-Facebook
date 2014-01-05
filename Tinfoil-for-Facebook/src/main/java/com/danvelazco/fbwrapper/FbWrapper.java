@@ -135,6 +135,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         findViewById(R.id.menu_item_refresh).setOnClickListener(buttonsListener);
         findViewById(R.id.menu_item_newsfeed).setOnClickListener(buttonsListener);
         findViewById(R.id.menu_items_notifications).setOnClickListener(buttonsListener);
+        findViewById(R.id.menu_item_messages).setOnClickListener(buttonsListener);
         findViewById(R.id.menu_share_this).setOnClickListener(buttonsListener);
         findViewById(R.id.menu_preferences).setOnClickListener(buttonsListener);
         findViewById(R.id.menu_about).setOnClickListener(buttonsListener);
@@ -323,6 +324,9 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
                 case R.id.menu_items_notifications:
                     loadNewPage(mDomainToUse + URL_PAGE_NOTIFICATIONS);
                     break;
+                case R.id.menu_item_messages:
+                	loadNewPage(mDomainToUse + URL_PAGE_MESSAGES);
+                	break;
                 case R.id.menu_share_this:
                     shareCurrentPage();
                     break;
