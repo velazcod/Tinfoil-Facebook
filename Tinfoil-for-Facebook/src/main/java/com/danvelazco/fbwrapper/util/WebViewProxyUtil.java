@@ -51,7 +51,7 @@ public class WebViewProxyUtil {
             return setProxyICS(webview, host, port);
         }
         // 4.1 or higher (JB)
-        else if (Build.VERSION.SDK_INT <= 16) {
+        else if (Build.VERSION.SDK_INT <= 18) {
             return setProxyJBPlus(webview, host, port);
         }
         // 4.4 or higher (KK)
