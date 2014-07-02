@@ -201,6 +201,11 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         // Un-register the connectivity changed receiver
         unregisterReceiver(mConnectivityReceiver);
 
+        if (mWebView != null) {
+            // Pass lifecycle events to the WebView
+            mWebView.onPause();
+        }
+
         // Stop synchronizing the CookieSyncManager
         mCookieSyncManager.stopSync();
 
