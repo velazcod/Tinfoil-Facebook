@@ -206,8 +206,10 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
             mWebView.onPause();
         }
 
-        // Stop synchronizing the CookieSyncManager
-        mCookieSyncManager.stopSync();
+        if (mCookieSyncManager != null) {
+            // Stop synchronizing the CookieSyncManager
+            mCookieSyncManager.stopSync();
+        }
 
         super.onPause();
     }
