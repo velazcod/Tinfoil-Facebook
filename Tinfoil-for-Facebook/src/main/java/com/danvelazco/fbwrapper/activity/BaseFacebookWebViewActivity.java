@@ -332,6 +332,19 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     }
 
     /**
+     * Used to block network requests of images in the {@link WebView}.
+     * <p/>
+     * See {@link WebSettings#setBlockNetworkImage(boolean)}
+     *
+     * @param blockImages {@link boolean}
+     */
+    protected void setBlockImages(boolean blockImages) {
+        if (mWebSettings != null) {
+            mWebSettings.setBlockNetworkImage(blockImages);
+        }
+    }
+
+    /**
      * Allows us to share the page that's currently opened
      * using the ACTION_SEND share intent.
      */

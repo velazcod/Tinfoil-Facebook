@@ -200,13 +200,15 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         // Get the URL to load, check-in and proxy settings
         boolean anyDomain = mSharedPreferences.getBoolean(FacebookPreferences.OPEN_LINKS_INSIDE, false);
         boolean allowCheckins = mSharedPreferences.getBoolean(FacebookPreferences.ALLOW_CHECKINS, false);
+        boolean blockImages = mSharedPreferences.getBoolean(FacebookPreferences.BLOCK_IMAGES, false);
         boolean enableProxy = mSharedPreferences.getBoolean(FacebookPreferences.KEY_PROXY_ENABLED, false);
         String proxyHost = mSharedPreferences.getString(FacebookPreferences.KEY_PROXY_HOST, null);
         String proxyPort = mSharedPreferences.getString(FacebookPreferences.KEY_PROXY_PORT, null);
 
-        // Set the flags for loading URLs and allowing geolocation
+        // Set the flags for loading URLs, allowing geolocation and loading network images
         setAllowCheckins(allowCheckins);
         setAllowAnyDomain(anyDomain);
+        setBlockImages(blockImages);
 
         if (enableProxy && !TextUtils.isEmpty(proxyHost) && !TextUtils.isEmpty(proxyPort)) {
             int proxyPortInt = -1;

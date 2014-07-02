@@ -29,6 +29,12 @@
             android:summary="@string/prefs_open_links_inside_sry"
             android:title="@string/prefs_open_links_inside" />
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefs_block_images"
+            android:summary="@string/prefs_block_images_sry"
+            android:title="@string/prefs_block_images" />
+
         <ListPreference
             android:defaultValue="auto"
             android:entries="@array/prefs_mobile_site_list"

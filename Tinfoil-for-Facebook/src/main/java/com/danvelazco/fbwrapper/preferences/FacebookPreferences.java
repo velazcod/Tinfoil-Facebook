@@ -41,6 +41,7 @@ public class FacebookPreferences extends PreferenceActivity {
     public final static String CAT_GENERAL = "pref_cat_general";
     public final static String ALLOW_CHECKINS = "prefs_allow_checkins";
     public final static String OPEN_LINKS_INSIDE = "prefs_open_links_inside";
+    public final static String BLOCK_IMAGES = "prefs_block_images";
     public final static String KEY_PROXY_ENABLED = "prefs_enable_proxy";
     public final static String KEY_PROXY_HOST = "prefs_proxy_host";
     public final static String KEY_PROXY_PORT = "prefs_proxy_port";

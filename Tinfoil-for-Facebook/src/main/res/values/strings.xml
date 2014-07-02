@@ -55,6 +55,8 @@
     <string name="prefs_allow_checkins_sry">Allows the mobile app to use coarse location in order to check-in to places</string>
     <string name="prefs_open_links_inside">Open links inside app</string>
     <string name="prefs_open_links_inside_sry">Any links being opened from the mobile app will open from within the app instead of the browser</string>
+    <string name="prefs_block_images">Block images</string>
+    <string name="prefs_block_images_sry">Save time and bandwidth by blocking all images loaded via the network.</string>
     <string name="pref_hide_ab">Auto-hide ActionBar</string>
     <string name="pref_hide_ab_sry">Automatically hide the ActionBar while scrolling down or not using. Scroll back up to make it appear again.</string>
     <string name="prefs_mobile_site">Mobile/Desktop site</string>
