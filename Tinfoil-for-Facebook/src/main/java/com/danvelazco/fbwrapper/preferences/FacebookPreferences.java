@@ -49,6 +49,7 @@ public class FacebookPreferences extends PreferenceActivity {
     public final static String SITE_MODE_AUTO = "auto";
     public final static String SITE_MODE_MOBILE = "mobile";
     public final static String SITE_MODE_DESKTOP = "desktop";
+    public final static String SITE_MODE_ZERO = "zero";
     public final static String ABOUT = "pref_about";
 
     // Preferences

@@ -233,13 +233,16 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         // Force or detect the site mode to load
         if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_MOBILE)) {
             // Force the webview config to mobile
-            setupFacebookWebViewConfig(true, true);
+            setupFacebookWebViewConfig(true, true, false);
         } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_DESKTOP)) {
             // Force the webview config to desktop mode
-            setupFacebookWebViewConfig(true, false);
+            setupFacebookWebViewConfig(true, false, false);
+        } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_ZERO)) {
+            // Force the webview config to desktop mode
+            setupFacebookWebViewConfig(false, true, true);
         } else {
             // Do not force, allow us to auto-detect what mode to use
-            setupFacebookWebViewConfig(false, true);
+            setupFacebookWebViewConfig(false, true, false);
         }
 
         // If we haven't shown the new menu drawer to the user, auto open it
@@ -264,11 +267,16 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      *               if false the 'mobile' flag will be ignored
      * @param mobile {@link boolean}
      *               whether to use the mobile or desktop site.
+     * @param facebookZero {@link boolean}
+     *               whether or not to use Facebook Zero
      */
-    private void setupFacebookWebViewConfig(boolean force, boolean mobile) {
+    private void setupFacebookWebViewConfig(boolean force, boolean mobile, boolean facebookZero) {
         if (force && !mobile) {
             // Force the desktop site to load
             mDomainToUse = INIT_URL_DESKTOP;
+        } else if (facebookZero) {
+            // If Facebook zero is set, use that
+            mDomainToUse = INIT_URL_FACEBOOK_ZERO;
         } else {
             // Otherwise, just load the mobile site for all devices
             mDomainToUse = INIT_URL_MOBILE;
