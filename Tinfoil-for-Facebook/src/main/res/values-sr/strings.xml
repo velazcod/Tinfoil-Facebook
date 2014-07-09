@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2013 Daniel Velazco
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <!-- App name -->
+    <string name="app_name">Омот за Фејсбук</string>
+    <string name="app_name_short">Тинфојл</string>
+
+    <!-- Labels -->
+    <string name="lbl_dialog_alert">Упозорење</string>
+    <string name="lbl_dialog_close">Затвори</string>
+    <string name="lbl_dialog_ok">У реду</string>
+    <string name="loading_video">Учитавам видео&#8230;</string>
+    <string name="upload_file_choose">Изабери фајл</string>
+    <string name="lbl_yes">Да</string>
+    <string name="lbl_no">Не</string>
+
+    <!-- Sharing -->
+    <string name="share_action">Подели текућу страницу</string>
+    <string name="share_action_subject">Фејсбук страница</string>
+
+    <!-- Context menu items -->
+    <string name="menu_desktop">Нормални</string>
+    <string name="menu_mobile">Мобилни</string>
+    <string name="menu_jump_top">Скочи на врх</string>
+    <string name="menu_news_feed">Новости</string>
+    <string name="menu_share">Подели</string>
+    <string name="menu_copy_url">Копирај везу</string>
+    <string name="menu_refresh">Освежи</string>
+    <string name="menu_notifications">Обавештења</string>
+    <string name="menu_messages">Поруке</string>
+    <string name="menu_preferences">Поставке</string>
+    <string name="menu_about">О програму</string>
+    <string name="menu_exit">Напусти</string>
+
+    <!-- Preferences -->
+    <string name="pref_cat_access">Приступ Фејсбуку</string>
+    <string name="pref_cat_general">Опште</string>
+    <string name="pref_cat_proxy">Проски</string>
+    <string name="prefs_allow_checkins">Дозволи чекирања</string>
+    <string name="prefs_allow_checkins_sry">Дозвољава апликацији да користи грубу локацију за чекирања на места</string>
+    <string name="prefs_open_links_inside">Отварај везе у апликацији</string>
+    <string name="prefs_open_links_inside_sry">Све отворене везе ће се отварати унутар апликације уместо у веб прегледачу</string>
+    <string name="prefs_block_images">Блокирај слике</string>
+    <string name="prefs_block_images_sry">Уштедите време и проток блокирањем свих слика учитаних преко мреже</string>
+    <string name="pref_hide_ab">Ауто-сакриј траку радњи</string>
+    <string name="pref_hide_ab_sry">Аутоматски сакрива траку радњи приликом неактивности или клизању на доле. Клизање на горе ће поново приказати траку радњи</string>
+    <string name="prefs_mobile_site">Мобилни/нормални приказ</string>
+    <string name="prefs_mobile_site_sry">Присилите употребу мобилног или нормалног сајта</string>
+    <string name="prefs_enable_proxy">Омогући прокси</string>
+    <string name="prefs_enable_proxy_sry">Подешавање проксија за мрежне захтеве</string>
+    <string name="prefs_proxy_host">Домаћин проксија</string>
+    <string name="prefs_proxy_port">Порт проксија</string>
+
+    <array name="prefs_mobile_site_list">
+        <item>Аутоматски</item>
+        <item>Присили мобилни сајт</item>
+        <item>Присили нормални сајт</item>
+        <item>Фејсбук Зиро</item>
+    </array>
+    <array name="prefs_mobile_site_list_values">
+        <item>auto</item>
+        <item>mobile</item>
+        <item>desktop</item>
+        <item>zero</item>
+    </array>
+
+    <string name="pref_about">О програму</string>
+    <string name="pref_about_sry">Програмер: Данијел Веласо (Daniel Velazco). Кликните за још информација</string>
+    <!-- End preferences -->
+
+    <!-- Orbot related strings -->
+    <string name="market_orbot">market://search?q=pname:org.torproject.android</string>
+    <string name="start_orbot_">Да покренем Орбот?</string>
+    <string name="orbot_not_running_start_it_question">Орбот није покренут. Желите ли да га покренем и повежем на Тор?</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_checkins_disables">\nФејсбук покушава да приступи вашој локацији.\n
+\nВероватно покушавате да се „чекирате“ (пријавите) на одређено место. Опционе дозволе за ово су подразумевано онемогућене.\n
+\nОву могућност можете укључити у Поставкама, опција „Дозволи чекирања“\n
+\nТинфојл дели само „грубу локацију“, што значи да не користи ГПС већ само мрежну и бежичну локацију, да би се сачувала батерија.\n
+\n</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_about">\nПрограмер: Данијел Веласо.
+\nvelazcod@gmail.com
+\nhttp://www.danvelazco.com\n
+\n
+\nИзворни кôд:
+\nhttps://github.com/velazcod/Tinfoil-Facebook\n
+\n
+\nОва апликација је за оне којима је потребан заштитни омот за пријаву на Фејсбук. Апликација прави „кутију за песак“ (заштитну изолацију) у којој покреће Фејсбуков мобилни вебсајт. Захтеване су INTERNET дозволе а ако имате сумњи везано за то, слободно погледајте изворни кôд. Дозволе за приступ локацији су потребне али позиционирање се не користи ако вам је поставка „Дозволи чекирања“ искључена.\n
+\n</string>
+
+</resources>
