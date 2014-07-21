@@ -233,13 +233,16 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         // Force or detect the site mode to load
         if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_MOBILE)) {
             // Force the webview config to mobile
-            setupFacebookWebViewConfig(true, true, false);
+            setupFacebookWebViewConfig(true, true, false, false);
         } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_DESKTOP)) {
             // Force the webview config to desktop mode
-            setupFacebookWebViewConfig(true, false, false);
+            setupFacebookWebViewConfig(true, false, false, false);
         } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_ZERO)) {
-            // Force the webview config to desktop mode
-            setupFacebookWebViewConfig(false, true, true);
+            // Force the webview config to zero mode
+            setupFacebookWebViewConfig(false, true, false, true);
+        } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_BASIC)) {
+            // Force the webview to load the Basic HTML Mobile site
+            setupFacebookWebViewConfig(true, true, true, false);
         } else {
             // Do not force, allow us to auto-detect what mode to use
             setupFacebookWebViewConfig(false, true, false);
@@ -270,7 +273,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      * @param facebookZero {@link boolean}
      *               whether or not to use Facebook Zero
      */
-    private void setupFacebookWebViewConfig(boolean force, boolean mobile, boolean facebookZero) {
+    private void setupFacebookWebViewConfig(boolean force, boolean mobile, boolean facebookBasic, boolean facebookZero) {
         if (force && !mobile) {
             // Force the desktop site to load
             mDomainToUse = INIT_URL_DESKTOP;
@@ -283,7 +286,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         }
 
         // Set the user agent depending on config
-        setUserAgent(force, mobile);
+        setUserAgent(force, mobile, facebookBasic);
     }
 
     /**
