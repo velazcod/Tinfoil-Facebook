@@ -70,12 +70,14 @@
         <item>Auto</item>
         <item>Force mobile site</item>
         <item>Force desktop site</item>
+        <item>Force basic site</item>
         <item>Facebook Zero</item>
     </array>
     <array name="prefs_mobile_site_list_values">
         <item>auto</item>
         <item>mobile</item>
         <item>desktop</item>
+        <item>basic</item>
         <item>zero</item>
     </array>
 
