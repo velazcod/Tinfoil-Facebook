@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2013 Daniel Velazco
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_drawer_right"
     android:layout_width="@dimen/navigation_drawer_width"
     android:layout_height="match_parent"
@@ -26,314 +24,320 @@
     android:focusableInTouchMode="false"
     android:background="@color/light_gray">
 
-    <!-- Title bar -->
-    <RelativeLayout
-        android:id="@+id/menu_title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:background="@color/mild_gray">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_app_icon"
-            android:layout_width="@dimen/navigation_drawer_app_icon_size"
-            android:layout_height="@dimen/navigation_drawer_app_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_launcher"
-            android:contentDescription="@string/app_name"/>
+        <!-- Title bar -->
+        <RelativeLayout
+            android:id="@+id/menu_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:background="@color/mild_gray">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_app_icon"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            android:fontFamily="sans-serif"
-            android:textSize="@dimen/navigation_drawer_items_text_size"
-            android:textColor="@android:color/white"
-            android:text="@string/app_name"/>
+            <ImageView
+                android:id="@+id/iv_app_icon"
+                android:layout_width="@dimen/navigation_drawer_app_icon_size"
+                android:layout_height="@dimen/navigation_drawer_app_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_launcher"
+                android:contentDescription="@string/app_name" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_app_icon"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                android:fontFamily="sans-serif"
+                android:textSize="@dimen/navigation_drawer_items_text_size"
+                android:textColor="@android:color/white"
+                android:text="@string/app_name" />
 
-    <!-- Menu item: Jump to top -->
-    <RelativeLayout
-        android:id="@+id/menu_item_jump_to_top"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_jump_to_top"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_upload"
-            android:contentDescription="@string/menu_jump_top"/>
+        <!-- Menu item: Jump to top -->
+        <RelativeLayout
+            android:id="@+id/menu_item_jump_to_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tv_jump_to_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_jump_to_top"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_jump_top"/>
+            <ImageView
+                android:id="@+id/iv_jump_to_top"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_upload"
+                android:contentDescription="@string/menu_jump_top" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_jump_to_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_jump_to_top"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_jump_top" />
 
-    <!-- Menu item: Refresh -->
-    <RelativeLayout
-        android:id="@+id/menu_item_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_refresh"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_rotate"
-            android:contentDescription="@string/menu_refresh" />
+        <!-- Menu item: Refresh -->
+        <RelativeLayout
+            android:id="@+id/menu_item_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tv_refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_refresh"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_refresh"/>
+            <ImageView
+                android:id="@+id/iv_refresh"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_rotate"
+                android:contentDescription="@string/menu_refresh" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_refresh"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_refresh" />
 
-    <!-- Menu item: News feed -->
-    <RelativeLayout
-        android:id="@+id/menu_item_newsfeed"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_newsfeed"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_view"
-            android:contentDescription="@string/menu_refresh" />
+        <!-- Menu item: News feed -->
+        <RelativeLayout
+            android:id="@+id/menu_item_newsfeed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tv_newsfeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_newsfeed"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_news_feed"/>
+            <ImageView
+                android:id="@+id/iv_newsfeed"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_view"
+                android:contentDescription="@string/menu_refresh" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_newsfeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_newsfeed"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_news_feed" />
 
-    <!-- Menu item: Notifications -->
-    <RelativeLayout
-        android:id="@+id/menu_items_notifications"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_notifications"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_info_details"
-            android:contentDescription="@string/menu_notifications" />
+        <!-- Menu item: Notifications -->
+        <RelativeLayout
+            android:id="@+id/menu_items_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tv_notifications"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_notifications"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_notifications"/>
+            <ImageView
+                android:id="@+id/iv_notifications"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_info_details"
+                android:contentDescription="@string/menu_notifications" />
 
-    </RelativeLayout>
-    
-    <!-- Menu item: Messages -->
-    <RelativeLayout
-        android:id="@+id/menu_item_messages"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+            <TextView
+                android:id="@+id/tv_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_notifications"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_notifications" />
 
-        <ImageView
-            android:id="@+id/iv_messages"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_edit"
-            android:contentDescription="@string/menu_messages" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_messages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_messages"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_messages"/>
+        <!-- Menu item: Messages -->
+        <RelativeLayout
+            android:id="@+id/menu_item_messages"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_messages"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_edit"
+                android:contentDescription="@string/menu_messages" />
 
-    <!-- Menu item: Share this page -->
-    <RelativeLayout
-        android:id="@+id/menu_share_this"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+            <TextView
+                android:id="@+id/tv_messages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_messages"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_messages" />
 
-        <ImageView
-            android:id="@+id/iv_share_this"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_share"
-            android:contentDescription="@string/menu_refresh" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_share_this"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_share_this"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_share"/>
+        <!-- Menu item: Share this page -->
+        <RelativeLayout
+            android:id="@+id/menu_share_this"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_share_this"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_share"
+                android:contentDescription="@string/menu_refresh" />
 
-    <!-- Menu item: Preferences -->
-    <RelativeLayout
-        android:id="@+id/menu_preferences"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+            <TextView
+                android:id="@+id/tv_share_this"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_share_this"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_share" />
 
-        <ImageView
-            android:id="@+id/iv_preferences"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_preferences"
-            android:contentDescription="@string/menu_refresh" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_preferences"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_preferences"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_preferences"/>
+        <!-- Menu item: Preferences -->
+        <RelativeLayout
+            android:id="@+id/menu_preferences"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_preferences"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:contentDescription="@string/menu_refresh" />
 
-    <!-- Menu item: About -->
-    <RelativeLayout
-        android:id="@+id/menu_about"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+            <TextView
+                android:id="@+id/tv_preferences"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_preferences"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_preferences" />
 
-        <ImageView
-            android:id="@+id/iv_about"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_help"
-            android:contentDescription="@string/menu_refresh" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_about"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_about"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_about"/>
+        <!-- Menu item: About -->
+        <RelativeLayout
+            android:id="@+id/menu_about"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_about"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_help"
+                android:contentDescription="@string/menu_refresh" />
 
-    <!-- Menu item: Share this page -->
-    <RelativeLayout
-        android:id="@+id/menu_kill"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_drawer_items_height"
-        android:padding="@dimen/navigation_drawer_items_padding"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+            <TextView
+                android:id="@+id/tv_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_about"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_about" />
 
-        <ImageView
-            android:id="@+id/iv_kill"
-            android:layout_width="@dimen/navigation_drawer_icon_size"
-            android:layout_height="@dimen/navigation_drawer_icon_size"
-            android:layout_centerVertical="true"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:contentDescription="@string/menu_refresh" />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_kill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_kill"
-            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-            android:gravity="left"
-            style="@style/MenuDrawerTextStyle"
-            android:text="@string/menu_exit"/>
+        <!-- Menu item: Share this page -->
+        <RelativeLayout
+            android:id="@+id/menu_kill"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:padding="@dimen/navigation_drawer_items_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:selectableItemBackground">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_kill"
+                android:layout_width="@dimen/navigation_drawer_icon_size"
+                android:layout_height="@dimen/navigation_drawer_icon_size"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:contentDescription="@string/menu_refresh" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tv_kill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_kill"
+                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+                android:gravity="left"
+                style="@style/MenuDrawerTextStyle"
+                android:text="@string/menu_exit" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
