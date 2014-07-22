@@ -83,6 +83,8 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     // Mobile user agent (Mobile user agent from a Google Nexus 5 running Android 4.4.2
     protected static final String USER_AGENT_MOBILE = "Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) " +
             "AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36";
+// Firefox for Android user agent, it brings up a basic version of the site. Halfway between touch site and zero site.
+	protected static final String USER_AGENT_BASIC = "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0";
 
     // Members
     protected ConnectivityManager mConnectivityManager = null;
@@ -269,15 +271,17 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      *               true if we should use a custom user agent for mobile devices,
      *               false if not.
      */
-    protected void setUserAgent(boolean force, boolean mobile) {
-        if (force && mobile) {
+    protected void setUserAgent(boolean force, boolean mobile boolean facebookBasic) {
+        if (force && mobile && !facebookBasic) {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 mWebSettings.setUserAgentString(USER_AGENT_MOBILE_OLD);
             } else {
                 mWebSettings.setUserAgentString(USER_AGENT_MOBILE);
             }
-        } else if (force && !mobile) {
+        } else if (force && !mobile && !facebookBasic) {
             mWebSettings.setUserAgentString(USER_AGENT_DESKTOP);
+        } else if (force && mobile && facebookBasic) {
+            mWebSettings.setUserAgentString(USER__AGENT_BASIC);
         } else {
             mWebSettings.setUserAgentString(null);
         }
