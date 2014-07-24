@@ -24,13 +24,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
@@ -38,6 +44,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import com.danvelazco.fbwrapper.R;
 import com.danvelazco.fbwrapper.util.Logger;
 import com.danvelazco.fbwrapper.util.OrbotHelper;
@@ -45,8 +52,11 @@ import com.danvelazco.fbwrapper.util.WebViewProxyUtil;
 import com.danvelazco.fbwrapper.webview.FacebookWebChromeClient;
 import com.danvelazco.fbwrapper.webview.FacebookWebView;
 import com.danvelazco.fbwrapper.webview.FacebookWebViewClient;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * Base activity that uses a {@link FacebookWebView} to load the Facebook
@@ -64,6 +74,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     // Constants
     private final static String LOG_TAG = "BaseFacebookWebViewActivity";
     protected final static int RESULT_CODE_FILE_UPLOAD = 1001;
+    private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2981279;
     protected final static String INIT_URL_MOBILE = "https://m.facebook.com";
     protected final static String INIT_URL_DESKTOP = "https://www.facebook.com";
     protected final static String INIT_URL_FACEBOOK_ZERO = "https://0.facebook.com";
@@ -94,6 +105,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected WebSettings mWebSettings = null;
     protected ValueCallback<Uri> mUploadMessage = null;
     private boolean mCreatingActivity = true;
+    private String mPendingImageUrlToSave = null;
 
     /**
      * BroadcastReceiver to handle ConnectivityManager.CONNECTIVITY_ACTION intent action.
@@ -159,6 +171,9 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
 
         // Create a CookieSyncManager instance and keep a reference of it
         mCookieSyncManager = CookieSyncManager.createInstance(this);
+
+        //
+        registerForContextMenu(mWebView);
 
         // Have the activity open the proper URL
         onWebViewInit(savedInstanceState);
@@ -233,6 +248,35 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     public void onConfigurationChanged(Configuration newConfig) {
         // Handle orientation configuration changes
         super.onConfigurationChanged(newConfig);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+        WebView.HitTestResult result = mWebView.getHitTestResult();
+        switch (result.getType()) {
+            case WebView.HitTestResult.IMAGE_TYPE:
+                showLongPressedImageMenu(menu, result.getExtra());
+                break;
+            case WebView.HitTestResult.SRC_ANCHOR_TYPE:
+                showLongPressedLinkMenu(menu, result.getExtra());
+                break;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case ID_CONTEXT_MENU_SAVE_IMAGE:
+                saveImageToDisk(mPendingImageUrlToSave);
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     /**
@@ -366,6 +410,33 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         i.putExtra(Intent.EXTRA_SUBJECT, R.string.share_action_subject);
         i.putExtra(Intent.EXTRA_TEXT, mWebView.getUrl());
         startActivity(Intent.createChooser(i, getString(R.string.share_action)));
+    }
+
+    /**
+     * Show a context menu to allow the user to perform actions specifically related to the link they just long pressed
+     * on.
+     *
+     * @param menu
+     *         {@link ContextMenu}
+     * @param url
+     *         {@link String}
+     */
+    private void showLongPressedLinkMenu(ContextMenu menu, String url) {
+        // TODO: needs to be implemented, add ability to open site with external browser
+    }
+
+    /**
+     * Show a context menu to allow the user to perform actions specifically related to the image they just long pressed
+     * on.
+     *
+     * @param menu
+     *         {@link ContextMenu}
+     * @param imageUrl
+     *         {@link String}
+     */
+    private void showLongPressedImageMenu(ContextMenu menu, String imageUrl) {
+        mPendingImageUrlToSave = imageUrl;
+        menu.add(0, ID_CONTEXT_MENU_SAVE_IMAGE, 0, getString(R.string.lbl_save_image));
     }
 
     /**
@@ -532,6 +603,72 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * Save the image on the specified URL to disk
+     *
+     * @param imageUrl
+     *         {@link String}
+     */
+    private void saveImageToDisk(String imageUrl) {
+        if (imageUrl != null) {
+            Picasso.with(this).load(imageUrl).into(saveImageTarget);
+        }
+    }
+
+    private Target saveImageTarget = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
+            (new SaveImageTask()).execute(bitmap);
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable drawable) {
+            Toast.makeText(BaseFacebookWebViewActivity.this, getString(R.string.txt_save_image_failed),
+                    Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable drawable) {
+            // Not implemented
+        }
+    };
+
+    private class SaveImageTask extends AsyncTask<Bitmap, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Bitmap... images) {
+            Bitmap bitmap = images[0];
+            File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File imageFile = new File(directory, System.currentTimeMillis() + ".jpg");
+            try {
+                if (imageFile.createNewFile()) {
+                    FileOutputStream ostream = new FileOutputStream(imageFile);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 75, ostream);
+                    ostream.close();
+
+                    // Ping the media scanner
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(imageFile)));
+
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                Toast.makeText(BaseFacebookWebViewActivity.this, getString(R.string.txt_save_image_success),
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(BaseFacebookWebViewActivity.this, getString(R.string.txt_save_image_failed),
+                        Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }

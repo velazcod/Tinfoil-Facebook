@@ -28,6 +28,7 @@
     <string name="upload_file_choose">Choose file</string>
     <string name="lbl_yes">Yes</string>
     <string name="lbl_no">No</string>
+    <string name="lbl_save_image">Save image</string>
 
     <!-- Sharing -->
     <string name="share_action">Share current page</string>
@@ -84,6 +85,9 @@
     <string name="pref_about">About</string>
     <string name="pref_about_sry">Written by Daniel Velazco. Click here for more information.</string>
     <!-- End preferences -->
+
+    <string name="txt_save_image_success">Image downloaded and saved to download folder</string>
+    <string name="txt_save_image_failed">Could not save image</string>
 
     <!-- Orbot related strings -->
     <string name="market_orbot">market://search?q=pname:org.torproject.android</string>
