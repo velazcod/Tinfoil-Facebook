@@ -83,8 +83,8 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     // Mobile user agent (Mobile user agent from a Google Nexus 5 running Android 4.4.2
     protected static final String USER_AGENT_MOBILE = "Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) " +
             "AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36";
-// Firefox for Android user agent, it brings up a basic version of the site. Halfway between touch site and zero site.
-	protected static final String USER_AGENT_BASIC = "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0";
+    // Firefox for Android user agent, it brings up a basic version of the site. Halfway between touch site and zero site.
+    protected static final String USER_AGENT_BASIC = "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0";
 
     // Members
     protected ConnectivityManager mConnectivityManager = null;
