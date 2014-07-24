@@ -97,10 +97,6 @@ public class FacebookWebView extends WebView {
     @Override
     public void destroy() {
         mInitialized = false;
-        mContext = null;
-        mWebSettings = null;
-        mWebViewClient = null;
-        mWebChromeClient = null;
 
         if (mWebChromeClient != null) {
             mWebChromeClient.destroy();
@@ -109,6 +105,11 @@ public class FacebookWebView extends WebView {
         if (mWebViewClient != null) {
             mWebViewClient.destroy();
         }
+
+        mContext = null;
+        mWebSettings = null;
+        mWebViewClient = null;
+        mWebChromeClient = null;
 
         super.destroy();
     }
