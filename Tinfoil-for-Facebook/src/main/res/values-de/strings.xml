@@ -2,7 +2,7 @@
 <!--
     Copyright (C) 2013 Daniel Velazco
 
-    German Translation (C) 2013 averageapps
+    German Translation (C) 2014 <averageapps@gmail.com>
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -26,6 +26,15 @@
     <string name="lbl_dialog_alert">Hinweis</string>
     <string name="lbl_dialog_close">Schließen</string>
     <string name="lbl_dialog_ok">OK</string>
+    <string name="loading_video">Lade Video&#8230;</string>
+    <string name="upload_file_choose">Datei auswählen</string>
+    <string name="lbl_yes">Ja</string>
+    <string name="lbl_no">Nein</string>
+    <string name="lbl_save_image">Bild speichern</string>
+
+    <!-- Sharing -->
+    <string name="share_action">Teile diese Seite</string>
+    <string name="share_action_subject">Facebook-Seite</string>
 
     <!-- Context menu items -->
     <string name="menu_desktop">Desktop</string>
@@ -36,46 +45,64 @@
     <string name="menu_copy_url">URL kopieren</string>
     <string name="menu_refresh">Aktualisieren</string>
     <string name="menu_notifications">Benachrichtigungen</string>
+    <string name="menu_messages">Nachrichten</string>
     <string name="menu_preferences">Einstellungen</string>
-    <string name="menu_about">Über</string>
+    <string name="menu_about">Über Tinfoil</string>
     <string name="menu_exit">Beenden</string>
 
     <!-- Preferences -->
     <string name="pref_cat_access">Zugriff</string>
     <string name="pref_cat_general">Allgemein</string>
+    <string name="pref_cat_proxy">Proxy</string>
     <string name="prefs_allow_checkins">Einchecken erlauben</string>
     <string name="prefs_allow_checkins_sry">Erlaubt der App, den ungefähren Standort zu benutzen, um mit Facebook einchecken zu können</string>
     <string name="prefs_open_links_inside">Links in der App öffnen</string>
-    <string name="prefs_open_links_inside_sry">Links werden direkt in der App geöffnet, nicht in einem externen Browser</string>
-    <string name="prefs_mobile_site">Mobile oder Desktop-Seite</string>
-    <string name="prefs_mobile_site_sry">Nutzung der mobilen oder der Desktop-Version von Facebook erzwingen.</string>
+    <string name="prefs_open_links_inside_sry">Links direkt in der App öffnen, nicht in einem externen Browser</string>
+    <string name="prefs_block_images">Blockiere Bilder</string>
+    <string name="prefs_block_images_sry">Spare Zeit und Datenvolumen dadurch, dass keine Bilder geladen werden.</string>
+    <string name="pref_hide_ab">Dynamische Aktionsleiste</string>
+    <string name="pref_hide_ab_sry">Blende automatisch beim herunterscrollen die Aktionsleiste aus. Hochscrollen, um sie wieder einzublenden.</string>
+    <string name="prefs_mobile_site">Anzeige-Modus</string>
+    <string name="prefs_mobile_site_sry">Nutzung der Desktop-Version oder verschiedener Mobil-Versionen von Facebook in der App erzwingen.</string>
+    <string name="prefs_enable_proxy">Proxy verwenden</string>
+    <string name="prefs_enable_proxy_sry">Konfiguriere Proxy-Server für Netzwerkabfragen.</string>
+    <string name="prefs_proxy_host">Host</string>
+    <string name="prefs_proxy_port">Port</string>
 
     <array name="prefs_mobile_site_list">
         <item>Automatisch</item>
-        <item>Erzwinge mobile Version</item>
-        <item>Erzwinge Desktop-Version</item>
+        <item>Mobile Version</item>
+        <item>Desktop-Version</item>
+        <item>Minimale Version</item>
         <item>Facebook Zero</item>
     </array>
     <array name="prefs_mobile_site_list_values">
         <item>auto</item>
         <item>mobile</item>
         <item>desktop</item>
+        <item>basic</item>
         <item>zero</item>
     </array>
 
-    <string name="pref_hide_ab">ActionBar ausblenden</string>
-    <string name="pref_hide_ab_sry">Blende die ActionBar automatisch aus, wenn sie nicht benutzt wird. Hochscrollen, um sie wieder einzublenden.</string>
-    <string name="pref_logcat">System-Logging</string>
-    <string name="pref_logcat_sry">System-Logging aktivieren. Hilfreich, um dem Entwickler bei der Problembehebung zu helfen</string>
-    <string name="pref_about">Über</string>
+    <string name="pref_about">Über Tinfoil</string>
     <string name="pref_about_sry">Geschrieben von Daniel Velazco. Hier klicken für weitere Infos.</string>
     <!-- End preferences -->
+
+    <string name="txt_save_image_success">Bild heruntergeladen und im "Downloads"-Ordner gespeichert</string>
+    <string name="txt_save_image_failed">Bild kann nicht gespeichert werden</string>
+
+    <!-- Orbot related strings -->
+    <string name="market_orbot">market://search?q=pname:org.torproject.android</string>
+    <string name="start_orbot_">Starte Orbot?</string>
+    <string name="orbot_not_running_start_it_question">Orbot läuft momentan anscheinend nicht. Orbot starten und mit dem TOR-Netzwerk Verbinden?</string>
+
     <!-- Text used on the "about" dialog -->
     <string name="txt_checkins_disables">\nFacebook versucht, auf deinen Standort zuzugreifen.\n
 \nWahrscheinlich versuchst du gerade an einem bestimmten Ort \"einzuchecken\". Tinfoil hat eine optionale Berechtigung dafür, die aber standardmäßig deaktiviert ist.\n
 \nDu kannst diese Funktion in den Einstellungen unter \"Einchecken erlauben\" aktivieren.\n
 \nTinfoil bestimmt den Standort nur durch W-LAN und Funknetz, um Akku zu sparen. Das ist allerdings nicht so genau wie die echte GPS-Position.\n
 \n</string>
+
     <!-- Text used on the "about" dialog -->
     <string name="txt_about">\nEntwickelt von Daniel Velazco.
 \nvelazcod@gmail.com
@@ -84,7 +111,8 @@
 \nQuellcode:
 \nhttps://github.com/velazcod/Tinfoil-Facebook\n
 \n
-\nDiese App ist für Leute, die einen Aluhut (englisch: \"tin foil hat\") für Facebook brauchen. Sie benutzt eine Sandbox (isolierter Bereich ohne Zugriff auf persönliche Daten, z.B. Adressbuch), in der die mobile Internetseite von Facebook läuft. Benötigt die Berechtigung für Internetzugriff, und wer skeptisch ist, kann sich gerne den Quellcode ansehen (s. oben). Die Berechtigung für Standortbestimmung wird nur benutzt, falls \"Einchecken erlauben\" in den Einstellungen aktiviert ist.\n
-\n</string>
+\nDiese App ist für Leute, die einen Alu-Hut (englisch: \"tin foil hat\") für Facebook brauchen. Sie benutzt eine Sandbox (isolierter Bereich ohne Zugriff auf persönliche Daten, z.B. Adressbuch), in der die mobile Internetseite von Facebook läuft.
+\nDie Berechtigung für Standortbestimmung wird nur benutzt, falls \"Einchecken erlauben\" in den Einstellungen aktiviert ist.\n
+\nWer skeptisch ist, kann sich gerne den Quellcode ansehen (siehe oben).\n</string>
 
 </resources>
