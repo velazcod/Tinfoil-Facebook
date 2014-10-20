@@ -620,7 +620,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     private Target saveImageTarget = new Target() {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
-            (new SaveImageTask()).execute(bitmap);
+            (new SaveImageTask()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, bitmap);
         }
 
         @Override
