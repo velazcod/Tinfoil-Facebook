@@ -16,8 +16,10 @@
 
 package com.danvelazco.fbwrapper.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,6 +42,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
@@ -74,6 +77,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     // Constants
     private final static String LOG_TAG = "BaseFacebookWebViewActivity";
     protected final static int RESULT_CODE_FILE_UPLOAD = 1001;
+    protected final static int RESULT_CODE_FILE_UPLOAD_LOLLIPOP = 2001;
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2981279;
     protected final static String INIT_URL_MOBILE = "https://m.facebook.com";
     protected final static String INIT_URL_DESKTOP = "https://www.facebook.com";
@@ -104,6 +108,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected ProgressBar mProgressBar = null;
     protected WebSettings mWebSettings = null;
     protected ValueCallback<Uri> mUploadMessage = null;
+    protected ValueCallback<Uri[]> mUploadMessageLollipop = null;
     private boolean mCreatingActivity = true;
     private String mPendingImageUrlToSave = null;
 
@@ -490,6 +495,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     /**
      * {@inheritDoc}
      */
+    @SuppressLint("NewApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         switch (requestCode) {
@@ -504,6 +510,14 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
                         : intent.getData();
                 mUploadMessage.onReceiveValue(result);
                 mUploadMessage = null;
+                break;
+            case RESULT_CODE_FILE_UPLOAD_LOLLIPOP:
+                if (null == mUploadMessageLollipop) {
+                    return;
+                }
+                mUploadMessageLollipop.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode,
+                        intent));
+                mUploadMessageLollipop = null;
                 break;
         }
     }
@@ -556,6 +570,27 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
                 Intent.createChooser(i,
                         getString(R.string.upload_file_choose)),
                 RESULT_CODE_FILE_UPLOAD);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressLint("NewApi")
+    @Override
+    public boolean openFileChooser(ValueCallback<Uri[]> filePathCallback,
+                                   WebChromeClient.FileChooserParams fileChooserParams) {
+        try {
+            Logger.d(LOG_TAG, "openFileChooser()");
+            mUploadMessageLollipop = filePathCallback;
+            startActivityForResult(
+                    Intent.createChooser(fileChooserParams.createIntent(),
+                            getString(R.string.upload_file_choose)),
+                    RESULT_CODE_FILE_UPLOAD_LOLLIPOP);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            mUploadMessageLollipop = null;
+            return false;
+        }
     }
 
     /**
