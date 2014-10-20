@@ -25,4 +25,8 @@
     <color name="mild_gray">#888888</color>
     <color name="dark_gray">#555555</color>
 
+    <color name="indigo_primary_500">#3f51b5</color>
+    <color name="indigo_primary_700">#303f9f</color>
+    <color name="indigo_accent_400">#5c6bc0</color>
+
 </resources>
