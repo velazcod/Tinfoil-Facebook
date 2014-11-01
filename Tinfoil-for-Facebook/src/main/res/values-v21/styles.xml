@@ -22,16 +22,16 @@
     <style name="AppBaseTheme" parent="android:Theme.Material.Light.NoActionBar">
         <!-- API 21 theme customizations can go here. -->
 
-        <item name="android:colorPrimary">@color/indigo_primary_500</item>
-        <item name="android:colorPrimaryDark">@color/indigo_primary_700</item>
-        <item name="android:colorAccent">@color/indigo_accent_400</item>
+        <item name="android:colorPrimary">@color/blue_primary</item>
+        <item name="android:colorPrimaryDark">@color/blue_primary_dark</item>
+        <item name="android:colorAccent">@color/blue_accent</item>
     </style>
 
     <!-- Base Preferences theme -->
     <style name="AppBasePreferencesTheme" parent="android:Theme.Material.Light.DarkActionBar">
-        <item name="android:colorPrimary">@color/indigo_primary_500</item>
-        <item name="android:colorPrimaryDark">@color/indigo_primary_700</item>
-        <item name="android:colorAccent">@color/indigo_accent_400</item>
+        <item name="android:colorPrimary">@color/blue_primary</item>
+        <item name="android:colorPrimaryDark">@color/blue_primary_dark</item>
+        <item name="android:colorAccent">@color/blue_accent</item>
     </style>
 
 </resources>
