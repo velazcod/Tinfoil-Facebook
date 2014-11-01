@@ -1,4 +1,3 @@
-
 Problems:
 
 * It would be nice to run this as single instance, but file upload gets broken due to
@@ -14,5 +13,4 @@ Problems:
 
 New features to keep in mind:
 
-- Multiple accounts?
-
+* Multiple accounts?
