@@ -51,6 +51,7 @@ public class FacebookPreferences extends PreferenceActivity {
     public final static String SITE_MODE_DESKTOP = "desktop";
     public final static String SITE_MODE_BASIC = "basic";
     public final static String SITE_MODE_ZERO = "zero";
+    public final static String SITE_MODE_ONION = "onion";
     public final static String ABOUT = "pref_about";
 
     // Preferences

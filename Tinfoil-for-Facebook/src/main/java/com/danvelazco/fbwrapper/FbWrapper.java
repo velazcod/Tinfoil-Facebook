@@ -230,22 +230,26 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         String mode = mSharedPreferences.getString(FacebookPreferences.SITE_MODE,
                 FacebookPreferences.SITE_MODE_AUTO);
 
+        // TODO: time to fix this mess
         // Force or detect the site mode to load
         if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_MOBILE)) {
             // Force the webview config to mobile
-            setupFacebookWebViewConfig(true, true, false, false);
+            setupFacebookWebViewConfig(true, true, false, false, false);
         } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_DESKTOP)) {
             // Force the webview config to desktop mode
-            setupFacebookWebViewConfig(true, false, false, false);
+            setupFacebookWebViewConfig(true, false, false, false, false);
         } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_ZERO)) {
             // Force the webview config to zero mode
-            setupFacebookWebViewConfig(false, true, false, true);
+            setupFacebookWebViewConfig(false, true, false, true, false);
         } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_BASIC)) {
             // Force the webview to load the Basic HTML Mobile site
-            setupFacebookWebViewConfig(true, true, true, false);
+            setupFacebookWebViewConfig(true, true, true, false, false);
+        } else if (mode.equalsIgnoreCase(FacebookPreferences.SITE_MODE_ONION)) {
+            // Force the webview to load Facebook via Tor (onion network)
+            setupFacebookWebViewConfig(true, true, false, false, true);
         } else {
             // Do not force, allow us to auto-detect what mode to use
-            setupFacebookWebViewConfig(false, true, false, false);
+            setupFacebookWebViewConfig(false, true, false, false, false);
         }
 
         // If we haven't shown the new menu drawer to the user, auto open it
@@ -273,13 +277,18 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      * @param facebookZero {@link boolean}
      *               whether or not to use Facebook Zero
      */
-    private void setupFacebookWebViewConfig(boolean force, boolean mobile, boolean facebookBasic, boolean facebookZero) {
+    // TODO: time to fix this mess
+    private void setupFacebookWebViewConfig(boolean force, boolean mobile, boolean facebookBasic,
+                                            boolean facebookZero, boolean facebookOnion) {
         if (force && !mobile) {
             // Force the desktop site to load
             mDomainToUse = INIT_URL_DESKTOP;
         } else if (facebookZero) {
             // If Facebook zero is set, use that
             mDomainToUse = INIT_URL_FACEBOOK_ZERO;
+        } else if (facebookOnion) {
+            // If the Onion domain is set, use that
+            mDomainToUse = INIT_URL_FACEBOOK_ONION;
         } else {
             // Otherwise, just load the mobile site for all devices
             mDomainToUse = INIT_URL_MOBILE;
