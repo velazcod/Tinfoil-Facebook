@@ -37,7 +37,7 @@
     <string name="pref_cat_general">Genel</string>
     <string name="pref_cat_proxy">Vekil sunucu</string>
     <string name="prefs_allow_checkins">Yer bildirimlerine izin ver</string>
-    <string name="prefs_allow_checkins_sry">Yer bildirimi yaparken Facebook'un konumunuzu tahmin etmesine izin verir.</string>
+    <string name="prefs_allow_checkins_sry">Yer bildirimi yaparken Facebook\'un konumunuzu tahmin etmesine izin verir.</string>
     <string name="prefs_open_links_inside">Bağlantıları uygulama içinde aç</string>
     <string name="prefs_open_links_inside_sry">Facebook dışındaki bir adrese dokunduğunuzda adresi telefonun kendi tarayıcısı yerine uygulama içinde açar.</string>
     <string name="prefs_block_images">Resimleri engelle</string>
@@ -78,7 +78,7 @@
     <!-- Orbot related strings -->
     <string name="market_orbot">market://search?q=pname:org.torproject.android</string>
     <string name="start_orbot_">Orbot başlatılsın mım?</string>
-    <string name="orbot_not_running_start_it_question">Görünüşe göre Orbot çalışmıyor. Başlatmak ve Tor'a bağlanmak ister misiniz?</string>
+    <string name="orbot_not_running_start_it_question">Görünüşe göre Orbot çalışmıyor. Başlatmak ve Tor\'a bağlanmak ister misiniz?</string>
 
     <!-- Text used on the "about" dialog -->
     <string name="txt_checkins_disables">\nFacebook konumunuza erişmek istiyor.\n
@@ -95,7 +95,7 @@
 \nKaynak kodu:
 \nhttps://github.com/velazcod/Tinfoil-Facebook\n
 \n
-\nBu uygulama facebook'a girerken gizleyici şapka kullanmak isteyenler için üretildi. Facebook'a girerken sizin için bir tünel oluşturur. Ağ bağlantısı gerektirir, eğer bu konuda şüpheleriniz varsa, adresini paylaştığım kaynak kodlarını incelemekten çekinmeyin. Yaklaşık konum izinleri gerektirir fakat ayarlardan "Yer bildirimlerine izin ver" seçeneğini seçmediğiniz sürece çalışmaz.\n
+\nBu uygulama facebook\'a girerken gizleyici şapka kullanmak isteyenler için üretildi. Facebook\'a girerken sizin için bir tünel oluşturur. Ağ bağlantısı gerektirir, eğer bu konuda şüpheleriniz varsa, adresini paylaştığım kaynak kodlarını incelemekten çekinmeyin. Yaklaşık konum izinleri gerektirir fakat ayarlardan \"Yer bildirimlerine izin ver\" seçeneğini seçmediğiniz sürece çalışmaz.\n
 \n</string>
 
 </resources>
