@@ -73,7 +73,7 @@
         <item>Force desktop site</item>
         <item>Force basic site</item>
         <item>Facebook Zero</item>
-        <item>Facebook.onion</item>
+        <item>Facebook.onion (requires Orbot)</item>
     </array>
     <array name="prefs_mobile_site_list_values">
         <item>auto</item>
