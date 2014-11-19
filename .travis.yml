@@ -22,7 +22,7 @@ before_install:
   # Install required components.
   # Note that sysimg-19 downloads only ARM, because only the first license query is accepted.
   - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --all --filter build-tools-21.0.0 --no-ui --force > /dev/null
+  - echo yes | android update sdk --all --filter build-tools-21.1.1 --no-ui --force > /dev/null
   - echo yes | android update sdk --filter android-21 --no-ui --force > /dev/null
   - echo yes | android update sdk --filter sysimg-21 --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
