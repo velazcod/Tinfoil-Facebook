@@ -75,6 +75,17 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         // If we have a valid URL that was shared to us, open the sharer
         if (sharedUrl != null) {
             if (!sharedUrl.equals("")) {
+
+                // Check if the URL being shared is a proper web URL
+                if (!sharedUrl.startsWith("http://") || !sharedUrl.startsWith("https://")) {
+                    // if it's not, let's see if it includes a URL in it (prefixed with a message)
+                    int startUrlIndex = sharedUrl.indexOf("http:");
+                    if (startUrlIndex > 0) {
+                        // Seems like it's prefixed with a message, let's trim the start and get the URL only
+                        sharedUrl = sharedUrl.substring(startUrlIndex);
+                    }
+                }
+
                 String formattedSharedUrl = String.format(mDomainToUse + URL_PAGE_SHARE_LINKS,
                         sharedUrl, sharedSubject);
                 Logger.d(LOG_TAG, "Loading the sharer page...");
