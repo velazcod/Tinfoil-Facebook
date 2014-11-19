@@ -70,10 +70,22 @@
                     android:host="m.facebook.com"
                     android:scheme="https"/>
                 <data
+                    android:host="m.fb.com"
+                    android:scheme="http"/>
+                <data
+                    android:host="m.fb.com"
+                    android:scheme="https"/>
+                <data
                     android:host="touch.facebook.com"
                     android:scheme="http"/>
                 <data
                     android:host="touch.facebook.com"
+                    android:scheme="https"/>
+                <data
+                    android:host="touch.fb.com"
+                    android:scheme="http"/>
+                <data
+                    android:host="touch.fb.com"
                     android:scheme="https"/>
                 <data
                     android:host="facebook.com"
@@ -82,16 +94,34 @@
                     android:host="facebook.com"
                     android:scheme="https"/>
                 <data
+                    android:host="fb.com"
+                    android:scheme="http"/>
+                <data
+                    android:host="fb.com"
+                    android:scheme="https"/>
+                <data
                     android:host="www.facebook.com"
                     android:scheme="http"/>
                 <data
                     android:host="www.facebook.com"
                     android:scheme="https"/>
                 <data
+                    android:host="www.fb.com"
+                    android:scheme="http"/>
+                <data
+                    android:host="www.fb.com"
+                    android:scheme="https"/>
+                <data
                     android:host="apps.facebook.com"
                     android:scheme="http"/>
                 <data
                     android:host="apps.facebook.com"
+                    android:scheme="https"/>
+                <data
+                    android:host="apps.fb.com"
+                    android:scheme="http"/>
+                <data
+                    android:host="apps.fb.com"
                     android:scheme="https"/>
             </intent-filter>
 
