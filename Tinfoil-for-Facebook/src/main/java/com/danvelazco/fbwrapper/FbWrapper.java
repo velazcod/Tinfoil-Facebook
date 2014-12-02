@@ -358,8 +358,8 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
                     loadNewPage(mDomainToUse + URL_PAGE_NOTIFICATIONS);
                     break;
                 case R.id.menu_item_messages:
-                	loadNewPage(mDomainToUse + URL_PAGE_MESSAGES);
-                	break;
+                    loadNewPage(mDomainToUse + URL_PAGE_MESSAGES);
+                    break;
                 case R.id.menu_share_this:
                     shareCurrentPage();
                     break;
