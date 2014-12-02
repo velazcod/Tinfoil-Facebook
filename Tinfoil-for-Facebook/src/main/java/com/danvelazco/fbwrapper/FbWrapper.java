@@ -352,7 +352,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
                     refreshCurrentPage();
                     break;
                 case R.id.menu_item_newsfeed:
-                    loadNewPage(mDomainToUse);
+                    loadNewPage(mDomainToUse + "?sk=h_chr");
                     break;
                 case R.id.menu_items_notifications:
                     loadNewPage(mDomainToUse + URL_PAGE_NOTIFICATIONS);
