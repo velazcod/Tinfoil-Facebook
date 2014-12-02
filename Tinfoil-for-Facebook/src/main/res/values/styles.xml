@@ -43,9 +43,7 @@
     </style>
 
     <!-- Custom style used for the top ProgressBar -->
-    <style name="Widget.Tinfoil.ProgressBar" parent="android:Widget.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@android:drawable/progress_horizontal</item>
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+    <style name="Widget.Tinfoil.ProgressBar" parent="android:Widget.Holo.ProgressBar.Horizontal">
     </style>
 
     <style name="MenuDrawerTextStyle" parent="@android:style/TextAppearance.Medium">

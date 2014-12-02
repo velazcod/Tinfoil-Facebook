@@ -34,4 +34,8 @@
         <item name="android:colorAccent">@color/blue_accent</item>
     </style>
 
+    <!-- Custom style used for the top ProgressBar -->
+    <style name="Widget.Tinfoil.ProgressBar" parent="android:Widget.Material.ProgressBar.Horizontal">
+    </style>
+
 </resources>

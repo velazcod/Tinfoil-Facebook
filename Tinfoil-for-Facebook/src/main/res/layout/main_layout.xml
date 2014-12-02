@@ -42,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/webview_top_progress_bar"
             style="@style/Widget.Tinfoil.ProgressBar"
+            android:layout_marginTop="@dimen/webview_top_progress_bar_top_margin"
             android:layout_alignParentTop="true"/>
 
     </RelativeLayout>
