@@ -79,8 +79,8 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected final static int RESULT_CODE_FILE_UPLOAD = 1001;
     protected final static int RESULT_CODE_FILE_UPLOAD_LOLLIPOP = 2001;
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2981279;
-    protected final static String INIT_URL_MOBILE = "https://m.facebook.com?sk=h_chr";
-    protected final static String INIT_URL_DESKTOP = "https://www.facebook.com?sk=h_chr";
+    protected final static String INIT_URL_MOBILE = "https://m.facebook.com";
+    protected final static String INIT_URL_DESKTOP = "https://www.facebook.com";
     protected final static String INIT_URL_FACEBOOK_ZERO = "https://0.facebook.com";
     protected final static String INIT_URL_FACEBOOK_ONION = "https://facebookcorewwwi.onion";
     protected final static String URL_PAGE_NOTIFICATIONS = "/notifications.php";
