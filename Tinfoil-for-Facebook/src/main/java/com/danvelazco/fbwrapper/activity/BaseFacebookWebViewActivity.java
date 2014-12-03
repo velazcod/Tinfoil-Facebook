@@ -333,7 +333,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         } else if (force && mobile && facebookBasic) {
             mWebSettings.setUserAgentString(USER_AGENT_BASIC);
         } else {
-            mWebSettings.setUserAgentString(USER_AGENT_MOBILE);
+            mWebSettings.setUserAgentString(null);
         }
     }
 
