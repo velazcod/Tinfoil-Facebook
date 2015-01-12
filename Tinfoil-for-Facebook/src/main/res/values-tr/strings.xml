@@ -44,12 +44,12 @@
     <string name="prefs_block_images_sry">Resimlerin yüklenmesini engelleyerek zamanınızdan ve kotanızdan tasarruf edin.</string>
     <string name="pref_hide_ab">Eylem menüsünü otomatik gizle</string>
     <string name="pref_hide_ab_sry">Kullanılmadığında veya aşağı kaydırılırken eylem menüsünü otomatik gizler. Tekrar yukarı kaydırmak eylem menüsünü gösterir.</string>
-    <string name="prefs_mobile_site">Mobile/Desktop site</string>
+    <string name="prefs_mobile_site">Mobil/Masaüstü site</string>
     <string name="prefs_mobile_site_sry">Mobil veya masaüstü siteyi kullanmaya zorla</string>
     <string name="prefs_enable_proxy">Vekil sunucuyu etkinleştir</string>
-    <string name="prefs_enable_proxy_sry">Configure proxy for network requests.</string>
-    <string name="prefs_proxy_host">Proxy host</string>
-    <string name="prefs_proxy_port">Proxy port</string>
+    <string name="prefs_enable_proxy_sry">Ağ bağlantısı için vekil sunucu ayarla.</string>
+    <string name="prefs_proxy_host">Vekil sunucu ev sahibi</string>
+    <string name="prefs_proxy_port">Vekil sunucu bağlantı noktası</string>
 
     <array name="prefs_mobile_site_list">
         <item>Oto.</item>
