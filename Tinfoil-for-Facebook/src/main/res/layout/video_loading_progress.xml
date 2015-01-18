@@ -15,28 +15,28 @@
     limitations under the License.
 -->
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/progress_indicator"
-    android:orientation="vertical"
-    android:layout_centerInParent="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@android:id/progress"
         style="?android:attr/progressBarStyleLarge"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/tv_loading_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/loading_spinner_top_padding"
         android:layout_gravity="center"
+        android:paddingTop="@dimen/loading_spinner_top_padding"
         android:text="@string/loading_video"
-        android:textSize="@dimen/loading_video_text_size"
-        android:textColor="@color/light_gray"/>
+        android:textColor="@color/light_gray"
+        android:textSize="@dimen/loading_video_text_size"/>
 
 </LinearLayout>

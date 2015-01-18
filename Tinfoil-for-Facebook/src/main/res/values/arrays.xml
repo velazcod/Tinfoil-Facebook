@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For the drawer -->
+    <string-array name="drawer_items">
+        <item>@string/menu_jump_top</item>
+        <item>@string/menu_refresh</item>
+        <item>@string/menu_news_feed</item>
+        <item>@string/menu_notifications</item>
+        <item>@string/menu_messages</item>
+        <item>@string/menu_share</item>
+        <item>@string/menu_preferences</item>
+        <item>@string/menu_about</item>
+        <item>@string/menu_exit</item>
+    </string-array>
+
+    <!-- Icon array for the drawer. Still needs to be applied somehow. -->
+    <array name="drawer_item_icons">
+        <item>@android:drawable/ic_menu_upload</item>
+        <item>@android:drawable/ic_menu_rotate</item>
+        <item>@android:drawable/ic_menu_view</item>
+        <item>@android:drawable/ic_menu_info_details</item>
+        <item>@android:drawable/ic_menu_edit</item>
+        <item>@android:drawable/ic_menu_share</item>
+        <item>@android:drawable/ic_menu_preferences</item>
+        <item>@android:drawable/ic_menu_help</item>
+        <item>@android:drawable/ic_menu_close_clear_cancel</item>
+    </array>
+</resources>

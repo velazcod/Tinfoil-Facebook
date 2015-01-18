@@ -15,9 +15,9 @@
     limitations under the License.
 -->
 <android.support.v4.widget.DrawerLayout
+    android:id="@+id/layout_main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FacebookNewWrapper">
@@ -34,16 +34,16 @@
             android:layout_height="match_parent"
             android:fadeScrollbars="true"
             android:focusable="true"
-            android:focusableInTouchMode="true" />
+            android:focusableInTouchMode="true"/>
 
         <!-- Progress bar used to show the loading progress -->
         <ProgressBar
             android:id="@+id/progress_bar"
+            style="@style/Widget.Tinfoil.ProgressBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/webview_top_progress_bar"
-            style="@style/Widget.Tinfoil.ProgressBar"
-            android:layout_marginTop="@dimen/webview_top_progress_bar_top_margin"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/webview_top_progress_bar_top_margin"/>
 
     </RelativeLayout>
 
@@ -53,9 +53,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <!-- Menu drawer (right) -->
-    <include layout="@layout/drawer_menu" />
+    <include layout="@layout/drawer_menu"/>
 
 </android.support.v4.widget.DrawerLayout>

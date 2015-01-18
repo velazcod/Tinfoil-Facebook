@@ -19,7 +19,7 @@
     <!-- dimensions -->
 
     <dimen name="webview_top_progress_bar">16dp</dimen>
-    <dimen name="webview_top_progress_bar_top_margin">-6dp</dimen>
+    <dimen name="webview_top_progress_bar_top_margin">-7dp</dimen>
     <dimen name="loading_spinner_top_padding">5dip</dimen>
     <dimen name="loading_video_text_size">14sp</dimen>
 

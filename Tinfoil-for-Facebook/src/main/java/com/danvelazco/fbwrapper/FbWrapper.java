@@ -1,6 +1,7 @@
 package com.danvelazco.fbwrapper;
 
 import android.app.AlertDialog;
+import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +14,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+
 import com.danvelazco.fbwrapper.activity.BaseFacebookWebViewActivity;
 import com.danvelazco.fbwrapper.preferences.FacebookPreferences;
 import com.danvelazco.fbwrapper.util.Logger;
@@ -49,10 +55,10 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
         // Keep a reference of the DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.layout_main);
+        getFragmentManager().beginTransaction().replace(R.id.drawerFragment, new DrawerFragment()).commit();
         mWebViewContainer = (RelativeLayout) findViewById(R.id.webview_container);
 
         // Set the click listener interface for the buttons
-        setOnClickListeners();
     }
 
     /**
@@ -110,7 +116,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         } else {
             // Load the URL depending on the type of device or preference
             Logger.d(LOG_TAG, "Loading the init Facebook URL");
-            loadNewPage(mDomainToUse);
+            loadNewPage(mDomainToUse + "/home.php?sk=h_chr");
         }
     }
 
@@ -129,28 +135,8 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
         // If the domain changes, reload the page with the new domain
         if (!mDomainToUse.equalsIgnoreCase(previousDomainUsed)) {
-            loadNewPage(mDomainToUse);
+            loadNewPage(mDomainToUse + "/home.php?sk=h_chr");
         }
-    }
-
-    /**
-     * Sets the click listener on all the buttons in the activity
-     */
-    private void setOnClickListeners() {
-        // Create a new listener
-        MenuDrawerButtonListener buttonsListener = new MenuDrawerButtonListener();
-
-        // Set this listener to all the buttons
-        findViewById(R.id.menu_drawer_right).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_item_jump_to_top).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_item_refresh).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_item_newsfeed).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_items_notifications).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_item_messages).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_share_this).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_preferences).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_about).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_kill).setOnClickListener(buttonsListener);
     }
 
     /**
@@ -335,48 +321,41 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         return isTablet;
     }
 
-    /**
-     * Menu drawer button listener interface
-     */
-    private class MenuDrawerButtonListener implements View.OnClickListener {
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.menu_item_jump_to_top:
+
+        public void drawerClick(int position) {
+            switch (position) {
+                case 0:
                     jumpToTop();
                     break;
-                case R.id.menu_item_refresh:
+                case 1:
                     refreshCurrentPage();
                     break;
-                case R.id.menu_item_newsfeed:
-                    loadNewPage(mDomainToUse + "?sk=h_chr");
+                case 2:
+                    loadNewPage(mDomainToUse + "/home.php?sk=h_chr");
                     break;
-                case R.id.menu_items_notifications:
+                case 3:
                     loadNewPage(mDomainToUse + URL_PAGE_NOTIFICATIONS);
                     break;
-                case R.id.menu_item_messages:
+                case 4:
                     loadNewPage(mDomainToUse + URL_PAGE_MESSAGES);
                     break;
-                case R.id.menu_share_this:
+                case 5:
                     shareCurrentPage();
                     break;
-                case R.id.menu_preferences:
+                case 6:
                     startActivity(new Intent(FbWrapper.this, FacebookPreferences.class));
                     break;
-                case R.id.menu_about:
+                case 7:
                     showAboutAlert();
                     break;
-                case R.id.menu_kill:
+                case 8:
                     mWebViewContainer.removeView(mWebView);
                     destroyWebView();
                     finish();
                     break;
             }
             closeMenuDrawer();
-        }
+
     }
 
     /**
@@ -417,4 +396,26 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * A ListFragment that replaces the million OnClickListeners previously used in the Drawer.
+     */
+    private class DrawerFragment extends ListFragment {
+        private String[] mPlanetTitles;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            inflater.inflate(R.layout.drawer_fragment, container, false);
+            mPlanetTitles = getResources().getStringArray(R.array.drawer_items);
+            // Set the adapter for the list view
+            setListAdapter(new ArrayAdapter<>(inflater.getContext(),
+                    R.layout.drawer_list_item, R.id.drawer_item_text, mPlanetTitles));
+            // Set the list's click listener
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+        @Override
+        public void onListItemClick(ListView l, View view, int position, long id) {
+            drawerClick(position);
+        }
+    }
 }

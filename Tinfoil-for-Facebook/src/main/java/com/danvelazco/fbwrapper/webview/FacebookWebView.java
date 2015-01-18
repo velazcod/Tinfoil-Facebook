@@ -40,7 +40,7 @@ public class FacebookWebView extends WebView {
     final boolean DEFAULT_DOM_STORAGE_ENABLED = true;
     final boolean DEFAULT_ALLOW_GEOLOCATION = false;
     final boolean DEFAULT_ALLOW_FILE_UPLOAD = true;
-    final boolean DEFAULT_WIDE_VIEWPORT = false;
+    final boolean DEFAULT_WIDE_VIEWPORT = true;
     final boolean DEFAULT_LOAD_WITH_OVERVIEW_MODE = true;
     final int DEFAULT_CACHE_MODE = WebSettings.LOAD_DEFAULT;
     final WebSettings.RenderPriority DEFAULT_RENDER_PRIORITY = WebSettings.RenderPriority.HIGH;
