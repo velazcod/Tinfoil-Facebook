@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- For the drawer -->
     <string-array name="drawer_items">
         <item>@string/menu_jump_top</item>
         <item>@string/menu_refresh</item>
@@ -12,6 +13,7 @@
         <item>@string/menu_exit</item>
     </string-array>
 
+    <!-- Icon array for the drawer. Still needs to be applied somehow. -->
     <array name="drawer_item_icons">
         <item>@android:drawable/ic_menu_upload</item>
         <item>@android:drawable/ic_menu_rotate</item>

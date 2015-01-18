@@ -39,10 +39,11 @@
         <!-- Progress bar used to show the loading progress -->
         <ProgressBar
             android:id="@+id/progress_bar"
-            style="@style/Widget.Tinfoil.ProgressBar"            android:layout_width="match_parent"
+            style="@style/Widget.Tinfoil.ProgressBar"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/webview_top_progress_bar"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="-7dp"/>
+            android:layout_marginTop="@dimen/webview_top_progress_bar_top_margin"/>
 
     </RelativeLayout>
 
