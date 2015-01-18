@@ -13,54 +13,55 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/menu_drawer_right"
+<LinearLayout
+    android:id="@+id/menu_drawer_right"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/navigation_drawer_width"
     android:layout_height="match_parent"
     android:layout_gravity="end"
-    android:orientation="vertical"
+    android:background="@color/light_gray"
     android:clickable="false"
     android:focusable="false"
     android:focusableInTouchMode="false"
-    android:background="@color/light_gray"
+    android:orientation="vertical"
     >
 
-        <!-- Title bar -->
-        <RelativeLayout
-            android:id="@+id/menu_title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/navigation_drawer_items_height"
-            android:padding="@dimen/navigation_drawer_items_padding"
-            android:background="@color/mild_gray">
+    <!-- Title bar -->
+    <RelativeLayout
+        android:id="@+id/menu_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_drawer_items_height"
+        android:background="@color/mild_gray"
+        android:padding="@dimen/navigation_drawer_items_padding">
 
-            <ImageView
-                android:id="@+id/iv_app_icon"
-                android:layout_width="@dimen/navigation_drawer_app_icon_size"
-                android:layout_height="@dimen/navigation_drawer_app_icon_size"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_launcher"
-                android:contentDescription="@string/app_name" />
+        <ImageView
+            android:id="@+id/iv_app_icon"
+            android:layout_width="@dimen/navigation_drawer_app_icon_size"
+            android:layout_height="@dimen/navigation_drawer_app_icon_size"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_launcher"/>
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_app_icon"
-                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-                android:gravity="left"
-                android:fontFamily="sans-serif"
-                android:textSize="@dimen/navigation_drawer_items_text_size"
-                android:textColor="@android:color/white"
-                android:text="@string/app_name" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
+            android:layout_toRightOf="@+id/iv_app_icon"
+            android:fontFamily="sans-serif"
+            android:gravity="left"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/navigation_drawer_items_text_size"/>
 
-        </RelativeLayout>
+    </RelativeLayout>
 
-<FrameLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:id="@+id/drawerFragment"
-    tools:layout="@layout/drawer_fragment"/>
+    <FrameLayout
+        android:id="@+id/drawerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/drawer_fragment"/>
 
-    </LinearLayout>
+</LinearLayout>

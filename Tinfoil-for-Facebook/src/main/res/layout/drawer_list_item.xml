@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-               android:layout_width="match_parent"
-               android:layout_gravity="center_vertical"
-               android:layout_height="48dp"
-               android:padding="@dimen/navigation_drawer_items_padding">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:layout_gravity="center_vertical"
+              android:padding="@dimen/navigation_drawer_items_padding">
 
     <!-- Gone for now, still trying to inflate the icons. -->
     <ImageView
@@ -15,10 +15,10 @@
 
     <TextView
         android:id="@+id/drawer_item_text"
+        style="@style/MenuDrawerTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-        android:gravity="left|center_vertical"
-        style="@style/MenuDrawerTextStyle"/>
+        android:gravity="left|center_vertical"/>
 
 </LinearLayout>
