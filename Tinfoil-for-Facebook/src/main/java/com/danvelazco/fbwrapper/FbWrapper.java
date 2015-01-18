@@ -116,7 +116,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         } else {
             // Load the URL depending on the type of device or preference
             Logger.d(LOG_TAG, "Loading the init Facebook URL");
-            loadNewPage(mDomainToUse);
+            loadNewPage(mDomainToUse + "/home.php?sk=h_chr");
         }
     }
 
@@ -135,7 +135,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
         // If the domain changes, reload the page with the new domain
         if (!mDomainToUse.equalsIgnoreCase(previousDomainUsed)) {
-            loadNewPage(mDomainToUse);
+            loadNewPage(mDomainToUse + "/home.php?sk=h_chr");
         }
     }
 
