@@ -28,6 +28,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
     // Constant
     private final static String LOG_TAG = "FbWrapper";
     private final static int MENU_DRAWER_GRAVITY = GravityCompat.END;
+    protected final static int DELAY_RESTORE_STATE = (60 * 1000) * 30;
 
     // Members
     private DrawerLayout mDrawerLayout = null;
@@ -102,16 +103,27 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
             return;
         }
 
-        // Attempt to either restore the activity or open the default page
+        boolean loadInitialPage = true;
+
         if (savedInstanceState != null) {
-            // Restore the state of the WebView using the saved instance state
-            Logger.d(LOG_TAG, "Restoring the WebView state");
-            restoreWebView(savedInstanceState);
-        } else {
+            long savedStateTime = savedInstanceState.getLong(KEY_SAVE_STATE_TIME, -1);
+            if (savedStateTime > 0) {
+                long timeDiff = System.currentTimeMillis() - savedStateTime;
+                if ((mWebView != null) && (timeDiff < DELAY_RESTORE_STATE)) {
+                    // Restore the state of the WebView using the saved instance state
+                    Logger.d(LOG_TAG, "Restoring the WebView state");
+                    restoreWebView(savedInstanceState);
+                    loadInitialPage = false;
+                }
+            }
+        }
+
+        if (loadInitialPage) {
             // Load the URL depending on the type of device or preference
             Logger.d(LOG_TAG, "Loading the init Facebook URL");
             loadNewPage(mDomainToUse);
         }
+
     }
 
     /**

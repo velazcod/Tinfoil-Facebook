@@ -35,6 +35,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -78,6 +79,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     private final static String LOG_TAG = "BaseFacebookWebViewActivity";
     protected final static int RESULT_CODE_FILE_UPLOAD = 1001;
     protected final static int RESULT_CODE_FILE_UPLOAD_LOLLIPOP = 2001;
+    protected static final String KEY_SAVE_STATE_TIME = "_instance_save_state_time";
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2981279;
     protected final static String INIT_URL_MOBILE = "https://m.facebook.com";
     protected final static String INIT_URL_DESKTOP = "https://www.facebook.com";
@@ -241,7 +243,10 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      * {@inheritDoc}
      */
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        // Save the current time to the state bundle
+        outState.putLong(KEY_SAVE_STATE_TIME, System.currentTimeMillis());
+
         // Save the state of the WebView as a Bundle to the Instance State
         mWebView.saveState(outState);
         super.onSaveInstanceState(outState);
