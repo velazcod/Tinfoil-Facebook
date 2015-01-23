@@ -26,11 +26,13 @@ import android.webkit.WebViewClient;
 import com.danvelazco.fbwrapper.util.Logger;
 
 /**
- * FacebookWebViewClient.<br/>
- * Extends {@link android.webkit.WebViewClient}.<br/>
+ * FacebookWebViewClient.<br>
+ * Extends {@link android.webkit.WebViewClient}.<br>
  * Used by {@link FacebookWebView}.
  */
 public class FacebookWebViewClient extends WebViewClient {
+
+    private String TAG = getClass().getSimpleName();
 
     // Members
     private WebViewClientListener mListener = null;
@@ -68,10 +70,10 @@ public class FacebookWebViewClient extends WebViewClient {
      */
     @Override
     public void onReceivedError(WebView view, int errorCod, String description, String failingUrl) {
-        Logger.e(getClass().getSimpleName(), "This WebView has received an error while trying to load:");
-        Logger.e(getClass().getSimpleName(), "\tError code: " + errorCod);
-        Logger.e(getClass().getSimpleName(), "\tDescription: " + description);
-        Logger.e(getClass().getSimpleName(), "\tFailed URL: " + failingUrl);
+        Logger.e(TAG, "This WebView has received an error while trying to load:");
+        Logger.e(TAG, "\tError code: " + errorCod);
+        Logger.e(TAG, "\tDescription: " + description);
+        Logger.e(TAG, "\tFailed URL: " + failingUrl);
     }
 
     /**
@@ -97,31 +99,31 @@ public class FacebookWebViewClient extends WebViewClient {
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        Logger.d(getClass().getSimpleName(), "shouldOverrideUrlLoading? " + url);
+        Logger.d(TAG, "shouldOverrideUrlLoading? " + url);
 
         // Do not override any type of loading if we can load any URL
         if (mAllowAnyUrl) {
-            Logger.d(getClass().getSimpleName(), "The user is allowing us to open any URL in this WebView, let it load.");
+            Logger.d(TAG, "The user is allowing us to open any URL in this WebView, let it load.");
             return false;
         }
 
         // Avoid NPEs when clicking on weird blank links
         if (url.equals("about:blank")) {
-            Logger.d(getClass().getSimpleName(), "Blank page, let it load");
+            Logger.d(TAG, "Blank page, let it load");
             return false;
         }
 
         // Get the URL's domain name
         String domain = Uri.parse(url).getHost();
 
-        Logger.d(getClass().getSimpleName(), "Checking URL: " + url);
-        Logger.d(getClass().getSimpleName(), "\tDomain: " + domain);
+        Logger.d(TAG, "Checking URL: " + url);
+        Logger.d(TAG, "\tDomain: " + domain);
 
         if (domain != null) {
             // Let this WebView open the URL
             // TODO: Check the proper domain names that facebook uses or find another way
             if (domain.contains("facebook") || domain.contains("fb")) {
-                Logger.d(getClass().getSimpleName(), "This URL should be loaded internally. Let it load.");
+                Logger.d(TAG, "This URL should be loaded internally. Let it load.");
                 view.loadUrl(url);
                 return false;
             }
@@ -129,7 +131,7 @@ public class FacebookWebViewClient extends WebViewClient {
 
         // Otherwise, fire the listener to open the URL by
         // any app that can handle it
-        Logger.d(getClass().getSimpleName(), "This URL should be loaded by a 3rd party. Override.");
+        Logger.d(TAG, "This URL should be loaded by a 3rd party. Override.");
         fireOpenExternalSiteListener(url);
 
         return true;

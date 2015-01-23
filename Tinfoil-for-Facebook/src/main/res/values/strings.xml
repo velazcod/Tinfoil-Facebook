@@ -46,7 +46,7 @@
     <string name="menu_messages">Messages</string>
     <string name="menu_preferences">Preferences</string>
     <string name="menu_about">About</string>
-    <string name="menu_exit">Kill</string>
+    <string name="menu_exit">Exit</string>
 
     <!-- Preferences -->
     <string name="pref_cat_access">Facebook access</string>

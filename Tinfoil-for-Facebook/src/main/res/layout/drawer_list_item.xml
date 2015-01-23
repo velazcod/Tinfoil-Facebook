@@ -2,18 +2,18 @@
 <!-- ListView item layout. -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/navigation_drawer_items_height"
     android:layout_gravity="center_vertical"
-    android:padding="@dimen/navigation_drawer_items_padding">
+    android:padding="@dimen/navigation_drawer_items_padding" >
 
     <!-- Gone for now, still trying to inflate the icons. -->
     <ImageView
         android:id="@+id/drawer_item_icon"
         android:layout_width="@dimen/navigation_drawer_icon_size"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_launcher"
-        android:visibility="gone"/>
+        android:src="@android:drawable/ic_menu_gallery" />
 
     <TextView
         android:id="@+id/drawer_item_text"
@@ -21,6 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-        android:gravity="left|center_vertical"/>
+        android:layout_marginStart="@dimen/navigation_drawer_items_icon_title_margin"
+        android:gravity="center_vertical|start"
+        tools:text="News Feed"/>
 
 </LinearLayout>

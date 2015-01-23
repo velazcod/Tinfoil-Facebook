@@ -13,8 +13,8 @@
         <item>@string/menu_exit</item>
     </string-array>
 
-    <!-- Icon array for the drawer. Still needs to be applied somehow. -->
-    <array name="drawer_item_icons">
+    <!-- Icon array for the drawer. -->
+    <integer-array name="drawer_item_icons">
         <item>@android:drawable/ic_menu_upload</item>
         <item>@android:drawable/ic_menu_rotate</item>
         <item>@android:drawable/ic_menu_view</item>
@@ -24,5 +24,5 @@
         <item>@android:drawable/ic_menu_preferences</item>
         <item>@android:drawable/ic_menu_help</item>
         <item>@android:drawable/ic_menu_close_clear_cancel</item>
-    </array>
+    </integer-array>
 </resources>

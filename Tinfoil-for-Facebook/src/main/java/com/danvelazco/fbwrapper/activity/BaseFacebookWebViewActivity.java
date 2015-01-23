@@ -65,7 +65,7 @@ import java.io.FileOutputStream;
  * Base activity that uses a {@link FacebookWebView} to load the Facebook
  * site in different formats. Here we can implement all the boilerplate code
  * that has to do with loading the activity as well as lifecycle events.
- * <p/>
+ * <p>
  * See {@link #onActivityCreated()}
  * See {@link #onWebViewInit(android.os.Bundle)}
  * See {@link #onResumeActivity()}
@@ -82,9 +82,18 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected final static String INIT_URL_MOBILE = "https://m.facebook.com";
     protected final static String INIT_URL_DESKTOP = "https://www.facebook.com";
     protected final static String INIT_URL_FACEBOOK_ZERO = "https://0.facebook.com";
+    protected final static String INIT_URL_FACEBOOK_BASIC = "https://mbasic.facebook.com/";
     protected final static String INIT_URL_FACEBOOK_ONION = "https://facebookcorewwwi.onion";
+    // Because Facebook's new mobile site needs the /home.php to properly force Most Recent.
+    protected final static String INIT_URL_NORMAL_SUFFIX = "?sk=h_chr";
+    protected final static String INIT_URL_MOBILE_SUFFIX = "/home.php?sk=h_chr";
     protected final static String URL_PAGE_NOTIFICATIONS = "/notifications.php";
     protected final static String URL_PAGE_MESSAGES = "/messages";
+    protected final static int ZERO = 0;
+    protected final static int BASIC = 1;
+    protected final static int DESKTOP = 2;
+    protected final static int MOBILE = 3;
+    protected final static int ONION = 4;
 
     // URL for Sharing Links
     // u = url & t = title
@@ -99,8 +108,6 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     // Mobile user agent (Mobile user agent from a Google Nexus 5 running Android 4.4.2
     protected static final String USER_AGENT_MOBILE = "Mozilla/5.0 (Linux; Android 5.0; Nexus 5 Build/LRX21O) " +
             "AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/37.0.0.0 Mobile Safari/537.36";
-    // Firefox for Android user agent, it brings up a basic version of the site. Halfway between touch site and zero site.
-    protected static final String USER_AGENT_BASIC = "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0";
 
     // Members
     protected ConnectivityManager mConnectivityManager = null;
@@ -309,31 +316,24 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     }
 
     /**
-     * Set the browser user agent to be used. If the user agent should be forced,
-     * make sure the 'force' param is set to true, otherwise the devices' default
-     * user agent will be used.
+     * Set the browser user agent to be used.
      *
-     * @param force  {@link boolean}
-     *               true if we should force a custom user agent, false if not.
-     *               Note, if this flag is false the default user agent will be
-     *               used while disregarding the mobile {@link boolean} parameter
-     * @param mobile {@link boolean}
-     *               true if we should use a custom user agent for mobile devices,
-     *               false if not.
+     * @param type {@link int} Which user agent to use.
+     *
      */
-    protected void setUserAgent(boolean force, boolean mobile, boolean facebookBasic) {
-        if (force && mobile && !facebookBasic) {
+    protected void setUserAgent(int type) {
+        if (type == MOBILE) {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 mWebSettings.setUserAgentString(USER_AGENT_MOBILE_OLD);
             } else {
                 mWebSettings.setUserAgentString(USER_AGENT_MOBILE);
             }
-        } else if (force && !mobile && !facebookBasic) {
+        } else if (type == DESKTOP) {
             mWebSettings.setUserAgentString(USER_AGENT_DESKTOP);
-        } else if (force && mobile && facebookBasic) {
-            mWebSettings.setUserAgentString(USER_AGENT_BASIC);
-        } else {
-            mWebSettings.setUserAgentString(null);
+        }
+        // Basic, Onion, Auto and Zero do not need a user agent, so use the system default.
+        else {
+            mWebSettings.setUserAgentString(WebSettings.getDefaultUserAgent(this));
         }
     }
 
