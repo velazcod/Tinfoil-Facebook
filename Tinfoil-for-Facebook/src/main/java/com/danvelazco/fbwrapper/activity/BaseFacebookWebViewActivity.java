@@ -544,22 +544,35 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         }
     }
 
+    private AlertDialog mLocationAlertDialog = null;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void showGeolocationDisabledAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(getString(R.string.lbl_dialog_alert));
-        alertDialog.setMessage(getString(R.string.txt_checkins_disables));
-        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,
+        mLocationAlertDialog = new AlertDialog.Builder(this).create();
+        mLocationAlertDialog.setTitle(getString(R.string.lbl_dialog_alert));
+        mLocationAlertDialog.setMessage(getString(R.string.txt_checkins_disables));
+        mLocationAlertDialog.setButton(DialogInterface.BUTTON_NEUTRAL,
                 getString(R.string.lbl_dialog_ok),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Don't do anything here, simply close the dialog
                     }
                 });
-        alertDialog.show();
+        mLocationAlertDialog.show();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void hideGeolocationAlert() {
+        if ((mLocationAlertDialog != null) && mLocationAlertDialog.isShowing()) {
+            mLocationAlertDialog.dismiss();
+            mLocationAlertDialog = null;
+        }
     }
 
     /**

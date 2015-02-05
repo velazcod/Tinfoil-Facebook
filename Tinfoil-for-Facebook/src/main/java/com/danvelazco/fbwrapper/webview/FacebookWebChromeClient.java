@@ -223,6 +223,16 @@ public class FacebookWebChromeClient extends WebChromeClient {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onGeolocationPermissionsHidePrompt() {
+        if (mListener != null) {
+            mListener.hideGeolocationAlert();
+        }
+    }
+
+    /**
      * Handle file upload. Used for backwards compatibility.
      *
      * @param uploadMsg
@@ -314,6 +324,11 @@ public class FacebookWebChromeClient extends WebChromeClient {
          * it. Use this to show an alert to the user in the case they want to enable the use of geolocation.
          */
         void showGeolocationDisabledAlert();
+
+        /**
+         * Called when the website that had previously requested access to geolocation data no longer needs it.
+         */
+        void hideGeolocationAlert();
 
         /**
          * This method will be called anytime the file chooser has to be opened in order to upload a file.
