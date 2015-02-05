@@ -209,8 +209,6 @@ public class FacebookWebChromeClient extends WebChromeClient {
     @Override
     public void onGeolocationPermissionsShowPrompt(String origin,
                                                    GeolocationPermissions.Callback callback) {
-        super.onGeolocationPermissionsShowPrompt(origin, callback);
-
         // If we are not allowed to use geolocation, show an alert, if possible.
         if (!mAllowGeolocation) {
             if (mListener != null) {
