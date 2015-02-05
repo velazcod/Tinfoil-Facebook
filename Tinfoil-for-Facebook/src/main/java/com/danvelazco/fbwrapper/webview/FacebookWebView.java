@@ -33,7 +33,7 @@ public class FacebookWebView extends WebView {
 
     // Constants, default values for this WebView's configuration
     final boolean DEFAULT_JS_ENABLED = true;
-    final WebSettings.PluginState DEFAULT_PLUGIN_STATE = WebSettings.PluginState.ON;
+    final WebSettings.PluginState DEFAULT_PLUGIN_STATE = WebSettings.PluginState.ON_DEMAND;
     final boolean DEFAULT_SUPPORT_ZOOM = true;
     final boolean DEFAULT_SAVE_FORM_DATA = false;
     final boolean DEFAULT_SAVE_PASSWORD = false;
