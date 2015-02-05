@@ -171,16 +171,12 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
 
         // Set the database path for this WebView so that
         // HTML5 Storage API works properly
-        File directory = getFilesDir();
-        if (directory != null) {
-            mWebSettings.setDatabaseEnabled(true);
-            mWebSettings.setDatabasePath(directory.getAbsolutePath() + "/");
-        }
+        mWebSettings.setAppCacheEnabled(true);
+        mWebSettings.setDatabaseEnabled(true);
 
         // Create a CookieSyncManager instance and keep a reference of it
         mCookieSyncManager = CookieSyncManager.createInstance(this);
 
-        //
         registerForContextMenu(mWebView);
 
         // Have the activity open the proper URL
