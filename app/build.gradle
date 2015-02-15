@@ -6,6 +6,12 @@ buildscript {
     }
 }
 
+repositories {
+    maven {
+        url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
+    }
+}
+
 android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -50,4 +56,5 @@ final SUPPORT_LIBRARY_VERSION = rootProject.ext.SUPPORT_LIBRARY_VERSION
 dependencies {
     compile "com.android.support:support-v4:${SUPPORT_LIBRARY_VERSION}"
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'org.xwalk:xwalk_core_library_beta:11.40.277.6'
 }
