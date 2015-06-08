@@ -2,16 +2,16 @@ apply plugin: 'com.android.application'
 
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
 }
 
-dependencies {
-    compile 'com.android.support:support-v4:21.+'
-    compile 'com.squareup.picasso:picasso:2.3.3'
-}
-
 android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
@@ -43,4 +43,11 @@ android {
         abortOnError false
     }
 
+}
+
+final SUPPORT_LIBRARY_VERSION = rootProject.ext.SUPPORT_LIBRARY_VERSION
+
+dependencies {
+    compile "com.android.support:support-v4:${SUPPORT_LIBRARY_VERSION}"
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
