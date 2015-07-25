@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2013 Daniel Velazco
+    Italian Translation (C) 2014 <angeloruocco90@gmail.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <!-- App name -->
+    <string name="app_name">Tinfoil for Facebook</string>
+    <string name="app_name_short">Tinfoil</string>
+
+    <!-- Labels -->
+    <string name="lbl_dialog_alert">Alert</string>
+    <string name="lbl_dialog_close">Chiudi</string>
+    <string name="lbl_dialog_ok">OK</string>
+    <string name="loading_video">Caricamento video&#8230;</string>
+    <string name="upload_file_choose">Scegli file</string>
+    <string name="lbl_yes">Si</string>
+    <string name="lbl_no">No</string>
+    <string name="lbl_save_image">Salva immagine</string>
+
+    <!-- Sharing -->
+    <string name="share_action">Condividi pagina corrente</string>
+    <string name="share_action_subject">Pagina Facebook</string>
+
+    <!-- Context menu items -->
+    <string name="menu_desktop">Desktop</string>
+    <string name="menu_mobile">Mobile</string>
+    <string name="menu_jump_top">Torna in cima</string>
+    <string name="menu_news_feed">Novità</string>
+    <string name="menu_share">Condividi</string>
+    <string name="menu_copy_url">Copia URL</string>
+    <string name="menu_refresh">Aggiorna</string>
+    <string name="menu_notifications">Notifiche</string>
+    <string name="menu_messages">Messaggi</string>
+    <string name="menu_preferences">Preferenze</string>
+    <string name="menu_about">Aiuto</string>
+    <string name="menu_exit">Esci</string>
+
+    <!-- Preferences -->
+    <string name="pref_cat_access">Accesso a Facebook</string>
+    <string name="pref_cat_general">Generali</string>
+    <string name="pref_cat_proxy">Proxy</string>
+    <string name="prefs_allow_checkins">Permetti localizzazione</string>
+    <string name="prefs_allow_checkins_sry">Permetti all\'app di usare la localizzazione per taggare i luoghi</string>
+    <string name="prefs_open_links_inside">Apri link dentro l\'app</string>
+    <string name="prefs_open_links_inside_sry">Qualsiasi link aperto dall\'app verrà aperto nell\'app stessa inveche che nel browser</string>
+    <string name="prefs_block_images">Blocca immagini</string>
+    <string name="prefs_block_images_sry">Risparmia tempo e connessione impedendo all\'app di caricare le immagini</string>
+    <string name="pref_hide_ab">Nascondi la ActionBar</string>
+    <string name="pref_hide_ab_sry">Nascondi automaticamente la ActionBar quando si scorre verso il basso. Scorri verso l\'alto per farla apparire di nuovo</string>
+    <string name="prefs_mobile_site">Sito Mobile/Desktop</string>
+    <string name="prefs_mobile_site_sry">Forza l\'uso del sito in modalità desktop o mobile</string>
+    <string name="prefs_enable_proxy">Abilita proxy</string>
+    <string name="prefs_enable_proxy_sry">Configura il proxy</string>
+    <string name="prefs_proxy_host">Proxy host</string>
+    <string name="prefs_proxy_port">Proxy port</string>
+
+    <array name="prefs_mobile_site_list">
+        <item>Auto</item>
+        <item>Forza sito mobile</item>
+        <item>Forza sito desktop</item>
+        <item>Forza sito di base</item>
+        <item>Facebook Zero</item>
+        <item>Facebook.onion (richiede Orbot)</item>
+    </array>
+    <array name="prefs_mobile_site_list_values">
+        <item>auto</item>
+        <item>mobile</item>
+        <item>desktop</item>
+        <item>base</item>
+        <item>zero</item>
+        <item>onion</item>
+    </array>
+
+    <string name="pref_about">Aiuto</string>
+    <string name="pref_about_sry">Sviluppato da Daniel Velazco. Clicca qui per maggiori informazioni.</string>
+    <!-- End preferences -->
+
+    <string name="txt_save_image_success">Immagine scaricata e salvata nella cartella download</string>
+    <string name="txt_save_image_failed">Impossibile salvare immagine</string>
+
+    <!-- Orbot related strings -->
+    <string name="market_orbot">market://search?q=pname:org.torproject.android</string>
+    <string name="start_orbot_">Avviare Orbot?</string>
+    <string name="orbot_not_running_start_it_question">Orbot non è in esecuzione. Vuoi avviarlo e connetterti a Tor?</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_checkins_disables">\nFacebook sta tentando di localizzarti.\n
+\nProbabilmente stai cercando di \"taggarti\" in un luogo. Nonostante Tinfoil abbia i permessi per farlo, questi sono per default disabilitati.\n
+\nPuoi abilitare questa opzione andando nelle preferenze e selezionando\"Permetti localizzazione\".\n
+\nTinfoil ha accesso solo alla \"Localizzazione grossolana\", e non fa uso del GPS ma solo della rete e del Wi-Fi, allo scopo di risparmiare batteria.\n
+\n</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_about">\nSviluppato da Daniel Velazco.
+\nvelazcod@gmail.com
+\nhttp://www.danvelazco.com\n
+\n
+\nSorgente:
+\nhttps://github.com/velazcod/Tinfoil-Facebook\n
+\n
+\nQuest\'app è per quegli utenti che hanno bisogno di un \"cappello di alluminio\" quando si connettono a Facebook. Crea un reindirizzamento al sito mobile di Facebook. Richiede i permessi INTERNET, e se sei scettico, sentiti libero di verificare il sorgente. I permessi di localizzazione grezza sono richiesti ma non utilizzati, a meno che l\'opzione \"Permetti localizzazione\" nelle preferenze non sia selezionata.\n
+\n</string>
+    <string name="other">Altro</string>
+
+</resources>
