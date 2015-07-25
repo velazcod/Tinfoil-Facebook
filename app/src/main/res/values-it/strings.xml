@@ -114,6 +114,5 @@
 \n
 \nQuest\'app è per quegli utenti che hanno bisogno di un \"cappello di alluminio\" quando si connettono a Facebook. Crea un reindirizzamento al sito mobile di Facebook. Richiede i permessi INTERNET, e se sei scettico, sentiti libero di verificare il sorgente. I permessi di localizzazione grezza sono richiesti ma non utilizzati, a meno che l\'opzione \"Permetti localizzazione\" nelle preferenze non sia selezionata.\n
 \n</string>
-    <string name="other">Altro</string>
 
 </resources>
