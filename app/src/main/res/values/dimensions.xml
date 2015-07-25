@@ -24,14 +24,14 @@
     <dimen name="loading_video_text_size">14sp</dimen>
 
     <!-- Drawer menu -->
-    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="navigation_drawer_width">264dp</dimen>
 
     <!-- Drawer menu items -->
-    <dimen name="navigation_drawer_items_height">50dp</dimen>
-    <dimen name="navigation_drawer_items_padding">5dp</dimen>
-    <dimen name="navigation_drawer_items_text_size">17sp</dimen>
-    <dimen name="navigation_drawer_items_icon_title_margin">5dp</dimen>
+    <dimen name="navigation_drawer_items_height">48dp</dimen>
+    <dimen name="navigation_drawer_items_padding">12dp</dimen>
+    <dimen name="navigation_drawer_items_padding_left">16dp</dimen>
+    <dimen name="navigation_drawer_items_padding_top">20dp</dimen>
+    <dimen name="navigation_drawer_items_icon_title_margin">32dp</dimen>
     <dimen name="navigation_drawer_app_icon_size">42dp</dimen>
-    <dimen name="navigation_drawer_icon_size">30dp</dimen>
-
+    <dimen name="navigation_drawer_icon_size">24dp</dimen>
 </resources>

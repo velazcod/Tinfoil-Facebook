@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Copyright (C) 2013 Daniel Velazco
+
     Italian Translation (C) 2014 <angeloruocco90@gmail.com>
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,7 +51,7 @@
     <string name="menu_exit">Esci</string>
 
     <!-- Preferences -->
-    <string name="pref_cat_access">Accesso a Facebook</string>
+    <string name="pref_cat_access">Accesso Facebook</string>
     <string name="pref_cat_general">Generali</string>
     <string name="pref_cat_proxy">Proxy</string>
     <string name="prefs_allow_checkins">Permetti localizzazione</string>
@@ -114,5 +115,6 @@
 \n
 \nQuest\'app è per quegli utenti che hanno bisogno di un \"cappello di alluminio\" quando si connettono a Facebook. Crea un reindirizzamento al sito mobile di Facebook. Richiede i permessi INTERNET, e se sei scettico, sentiti libero di verificare il sorgente. I permessi di localizzazione grezza sono richiesti ma non utilizzati, a meno che l\'opzione \"Permetti localizzazione\" nelle preferenze non sia selezionata.\n
 \n</string>
+    <string name="other">Altro</string>
 
 </resources>

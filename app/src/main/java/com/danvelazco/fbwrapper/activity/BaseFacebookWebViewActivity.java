@@ -469,10 +469,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     private boolean checkNetworkConnection() {
         try {
             NetworkInfo networkInfo = mConnectivityManager.getActiveNetworkInfo();
-            if (networkInfo != null) {
-                return networkInfo.isConnected();
-            }
-            return false;
+            return networkInfo != null && networkInfo.isConnected();
         } catch (SecurityException e) {
             // Catch the Security Exception in case the user revokes the ACCESS_NETWORK_STATE permission
             e.printStackTrace();
@@ -643,7 +640,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
      * {@inheritDoc}
      */
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         // Override the back button
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mWebView.canGoBack()) {

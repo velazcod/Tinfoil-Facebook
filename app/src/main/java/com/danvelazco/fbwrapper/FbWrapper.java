@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
@@ -27,7 +29,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
 
     // Constant
     private final static String LOG_TAG = "FbWrapper";
-    private final static int MENU_DRAWER_GRAVITY = GravityCompat.END;
+    private final static int MENU_DRAWER_GRAVITY = GravityCompat.START;
     protected final static int DELAY_RESTORE_STATE = (60 * 1000) * 30;
 
     // Members
@@ -51,6 +53,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         // Keep a reference of the DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.layout_main);
         mWebViewContainer = (RelativeLayout) findViewById(R.id.webview_container);
+        mDrawerLayout.setDrawerShadow(ContextCompat.getDrawable(this, R.drawable.shadow), MENU_DRAWER_GRAVITY);
 
         // Set the click listener interface for the buttons
         setOnClickListeners();
@@ -162,7 +165,6 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
         findViewById(R.id.menu_share_this).setOnClickListener(buttonsListener);
         findViewById(R.id.menu_preferences).setOnClickListener(buttonsListener);
         findViewById(R.id.menu_about).setOnClickListener(buttonsListener);
-        findViewById(R.id.menu_kill).setOnClickListener(buttonsListener);
     }
 
     /**
@@ -381,11 +383,6 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
                 case R.id.menu_about:
                     showAboutAlert();
                     break;
-                case R.id.menu_kill:
-                    mWebViewContainer.removeView(mWebView);
-                    destroyWebView();
-                    finish();
-                    break;
             }
             closeMenuDrawer();
         }
@@ -413,7 +410,7 @@ public class FbWrapper extends BaseFacebookWebViewActivity {
      * {@inheritDoc}
      */
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         switch(keyCode){
         case KeyEvent.KEYCODE_MENU:
             toggleMenuDrawer();
