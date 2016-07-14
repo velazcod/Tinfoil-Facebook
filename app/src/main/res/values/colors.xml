@@ -29,4 +29,9 @@
     <color name="blue_primary_dark">#ff293c68</color>
     <color name="blue_accent">#738ffe</color>
 
+    <color name="swipe_color_1">#33B5E5</color>
+    <color name="swipe_color_2">#99CC00</color>
+    <color name="swipe_color_3">#FFBB33</color>
+    <color name="swipe_color_4">#FF4444</color>
+
 </resources>

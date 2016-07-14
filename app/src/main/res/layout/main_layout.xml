@@ -27,14 +27,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Our actual WebView -->
-        <com.danvelazco.fbwrapper.webview.FacebookWebView
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
+        <!--This is for swipe down to refresh -->
+        <android.support.v4.widget.SwipeRefreshLayout
             android:layout_height="match_parent"
-            android:fadeScrollbars="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true" />
+            android:layout_width="match_parent"
+            android:id="@+id/swiperefreshlayout" >
+            <!-- Our actual WebView -->
+            <com.danvelazco.fbwrapper.webview.FacebookWebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <!-- Progress bar used to show the loading progress -->
         <ProgressBar
