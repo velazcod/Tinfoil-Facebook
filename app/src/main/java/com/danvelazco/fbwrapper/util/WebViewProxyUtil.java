@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 Daniel Velazco
+ * Copyright (C) 2016 Jeff Gehlbach
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +56,12 @@ public class WebViewProxyUtil {
             return setProxyJBPlus(webview, host, port);
         }
         // 4.4 or higher (KK)
-        else {
+        else if (Build.VERSION.SDK_INT <= 20) {
             return setKitKatWebViewProxy(context, host, port);
+        }
+        // 5.0 or higher (LP)
+        else {
+            return setLollipopWebViewProxy(context, host, port);
         }
     }
 
@@ -212,6 +217,48 @@ public class WebViewProxyUtil {
         }
 
         Log.d(LOG_TAG, "Setting proxy with >= 4.4 API successful!");
+        return true;
+    }
+    /**
+     * Set Proxy for Android 5.0 and above.
+     */
+    @SuppressWarnings("all")
+    private static boolean setLollipopWebViewProxy(Context appContext, String host, int port) {
+        System.setProperty("http.proxyHost", host);
+        System.setProperty("http.proxyPort", port + "");
+        System.setProperty("https.proxyHost", host);
+        System.setProperty("https.proxyPort", port + "");
+        try {
+            Class applictionCls = Class.forName("android.app.Application");
+            Field loadedApkField = applictionCls.getDeclaredField("mLoadedApk");
+            loadedApkField.setAccessible(true);
+            Object loadedApk = loadedApkField.get(appContext);
+            Class loadedApkCls = Class.forName("android.app.LoadedApk");
+            Field receiversField = loadedApkCls.getDeclaredField("mReceivers");
+            receiversField.setAccessible(true);
+            ArrayMap receivers = (ArrayMap) receiversField.get(loadedApk);
+            for (Object receiverMap : receivers.values()) {
+                for (Object rec : ((ArrayMap) receiverMap).keySet()) {
+                    Class clazz = rec.getClass();
+                    if (clazz.getName().contains("ProxyChangeListener")) {
+                        Method onReceiveMethod = clazz.getDeclaredMethod("onReceive", Context.class, Intent.class);
+                        Intent intent = new Intent(Proxy.PROXY_CHANGE_ACTION);
+                        /***** In Lollipop, ProxyProperties went public as ProxyInfo *****/
+                        final String CLASS_NAME = "android.net.ProxyInfo";
+                        Class cls = Class.forName(CLASS_NAME);
+                        /***** ProxyInfo lacks constructors, use the static buildDirectProxy method instead *****/
+                        Method buildDirectProxyMethod = cls.getMethod("buildDirectProxy", String.class, Integer.TYPE);
+                        Object proxyInfo = buildDirectProxyMethod.invoke(cls, host, port);
+                        intent.putExtra("proxy", (Parcelable) proxyInfo);
+                        onReceiveMethod.invoke(rec, appContext, intent);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Setting proxy with >= 5.0 API failed with " + e.getClass().getName() + ": " + e.getMessage());
+            return false;
+        }
+        Log.d(LOG_TAG, "Setting proxy with >= 5.0 API successful!");
         return true;
     }
 
