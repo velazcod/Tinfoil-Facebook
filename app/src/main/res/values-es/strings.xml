@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2015 Roberto M.F. (Roboe)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <!-- App name -->
+    <string name="app_name">Tinfoil for Facebook</string>
+    <string name="app_name_short">Tinfoil</string>
+
+    <!-- Labels -->
+    <string name="lbl_dialog_alert">Aviso</string>
+    <string name="lbl_dialog_close">Cerrar</string>
+    <string name="lbl_dialog_ok">OK</string>
+    <string name="loading_video">Cargando vídeo&#8230;</string>
+    <string name="upload_file_choose">Elija archivo</string>
+    <string name="lbl_yes">Sí</string>
+    <string name="lbl_no">No</string>
+    <string name="lbl_save_image">Guardar imagen</string>
+
+    <!-- Sharing -->
+    <string name="share_action">Compartir la página actual</string>
+    <string name="share_action_subject">Página de Facebook</string>
+
+    <!-- Context menu items -->
+    <string name="menu_desktop">Escritorio</string>
+    <string name="menu_mobile">Móvile</string>
+    <string name="menu_jump_top">Saltar al principio</string>
+    <string name="menu_news_feed">Noticias</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_copy_url">Copiar URL</string>
+    <string name="menu_refresh">Actualizar</string>
+    <string name="menu_notifications">Notificaciones</string>
+    <string name="menu_messages">Mensajes</string>
+    <string name="menu_preferences">Preferencias</string>
+    <string name="menu_about">Acerca de</string>
+    <string name="menu_exit">Salir</string>
+
+    <!-- Preferences -->
+    <string name="pref_cat_access">Acceso a Facebook</string>
+    <string name="pref_cat_general">General</string>
+    <string name="pref_cat_proxy">Proxy</string>
+    <string name="prefs_allow_checkins">Permitir check-ins</string>
+    <string name="prefs_allow_checkins_sry">Permitir a la aplicación móvil usar geolocalización ordinaria para hacer check-in en lugares</string>
+    <string name="prefs_open_links_inside">Abrir enlaces dentro de la aplicación</string>
+    <string name="prefs_open_links_inside_sry">Cualquier enlace que se abra desde la aplicación móvil se abrirá dentro de la aplicación en lugar de en un navegador web externo</string>
+    <string name="prefs_block_images">Bloquear imágenes</string>
+    <string name="prefs_block_images_sry">Ahorrar tiempo y ancho de banda bloqueando todas las imágenes cargadas por la red</string>
+    <string name="pref_hide_ab">Autoesconder ActionBar</string>
+    <string name="pref_hide_ab_sry">Esconde automáticamete la barra de acciones cuando se desplace hacia abajo o no se use. Desplácese hacia arriba para mostrarla de nuevo.</string>
+    <string name="prefs_mobile_site">Sitio móvil/de escritorio</string>
+    <string name="prefs_mobile_site_sry">Forzar el uso del sitio móvil o de escritorio</string>
+    <string name="prefs_enable_proxy">Activar proxy</string>
+    <string name="prefs_enable_proxy_sry">Configurar un proxy para las peticiones de red</string>
+    <string name="prefs_proxy_host">Dirección del proxy</string>
+    <string name="prefs_proxy_port">Puerto del proxy</string>
+
+    <array name="prefs_mobile_site_list">
+        <item>Auto</item>
+        <item>Forzar sitio móvil</item>
+        <item>Forzar sitio de escritorio</item>
+        <item>Forzar sitio básico</item>
+        <item>Facebook Zero</item>
+        <item>Facebook.onion (requiere Orbot)</item>
+    </array>
+    <array name="prefs_mobile_site_list_values">
+        <item>auto</item>
+        <item>mobile</item>
+        <item>desktop</item>
+        <item>basic</item>
+        <item>zero</item>
+        <item>onion</item>
+    </array>
+
+    <string name="pref_about">Acerca de</string>
+    <string name="pref_about_sry">Escrito por Daniel Velazco. Pulse aquí para saber más.</string>
+    <!-- End preferences -->
+
+    <string name="txt_save_image_success">Imagen descargada y guardada en la carpeta de descargas</string>
+    <string name="txt_save_image_failed">No se pudo guardar la imagen</string>
+
+    <!-- Orbot related strings -->
+    <string name="market_orbot">market://search?q=pname:org.torproject.android</string>
+    <string name="start_orbot_">¿Iniciar Orbot?</string>
+    <string name="orbot_not_running_start_it_question">Parece que Orbot no está en funcionamiento. ¿Le gustaría iniciar Orbot y conectar a Tor?</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_checkins_disables">\nFacebook está intentando acceder a tu geolocalización.\n
+\nProbablemente usted esté haciendo \"Check-in\" en un lugar específico. Aunque Tinfoil le permite compartir la geolocalización, está desactivada por defecto.\n
+\nPuede activar esta característica yendo a Preferencias y marcando la opción \"Permitir check-ins.\"\n
+\nTinfoil sólo comparte la \"geolocalización ordinaria\", que no usa el GPS, sino Wi-Fi y redes móviles a fin de ahorrar batería.\n
+\n</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_about">\nDesarrollado por Daniel Velazco.
+\nvelazcod@gmail.com
+\nhttp://www.danvelazco.com\n
+\n
+\nCódigo fuente:
+\nhttps://github.com/velazcod/Tinfoil-Facebook\n
+\n
+\nEsta aplicación es para aquellos usuarios que requieren un sombrero de papel de aluminio (\"tinfoil hat\", en inglés) para entrar en Facebook. Crea una caja aislada para el sitio móvil de Facebook. Para ello requiere el permiso de INTERNET, pero si es un poco escéptico, puede revisar el código fuente enlazado arriba. Se requiere el permiso de geolocalización ordinaria, pero no se usa hasta que active manualmente \"Permitir check-ins\" en las preferencias.\n
+\n</string>
+
+</resources>
