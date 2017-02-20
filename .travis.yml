@@ -8,7 +8,7 @@ branches:
 
 env:
   matrix:
-    - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
 
 before_install:
   # Install base Android SDK
@@ -22,9 +22,9 @@ before_install:
   # Install required components.
   # Note that sysimg-19 downloads only ARM, because only the first license query is accepted.
   - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --all --filter build-tools-21.1.2 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter android-21 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter sysimg-21 --no-ui --force > /dev/null
+  - echo yes | android update sdk --all --filter build-tools-22.0.1 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter android-22 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter sysimg-22 --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-google-m2repository --no-ui --force > /dev/null
