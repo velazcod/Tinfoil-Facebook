@@ -15,7 +15,8 @@
     limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.danvelazco.fbwrapper">
+          package="com.danvelazco.fbwrapper"
+          android:installLocation="auto">
     <!-- versionCode and versionName will be populated by build.gradle -->
 
     <uses-permission
