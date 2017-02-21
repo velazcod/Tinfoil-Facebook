@@ -636,7 +636,10 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         // This link is not for a page on my site, launch another Activity
         // that handles this URL
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     /**
