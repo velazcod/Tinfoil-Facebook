@@ -1,33 +1,45 @@
-language: java
-jdk: oraclejdk8
-
-# whitelist
 branches:
-    only:
-        - master
+  only:
+    - master
+
+language: android
+
+jdk:
+  - oraclejdk8
 
 env:
+  global:
+    - ANDROID_ABI=armeabi-v7a
   matrix:
-    - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-22
 
-before_install:
-  # Install base Android SDK
-  - sudo apt-get update -qq
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs lib32z1 ia32-libs-multiarch > /dev/null; fi
-  - wget http://dl.google.com/android/android-sdk_r23-linux.tgz
-  - tar xzf android-sdk_r23-linux.tgz
-  - export ANDROID_HOME=$PWD/android-sdk-linux
-  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+matrix:
+  fast_finish: true
 
-  # Install required components.
-  # Note that sysimg-19 downloads only ARM, because only the first license query is accepted.
-  - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --all --filter build-tools-22.0.1 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter android-24 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter sysimg-24 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter extra-google-m2repository --no-ui --force > /dev/null
+android:
+  components:
+    - tools
+    - platform-tools
+    - tools
+    - build-tools-25.0.2
+    - android-25
+    - $ANDROID_TARGET
+    - extra-android-support
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - sys-img-armeabi-v7a-$ANDROID_TARGET
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/daemon
+    - $HOME/.gradle/native
+    - $HOME/.gradle/wrapper
+
+before_script:
+# Avoid useless reupload of cache after every build, see https://docs.travis-ci.com/user/languages/android
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 install:
     - TERM=dumb ./gradlew clean assembleDebug -PdisablePreDex
