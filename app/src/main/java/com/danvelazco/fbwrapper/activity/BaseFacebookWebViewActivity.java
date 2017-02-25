@@ -561,8 +561,9 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
             mProgressBar.setVisibility(View.GONE);
 
             //Checks if the swipe refresh indicator is active. Turns off if it is
-            if(mSwipeRefreshLayout.isRefreshing())
+            if(mSwipeRefreshLayout.isRefreshing()) {
                 mSwipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
 
