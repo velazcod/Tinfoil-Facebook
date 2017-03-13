@@ -639,6 +639,13 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+
+            // Hack: Facebook uses a linker helper, it's blank when coming back to app
+            // from an outside link, so let's attempt to go back to avoid this blank page
+            if (mWebView.canGoBack()) {
+                Logger.d(LOG_TAG, "Attempting to go back to avoid blank page");
+                mWebView.goBack();
+            }
         }
     }
 
