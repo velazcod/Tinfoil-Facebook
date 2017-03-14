@@ -17,7 +17,7 @@
     android:id="@+id/menu_drawer_right"
     android:layout_width="@dimen/navigation_drawer_width"
     android:layout_height="match_parent"
-    android:layout_gravity="end"
+    android:layout_gravity="start"
     android:orientation="vertical"
     android:clickable="false"
     android:focusable="false"
@@ -33,38 +33,44 @@
         <RelativeLayout
             android:id="@+id/menu_title"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:layout_height="80dp"
             android:padding="@dimen/navigation_drawer_items_padding"
-            android:background="@color/mild_gray">
-
-            <ImageView
-                android:id="@+id/iv_app_icon"
-                android:layout_width="@dimen/navigation_drawer_app_icon_size"
-                android:layout_height="@dimen/navigation_drawer_app_icon_size"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_launcher"
-                android:contentDescription="@string/app_name" />
+            android:background="@color/blue_primary">
 
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_app_icon"
-                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-                android:gravity="left"
-                android:fontFamily="sans-serif"
-                android:textSize="@dimen/navigation_drawer_items_text_size"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@android:color/white"
                 android:text="@string/app_name" />
-
         </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="7dp"
+            android:background="@android:color/transparent"/>
 
         <!-- Menu item: Jump to top -->
         <RelativeLayout
             android:id="@+id/menu_item_jump_to_top"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -75,7 +81,7 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_upload"
+                android:src="@drawable/ic_upload_grey600_24dp"
                 android:contentDescription="@string/menu_jump_top" />
 
             <TextView
@@ -83,10 +89,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_jump_to_top"
+                android:fontFamily="sans-serif-light"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/iv_jump_to_top"
                 android:text="@string/menu_jump_top" />
 
         </RelativeLayout>
@@ -96,6 +104,12 @@
             android:id="@+id/menu_item_refresh"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -106,7 +120,7 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_rotate"
+                android:src="@drawable/ic_refresh_grey600_24dp"
                 android:contentDescription="@string/menu_refresh" />
 
             <TextView
@@ -117,7 +131,9 @@
                 android:layout_toRightOf="@+id/iv_refresh"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/black"
                 android:text="@string/menu_refresh" />
 
         </RelativeLayout>
@@ -127,6 +143,12 @@
             android:id="@+id/menu_item_newsfeed"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -137,8 +159,8 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_view"
-                android:contentDescription="@string/menu_refresh" />
+                android:src="@drawable/ic_eye_grey600_24dp"
+                android:contentDescription="@string/menu_news_feed" />
 
             <TextView
                 android:id="@+id/tv_newsfeed"
@@ -148,7 +170,9 @@
                 android:layout_toRightOf="@+id/iv_newsfeed"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/menu_news_feed" />
 
         </RelativeLayout>
@@ -158,6 +182,12 @@
             android:id="@+id/menu_items_notifications"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -168,7 +198,7 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_info_details"
+                android:src="@drawable/ic_information_grey600_24dp"
                 android:contentDescription="@string/menu_notifications" />
 
             <TextView
@@ -179,7 +209,9 @@
                 android:layout_toRightOf="@+id/iv_notifications"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/menu_notifications" />
 
         </RelativeLayout>
@@ -189,6 +221,12 @@
             android:id="@+id/menu_item_messages"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -199,7 +237,7 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_edit"
+                android:src="@drawable/ic_pencil_grey600_24dp"
                 android:contentDescription="@string/menu_messages" />
 
             <TextView
@@ -210,7 +248,9 @@
                 android:layout_toRightOf="@+id/iv_messages"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/menu_messages" />
 
         </RelativeLayout>
@@ -220,6 +260,12 @@
             android:id="@+id/menu_share_this"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -230,7 +276,7 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_share"
+                android:src="@drawable/ic_share_variant_grey600_24dp"
                 android:contentDescription="@string/menu_refresh" />
 
             <TextView
@@ -241,16 +287,47 @@
                 android:layout_toRightOf="@+id/iv_share_this"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/menu_share" />
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="7dp"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_drawer_items_height"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:text="@string/other"
+            android:textStyle="bold"
+            android:textColor="@android:color/darker_gray"
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/textView" />
 
         <!-- Menu item: Preferences -->
         <RelativeLayout
             android:id="@+id/menu_preferences"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -261,7 +338,7 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_preferences"
+                android:src="@drawable/ic_settings_grey600_24dp"
                 android:contentDescription="@string/menu_refresh" />
 
             <TextView
@@ -272,7 +349,9 @@
                 android:layout_toRightOf="@+id/iv_preferences"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/menu_preferences" />
 
         </RelativeLayout>
@@ -282,6 +361,12 @@
             android:id="@+id/menu_about"
             android:layout_width="match_parent"
             android:layout_height="@dimen/navigation_drawer_items_height"
+            android:paddingTop="@dimen/navigation_drawer_items_padding"
+            android:paddingLeft="@dimen/navigation_drawer_items_padding_left"
+            android:paddingStart="@dimen/navigation_drawer_items_padding_left"
+            android:paddingRight="@dimen/navigation_drawer_items_padding"
+            android:paddingEnd="@dimen/navigation_drawer_items_padding"
+            android:paddingBottom="@dimen/navigation_drawer_items_padding"
             android:padding="@dimen/navigation_drawer_items_padding"
             android:clickable="true"
             android:focusable="true"
@@ -292,7 +377,7 @@
                 android:layout_width="@dimen/navigation_drawer_icon_size"
                 android:layout_height="@dimen/navigation_drawer_icon_size"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_help"
+                android:src="@drawable/ic_help_circle_grey600_24dp"
                 android:contentDescription="@string/menu_refresh" />
 
             <TextView
@@ -303,41 +388,11 @@
                 android:layout_toRightOf="@+id/iv_about"
                 android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
                 android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/menu_about" />
 
         </RelativeLayout>
-
-        <!-- Menu item: Share this page -->
-        <RelativeLayout
-            android:id="@+id/menu_kill"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/navigation_drawer_items_height"
-            android:padding="@dimen/navigation_drawer_items_padding"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?android:selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/iv_kill"
-                android:layout_width="@dimen/navigation_drawer_icon_size"
-                android:layout_height="@dimen/navigation_drawer_icon_size"
-                android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:contentDescription="@string/menu_refresh" />
-
-            <TextView
-                android:id="@+id/tv_kill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_kill"
-                android:layout_marginLeft="@dimen/navigation_drawer_items_icon_title_margin"
-                android:gravity="left"
-                style="@style/MenuDrawerTextStyle"
-                android:text="@string/menu_exit" />
-
-        </RelativeLayout>
-
     </LinearLayout>
 </ScrollView>

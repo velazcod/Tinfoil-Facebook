@@ -24,6 +24,7 @@
     <color name="light_gray_alt3">#aeaeae</color>
     <color name="mild_gray">#888888</color>
     <color name="dark_gray">#555555</color>
+    <color name="black">#DE000000</color>
 
     <color name="blue_primary">#3B5998</color>
     <color name="blue_primary_dark">#ff293c68</color>
