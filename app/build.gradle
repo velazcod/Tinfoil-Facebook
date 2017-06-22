@@ -26,6 +26,7 @@ android {
     buildTypes {
         buildTypes {
             all {
+                applicationIdSuffix '.praeterii.fork'
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), "proguard.cfg"
             }
             debug {
