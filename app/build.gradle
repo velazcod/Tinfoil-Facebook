@@ -24,30 +24,34 @@ android {
     }
 
     buildTypes {
+        buildTypes {
+            all {
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), "proguard.cfg"
+            }
+            debug {
+                minifyEnabled false
+                debuggable true
+            }
 
-        debug {
-            minifyEnabled false
-            debuggable true
+            release {
+                minifyEnabled true
+                debuggable false
+            }
+
         }
 
-        release {
-            minifyEnabled false
-            debuggable false
+        lintOptions {
+            disable 'ExtraTranslation'
+            disable 'MissingTranslation'
+            abortOnError false
         }
 
     }
 
-    lintOptions {
-        disable 'ExtraTranslation'
-        disable 'MissingTranslation'
-        abortOnError false
+    final SUPPORT_LIBRARY_VERSION = rootProject.ext.SUPPORT_LIBRARY_VERSION
+
+    dependencies {
+        compile "com.android.support:support-v4:${SUPPORT_LIBRARY_VERSION}"
+        compile 'com.squareup.picasso:picasso:2.5.2'
     }
-
-}
-
-final SUPPORT_LIBRARY_VERSION = rootProject.ext.SUPPORT_LIBRARY_VERSION
-
-dependencies {
-    compile "com.android.support:support-v4:${SUPPORT_LIBRARY_VERSION}"
-    compile 'com.squareup.picasso:picasso:2.5.2'
 }
