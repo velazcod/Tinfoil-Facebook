@@ -36,6 +36,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -109,6 +110,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected CookieSyncManager mCookieSyncManager = null;
     protected FacebookWebView mWebView = null;
     protected ProgressBar mProgressBar = null;
+    protected SwipeRefreshLayout mSwipeRefreshLayout = null;
     protected WebSettings mWebSettings = null;
     protected ValueCallback<Uri> mUploadMessage = null;
     protected ValueCallback<Uri[]> mUploadMessageLollipop = null;
@@ -168,6 +170,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         mWebSettings = mWebView.getWebSettings();
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
         // Set the database path for this WebView so that
         // HTML5 Storage API works properly
@@ -178,6 +181,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         mCookieSyncManager = CookieSyncManager.createInstance(this);
 
         registerForContextMenu(mWebView);
+        initSwipeRefreshLayout();
 
         // Have the activity open the proper URL
         onWebViewInit(savedInstanceState);
@@ -447,6 +451,19 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     }
 
     /**
+     * Sets on refresh listener for SwipeRefreshLayout
+     */
+    private void initSwipeRefreshLayout() {
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.blue_primary, R.color.blue_accent);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshCurrentPage();
+            }
+        });
+    }
+
+    /**
      * This is to be used in case we want to force kill the activity.
      * Might not be necessary, but it's here in case we'd like to use it.
      */
@@ -624,6 +641,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     public void onPageLoadFinished(String url) {
         Logger.d(LOG_TAG, "onPageLoadFinished() -- url: " + url);
         mProgressBar.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     /**
