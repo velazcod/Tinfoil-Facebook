@@ -24,20 +24,18 @@ android {
     }
 
     buildTypes {
-        buildTypes {
-            all {
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), "proguard.cfg"
-            }
-            debug {
-                minifyEnabled false
-                debuggable true
-            }
+        all {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), "proguard.cfg"
+        }
 
-            release {
-                minifyEnabled true
-                debuggable false
-            }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
 
+        release {
+            minifyEnabled true
+            debuggable false
         }
 
         lintOptions {
