@@ -94,7 +94,7 @@
     <string name="orbot_not_running_start_it_question">Orbot ne semble pas être en cours d\'exécution. Voulez-vous le démarrer et vous connecter à Tor?</string>
 
     <!-- Text used on the "about" dialog -->
-    <string name="txt_checkins_disables">\nFacebook essaie d'accéder à votre emplacement.\n
+    <string name="txt_checkins_disables">\nFacebook essaie d\'accéder à votre emplacement.\n
 \nVous essayez probablement de vous connecter via un emplacement spécifique. Tinfoil a accès aux permissions nécessaires pour cela, mais elles sont désactivées par défaut.\n
 \nVous pouvez activer cette fonctionnalité en accédant aux préférences et en cochant l\'option qui dit \"Autoriser les check-ins.\"\n
 \nTinfoil ne partage que des \"Localisations grossières\", cela n\'utilise pas le GPS, seulement le réseau mobile et le Wi-Fi pour préserver votre batterie.\n
