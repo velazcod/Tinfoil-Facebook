@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2015 Roberto M.F. (Roboe)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <!-- App name -->
+    <string name="app_name">Tinfoil pro Facebook</string>
+    <string name="app_name_short">Tinfoil</string>
+
+    <!-- Labels -->
+    <string name="lbl_dialog_alert">Avisu</string>
+    <string name="lbl_dialog_close">Serra</string>
+    <string name="lbl_dialog_ok">AB</string>
+    <string name="loading_video">Carrighende su vìdeu&#8230;</string>
+    <string name="upload_file_choose">Issèbera su documentu</string>
+    <string name="lbl_yes">Eja</string>
+    <string name="lbl_no">Nono</string>
+    <string name="lbl_save_image">Sarva s'immàgine</string>
+
+    <!-- Sharing -->
+    <string name="share_action">Cumpartzi sa pàgina atuale</string>
+    <string name="share_action_subject">Pàgina de Facebook</string>
+
+    <!-- Context menu items -->
+    <string name="menu_desktop">Iscrivania</string>
+    <string name="menu_mobile">Mòbile</string>
+    <string name="menu_jump_top">Bae in pitzos</string>
+    <string name="menu_news_feed">Flussu de Noas</string>
+    <string name="menu_share">Cumpartzi</string>
+    <string name="menu_copy_url">Còpia URL</string>
+    <string name="menu_refresh">Agiorna</string>
+    <string name="menu_notifications">Notìficas</string>
+    <string name="menu_messages">Messàgios</string>
+    <string name="menu_preferences">Preferèntzias</string>
+    <string name="menu_about">Informatziones</string>
+    <string name="menu_exit">Essi</string>
+
+    <!-- Preferences -->
+    <string name="pref_cat_access">Intra in Facebook</string>
+    <string name="pref_cat_general">Generales</string>
+    <string name="pref_cat_proxy">Server intermediàriu</string>
+    <string name="prefs_allow_checkins">Permiti sas registratziones</string>
+    <string name="prefs_allow_checkins_sry">Permiti a s'aplicatzione de impreare sa geolocalizatzione de base pro ti pòdere registrare in sos logos</string>
+    <string name="prefs_open_links_inside">Aberi sos ligàmenes in intro de s'aplicatzione</string>
+    <string name="prefs_open_links_inside_sry">Cale si siat ligàmene abertu dae s'aplicatzione at a èssere abertu in intro de s'aplicatzione matessi imbetzes chi in intro de s'esploradore (su browser)</string>
+    <string name="prefs_block_images">Bloca sas immàgines</string>
+    <string name="prefs_block_images_sry">Sarva tempus e banda de datos blochende totu sas immàgines carrigadas dae sa retza.</string>
+    <string name="pref_hide_ab">Cua automaticamente sa barra de atzione</string>
+    <string name="pref_hide_ab_sry">Cua automaticamente sa barra de atzione cando ses achirrende a bassu o non la ses impreende. Àrtzia a susu pro la fàghere ammustrare torra.</string>
+    <string name="prefs_mobile_site">Situ mòbile/de iscrivania</string>
+    <string name="prefs_mobile_site_sry">Fortza s'impreu de su situ pro sos dispositivos mòbiles o de iscrivania</string>
+    <string name="prefs_enable_proxy">Abìlita unu server intermèdiu</string>
+    <string name="prefs_enable_proxy_sry">Configura unu server intermediàriu (proxy) pro sas pedidas de retza</string>
+    <string name="prefs_proxy_host">Acasagiamentu de su server intermediàriu</string>
+    <string name="prefs_proxy_port">Ghenna de su server intermediàriu</string>
+
+    <array name="prefs_mobile_site_list">
+        <item>Auto</item>
+        <item>Fortza su situ mòbile</item>
+        <item>Fortza su situ de iscrivania</item>
+        <item>Fortza su situ de base</item>
+        <item>Facebook Zero</item>
+        <item>Facebook.onion (tenet bisòngiu de Orbot)</item>
+    </array>
+    <array name="prefs_mobile_site_list_values">
+        <item>auto</item>
+        <item>mobile</item>
+        <item>desktop</item>
+        <item>basic</item>
+        <item>zero</item>
+        <item>onion</item>
+    </array>
+
+    <string name="pref_about">Informatziones</string>
+    <string name="pref_about_sry">Iscritu dae Daniel Velazco. Incarca inoghe pro àteras informatziones.</string>
+    <!-- End preferences -->
+
+    <string name="txt_save_image_success">Immàgine iscarrigada e sarvada in sa cartella de sos iscarrigamentos</string>
+    <string name="txt_save_image_failed">Impossìbile sarvare s'immàgine</string>
+
+    <!-- Orbot related strings -->
+    <string name="market_orbot">market://search?q=pname:org.torproject.android</string>
+    <string name="start_orbot_">Allùghere Orbot?</string>
+    <string name="orbot_not_running_start_it_question">Paret chi Orbot non siat allutu. Lu cheres allùghere e collegare a Tor?</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_checkins_disables">\nFacebook est chirchende de atzèdere a sa geolocalizatzione tua.\n
+\nProbabilmente ses chirchende de ti \"Registrare\" in unu logu dislindadu. Fintzas si Tinfoil tenet unu permissu optzionale impreadu pro cussu, in sas impostatziones predefinidas est istudadu.\n
+\nPodes abilitare custa funtzionalidade intrende in sas Preferèntzias e marchende s'optzione \"Permiti sas registratziones.\"\n
+\nTinfoil cumpartzit sa \"geolocalizatzione de base\" ebbia, chi no impreat su GPS ma petzi su Wi-Fi e sas retzas mòbiles pro risparmiare bateria.\n
+\n</string>
+
+    <!-- Text used on the "about" dialog -->
+    <string name="txt_about">\nIsvilupadu dae Daniel Velazco.
+\nvelazcod@gmail.com
+\nhttp://www.danvelazco.com\n
+\n
+\nCòdighe mitza:
+\nhttps://github.com/velazcod/Tinfoil-Facebook\n
+\n
+\nCusta aplicatzione est fata pro cussos utentes chi tenent bisòngiu de unu bonete de allumìniu (\"tinfoil hat\", in inglesu) pro entrare in Facebook. Creat una cassa serrada (una \"sandbox\") pro su situ mòbile de Facebook. Tenet bisòngiu de su permissu pro INTERNET, ma si non ti fidas podes abbaidare su còdighe mitza inoghe in subra. Su permissu de geolocalizatzione de base benit pedidu ma sa positzione non benit impreada si no allughes manualmente \"Permiti sas registratziones\" in sas preferèntzias.\n
+\n</string>
+
+</resources>
