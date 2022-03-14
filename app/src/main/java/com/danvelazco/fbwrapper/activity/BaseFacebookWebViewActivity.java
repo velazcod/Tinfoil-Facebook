@@ -36,6 +36,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -112,6 +113,7 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     protected WebSettings mWebSettings = null;
     protected ValueCallback<Uri> mUploadMessage = null;
     protected ValueCallback<Uri[]> mUploadMessageLollipop = null;
+    protected SwipeRefreshLayout mSwipeRefreshLayout = null;
     private boolean mCreatingActivity = true;
     private String mPendingImageUrlToSave = null;
 
@@ -168,6 +170,14 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         mWebSettings = mWebView.getWebSettings();
 
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
+        //Sets the different colors the loading indicator will show
+        mSwipeRefreshLayout.setColorSchemeResources(
+                R.color.swipe_color_1, R.color.swipe_color_2,
+                R.color.swipe_color_3, R.color.swipe_color_4);
+
+        setOnSwipeListener();
 
         // Set the database path for this WebView so that
         // HTML5 Storage API works properly
@@ -366,6 +376,18 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
     }
 
     /**
+     * Sets swiping listener for the swipe refresh layout
+     */
+    private void setOnSwipeListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshCurrentPage();
+            }
+        });
+    }
+
+    /**
      * Used to change the geolocation flag.
      *
      * @param allow {@link boolean} true if the use of
@@ -537,6 +559,11 @@ public abstract class BaseFacebookWebViewActivity extends Activity implements
         // Hide the progress bar as soon as it goes over 85%
         if (progress >= 85) {
             mProgressBar.setVisibility(View.GONE);
+
+            //Checks if the swipe refresh indicator is active. Turns off if it is
+            if(mSwipeRefreshLayout.isRefreshing()) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
 
