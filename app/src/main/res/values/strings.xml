@@ -113,5 +113,5 @@
 \n
 \nThis app is for those users that require a Tinfoil Hat when logging in to Facebook. It creates a sandbox for facebook\'s mobile site. Requires INTERNET permissions, and if you are skeptic about it, feel free to check the source code listed above. Coarse location permissions are required but location is not used unless you turn \"Allow Check-ins\" in the preferences.\n
 \n</string>
-
+    <string name="other">Other</string>
 </resources>

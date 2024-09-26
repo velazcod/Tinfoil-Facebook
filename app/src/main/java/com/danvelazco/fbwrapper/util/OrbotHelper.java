@@ -52,7 +52,7 @@ public class OrbotHelper {
 
     private boolean isAppInstalled(String uri) {
         PackageManager pm = mContext.getPackageManager();
-        boolean installed = false;
+        boolean installed;
         try {
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
             installed = true;

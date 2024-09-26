@@ -46,11 +46,4 @@
     <style name="Widget.Tinfoil.ProgressBar" parent="android:Widget.Holo.ProgressBar.Horizontal">
     </style>
 
-    <style name="MenuDrawerTextStyle" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">@dimen/navigation_drawer_items_text_size</item>
-        <item name="android:textColor">@color/dark_gray</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:typeface">sans</item>
-    </style>
-
 </resources>
